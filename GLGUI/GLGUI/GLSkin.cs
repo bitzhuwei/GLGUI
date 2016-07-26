@@ -30,22 +30,6 @@ namespace GLGUI
             public Color4 BackgroundColor;
         }
 
-        public struct GLFlowLayoutSkin
-        {
-            public GLPadding Padding;
-            public GLPadding Border;
-            public Color4 BorderColor;
-            public Color4 BackgroundColor;
-            public int Space;
-        }
-
-        public struct GLScrollableControlSkin
-        {
-            public GLPadding Border;
-            public Color4 BorderColor;
-            public Color4 BackgroundColor;
-        }
-
         public GLFormSkin FormActive = new GLFormSkin();
         public GLFormSkin FormInactive = new GLFormSkin();
 
@@ -56,12 +40,6 @@ namespace GLGUI
         public GLLabelSkin LinkLabelDisabled = new GLLabelSkin();
 
         public GLGroupLayoutSkin GroupLayout = new GLGroupLayoutSkin();
-
-        public GLFlowLayoutSkin FlowLayout = new GLFlowLayoutSkin();
-
-        public GLScrollableControlSkin ScrollableControl = new GLScrollableControlSkin();
-
-        public GLFlowLayoutSkin ContextMenu = new GLFlowLayoutSkin();
 
 
         public GLSkin(GLFont defaultFont = null)
@@ -112,24 +90,6 @@ namespace GLGUI
             GroupLayout.BorderColor = Color.Transparent;//Color.FromArgb(96, 96, 96);
             GroupLayout.BackgroundColor = Color.Transparent;//Color.FromArgb(240, 240, 240);
 
-
-            FlowLayout.Padding = new GLPadding(2);
-            FlowLayout.Border = new GLPadding(0);
-            FlowLayout.BorderColor = Color.Transparent;
-            FlowLayout.BackgroundColor = Color.Transparent;
-            FlowLayout.Space = 2;
-
-
-            ScrollableControl.Border = new GLPadding(1);
-            ScrollableControl.BorderColor = Color.FromArgb(56, 56, 56);
-            ScrollableControl.BackgroundColor = Color.FromArgb(41, 41, 41);
-
-
-            ContextMenu.Padding = new GLPadding(1);
-            ContextMenu.Border = new GLPadding(1);
-            ContextMenu.BorderColor = Color.FromArgb(128, 128, 128);
-            ContextMenu.BackgroundColor = Color.FromArgb(32, 32, 32);
-            ContextMenu.Space = 1;
 
 
         }
