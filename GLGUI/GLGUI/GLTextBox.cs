@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace GLGUI
 {
-	public class GLTextBox : GLControl
-	{
+    public class GLTextBox : GLControl
+    {
         public string Text { get { return text; } set { if (value != text) { text = value; Invalidate(); } } }
         public bool Enabled { get { return enabled; } set { enabled = value; Invalidate(); } }
         public GLSkin.GLTextBoxSkin SkinEnabled { get { return skinEnabled; } set { skinEnabled = value; Invalidate(); } }
@@ -24,91 +24,89 @@ namespace GLGUI
 
         public event EventHandler Changed;
 
-		private string text = "";
+        private string text = "";
         private GLFontText textProcessed = new GLFontText();
-		private SizeF textSize;
+        private SizeF textSize;
         private GLFontTextPosition cursorPosition = new GLFontTextPosition();
-		private GLSkin.GLTextBoxSkin skinEnabled, skinActive, skinHover, skinDisabled;
-		private GLSkin.GLTextBoxSkin skin;
-		private bool enabled = true;
-		private bool over = false;
-		private Rectangle background;
+        private GLSkin.GLTextBoxSkin skinEnabled, skinActive, skinHover, skinDisabled;
+        private GLSkin.GLTextBoxSkin skin;
+        private bool enabled = true;
+        private bool over = false;
+        private Rectangle background;
         private GLFontTextPosition selectionStart;
         private Stack<string> history = new Stack<string>();
         private Stack<string> future = new Stack<string>();
 
-		public GLTextBox(GLGui gui) : base(gui)
-		{
-			Render += OnRender;
-			MouseDown += OnMouseDown;
-			MouseUp += OnMouseUp;
-			MouseEnter += OnMouseEnter;
-			MouseLeave += OnMouseLeave;
+        public GLTextBox(GLGui gui)
+            : base(gui)
+        {
+            Render += OnRender;
+            MouseDown += OnMouseDown;
+            MouseUp += OnMouseUp;
+            MouseEnter += OnMouseEnter;
+            MouseLeave += OnMouseLeave;
             MouseMove += OnMouseMove;
-			Focus += OnFocus;
-			FocusLost += OnFocusLost;
-			KeyDown += OnKeyDown;
-			KeyPress += OnKeyPress;
+            Focus += OnFocus;
+            FocusLost += OnFocusLost;
+            KeyDown += OnKeyDown;
+            KeyPress += OnKeyPress;
 
-			skinEnabled = Gui.Skin.TextBoxEnabled;
-			skinActive = Gui.Skin.TextBoxActive;
-			skinHover = Gui.Skin.TextBoxHover;
-			skinDisabled = Gui.Skin.TextBoxDisabled;
+            skinEnabled = Gui.Skin.TextBoxEnabled;
+            skinActive = Gui.Skin.TextBoxActive;
+            skinHover = Gui.Skin.TextBoxHover;
+            skinDisabled = Gui.Skin.TextBoxDisabled;
 
-			outer = new Rectangle(0, 0, 100, 0);
+            outer = new Rectangle(0, 0, 100, 0);
 
-			ContextMenu = new GLContextMenu(gui);
-            ContextMenu.Add(new GLContextMenuEntry(gui) { Text = "Copy" }).Click += (s, e) => { if (selectionStart.Index != cursorPosition.Index) CopySelection(); };
-			ContextMenu.Add(new GLContextMenuEntry(gui) { Text = "Paste" }).Click += (s, e) => { if(Clipboard.ContainsText()) Insert(Clipboard.GetText()); };
-		}
+        }
 
         protected override void UpdateLayout()
-		{
-			skin = Enabled ? (HasFocus ? skinActive : (over ? skinHover : skinEnabled)) : skinDisabled;
+        {
+            skin = Enabled ? (HasFocus ? skinActive : (over ? skinHover : skinEnabled)) : skinDisabled;
 
-			outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
+            outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
 
             textSize = skin.Font.ProcessText(textProcessed, text,
-				new SizeF(
-                    WordWrap ? 
+                new SizeF(
+                    WordWrap ?
                         (AutoSize ? float.MaxValue : outer.Width - skin.Border.Horizontal - skin.Padding.Horizontal)
                         : SizeMax.Width - skin.Border.Horizontal - skin.Padding.Horizontal,
-                    Multiline ? 
+                    Multiline ?
                         (AutoSize ? float.MaxValue : outer.Height - skin.Border.Vertical - skin.Padding.Vertical)
                         : skin.Font.LineSpacing),
                 skin.TextAlign);
-			int minHeight = Math.Max(sizeMin.Height, (int)textSize.Height + skin.Border.Vertical + skin.Padding.Vertical);
+            int minHeight = Math.Max(sizeMin.Height, (int)textSize.Height + skin.Border.Vertical + skin.Padding.Vertical);
 
-			if (AutoSize)
-			{
-				outer.Width = (int)textSize.Width + skin.Border.Horizontal + skin.Padding.Horizontal;
+            if (AutoSize)
+            {
+                outer.Width = (int)textSize.Width + skin.Border.Horizontal + skin.Padding.Horizontal;
                 outer.Height = minHeight;
-				outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
-			}
+                outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
+            }
 
-			outer.Height = Math.Min(Math.Max(Multiline ? outer.Height : (int)skin.Font.LineSpacing + skin.Border.Vertical + skin.Padding.Vertical, sizeMin.Height), sizeMax.Height);
+            outer.Height = Math.Min(Math.Max(Multiline ? outer.Height : (int)skin.Font.LineSpacing + skin.Border.Vertical + skin.Padding.Vertical, sizeMin.Height), sizeMax.Height);
 
-			background = new Rectangle(
-				skin.Border.Left, skin.Border.Top,
-				outer.Width - skin.Border.Horizontal, outer.Height - skin.Border.Vertical);
-			Inner = new Rectangle(
-				background.Left + skin.Padding.Left, background.Top + skin.Padding.Top,
-				background.Width - skin.Padding.Horizontal, background.Height - skin.Padding.Vertical);
+            background = new Rectangle(
+                skin.Border.Left, skin.Border.Top,
+                outer.Width - skin.Border.Horizontal, outer.Height - skin.Border.Vertical);
+            Inner = new Rectangle(
+                background.Left + skin.Padding.Left, background.Top + skin.Padding.Top,
+                background.Width - skin.Padding.Horizontal, background.Height - skin.Padding.Vertical);
 
             cursorPosition.Position = new Vector2(float.MaxValue, float.MaxValue);
             cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
             selectionStart.Position = new Vector2(float.MaxValue, float.MaxValue);
             selectionStart = skin.Font.GetTextPosition(textProcessed, selectionStart);
-		}
+        }
 
         private double caretBlinkTimer = 0.0;
         private const double caretBlinkInterval = 0.7;
         private void OnRender(object sender, double timeDelta)
-		{
+        {
             caretBlinkTimer += timeDelta;
 
-			GLDraw.Fill(ref skin.BorderColor);
-			GLDraw.FillRect(ref background, ref skin.BackgroundColor);
+            GLDraw.Fill(ref skin.BorderColor);
+            GLDraw.FillRect(ref background, ref skin.BackgroundColor);
 
             if (selectionStart.Index != cursorPosition.Index)
             {
@@ -137,55 +135,55 @@ namespace GLGUI
 
             GLDraw.Text(textProcessed, Inner, ref skin.Color);
 
-			if (enabled)
-			{
-				if (HasFocus && caretBlinkTimer < caretBlinkInterval)
+            if (enabled)
+            {
+                if (HasFocus && caretBlinkTimer < caretBlinkInterval)
                     GLDraw.FillRect(
                         new Rectangle(
                             Inner.X + (int)cursorPosition.Position.X,
-						    Inner.Y + (int)cursorPosition.Position.Y,
+                            Inner.Y + (int)cursorPosition.Position.Y,
                             1, (int)skin.Font.LineSpacing), ref skin.Color);
-				else if (caretBlinkTimer > caretBlinkInterval * 2.0)
-						caretBlinkTimer -= caretBlinkInterval * 2.0;
-			}
-		}
+                else if (caretBlinkTimer > caretBlinkInterval * 2.0)
+                    caretBlinkTimer -= caretBlinkInterval * 2.0;
+            }
+        }
 
-		private void OnMouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (enabled && e.Button == MouseButton.Left)
-			{
-				isDragged = true;
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (enabled && e.Button == MouseButton.Left)
+            {
+                isDragged = true;
                 cursorPosition.Index = int.MaxValue;
-				cursorPosition.Position = new Vector2(e.X - Inner.X, e.Y - Inner.Y);
+                cursorPosition.Position = new Vector2(e.X - Inner.X, e.Y - Inner.Y);
                 cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
                 selectionStart = cursorPosition;
-			}
-		}
+            }
+        }
 
-		private void OnMouseUp(object sender, MouseButtonEventArgs e)
-		{
-			if (enabled && e.Button == MouseButton.Left)
-			{
-				if (isDragged)
-				{
-					isDragged = false;
-				}
-			}
-		}
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (enabled && e.Button == MouseButton.Left)
+            {
+                if (isDragged)
+                {
+                    isDragged = false;
+                }
+            }
+        }
 
-		private void OnMouseEnter(object sender, EventArgs e)
-		{
-			over = true;
-			Gui.Cursor = GLCursor.IBeam;
+        private void OnMouseEnter(object sender, EventArgs e)
+        {
+            over = true;
+            Gui.Cursor = GLCursor.IBeam;
             Invalidate();
-		}
+        }
 
-		private void OnMouseLeave(object sender, EventArgs e)
-		{
-			over = false;
-			Gui.Cursor = GLCursor.Default;
+        private void OnMouseLeave(object sender, EventArgs e)
+        {
+            over = false;
+            Gui.Cursor = GLCursor.Default;
             Invalidate();
-		}
+        }
 
         private void OnMouseMove(object sender, MouseMoveEventArgs e)
         {
@@ -197,34 +195,34 @@ namespace GLGUI
             }
         }
 
-		private void OnFocus(object sender, EventArgs e)
-		{
-			Invalidate();
-		}
-
-		private void OnFocusLost(object sender, EventArgs e)
-		{
+        private void OnFocus(object sender, EventArgs e)
+        {
             Invalidate();
-		}
+        }
 
-		private bool OnKeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!enabled)
-				return false;
-			if (!char.IsControl(e.KeyChar))
-			{
-				Insert(e.KeyChar.ToString());
-				return true;
-			}
-			return false;
-		}
+        private void OnFocusLost(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
 
-		private bool OnKeyDown(object sender, KeyboardKeyEventArgs e)
-		{
-			if (!enabled)
-				return false;
-			if (e.Key == Key.Delete)
-			{
+        private bool OnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!enabled)
+                return false;
+            if (!char.IsControl(e.KeyChar))
+            {
+                Insert(e.KeyChar.ToString());
+                return true;
+            }
+            return false;
+        }
+
+        private bool OnKeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            if (!enabled)
+                return false;
+            if (e.Key == Key.Delete)
+            {
                 if (selectionStart.Index != cursorPosition.Index)
                 {
                     future.Clear();
@@ -241,10 +239,10 @@ namespace GLGUI
                     return true;
                 Invalidate();
                 if (Changed != null) Changed(this, e);
-				return true;
-			}
-			if (e.Key == Key.BackSpace)
-			{
+                return true;
+            }
+            if (e.Key == Key.BackSpace)
+            {
                 if (selectionStart.Index != cursorPosition.Index)
                 {
                     future.Clear();
@@ -260,33 +258,33 @@ namespace GLGUI
                 }
                 else
                     return true;
-				Invalidate();
-				if (Changed != null) Changed(this, e);
-				return true;
-			}
-			if (e.Key == Key.Enter && Multiline)
-			{
-				Insert("\n");
-				return true;
-			}
+                Invalidate();
+                if (Changed != null) Changed(this, e);
+                return true;
+            }
+            if (e.Key == Key.Enter && Multiline)
+            {
+                Insert("\n");
+                return true;
+            }
             if (e.Key == Key.Left && cursorPosition.Index > 0)
-			{
+            {
                 cursorPosition.Index--;
                 cursorPosition.Position = new Vector2(float.MaxValue, float.MaxValue);
                 cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
                 if (!e.Shift)
                     selectionStart = cursorPosition;
-				return true;
-			}
+                return true;
+            }
             if (e.Key == Key.Right && cursorPosition.Index < text.Length)
-			{
+            {
                 cursorPosition.Index++;
                 cursorPosition.Position = new Vector2(float.MaxValue, float.MaxValue);
                 cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
                 if (!e.Shift)
                     selectionStart = cursorPosition;
-				return true;
-			}
+                return true;
+            }
             if (e.Key == Key.Up && cursorPosition.Position.Y > 0.0f)
             {
                 cursorPosition.Index = int.MaxValue;
@@ -294,7 +292,7 @@ namespace GLGUI
                 cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
                 if (!e.Shift)
                     selectionStart = cursorPosition;
-				return true;
+                return true;
             }
             if (e.Key == Key.Down)
             {
@@ -303,7 +301,7 @@ namespace GLGUI
                 cursorPosition = skin.Font.GetTextPosition(textProcessed, cursorPosition);
                 if (!e.Shift)
                     selectionStart = cursorPosition;
-				return true;
+                return true;
             }
             if (e.Control && e.Key == Key.A)
             {
@@ -328,17 +326,17 @@ namespace GLGUI
                 }
                 return true;
             }
-			if (e.Control && e.Key == Key.C)
-			{
+            if (e.Control && e.Key == Key.C)
+            {
                 if (selectionStart.Index != cursorPosition.Index)
                     CopySelection();
-				return true;
-			}
-			if (e.Control && e.Key == Key.V)
+                return true;
+            }
+            if (e.Control && e.Key == Key.V)
             {
                 if (Clipboard.ContainsText())
-					Insert(Clipboard.GetText());
-				return true;
+                    Insert(Clipboard.GetText());
+                return true;
             }
             if (e.Control && e.Key == Key.Z)
             {
@@ -385,8 +383,8 @@ namespace GLGUI
                     selectionStart = cursorPosition;
                 return true;
             }
-			return false;
-		}
+            return false;
+        }
 
         private void CopySelection()
         {
@@ -404,21 +402,21 @@ namespace GLGUI
             selectionStart = cursorPosition;
         }
 
-		private void Insert(string str)
-		{
+        private void Insert(string str)
+        {
             future.Clear();
             history.Push(text);
 
             if (selectionStart.Index != cursorPosition.Index)
                 RemoveSelection();
 
-			text = text.Insert(cursorPosition.Index, str);
-			cursorPosition.Index += str.Length;
+            text = text.Insert(cursorPosition.Index, str);
+            cursorPosition.Index += str.Length;
             selectionStart = cursorPosition;
-			Invalidate();
-			if (Changed != null)
+            Invalidate();
+            if (Changed != null)
                 Changed(this, EventArgs.Empty);
-		}
+        }
 
         private void Indent(bool unindent)
         {
@@ -473,6 +471,6 @@ namespace GLGUI
             else
                 history.Pop();
         }
-	}
+    }
 }
 

@@ -61,7 +61,6 @@
     <Compile Include="GLControl.cs" />
     <Compile Include="GLGui.cs" />
     <Compile Include="GLDraw.cs" />
-    <Compile Include="GLButton.cs" />
     <Compile Include="GLSkin.cs" />
     <Compile Include="GLLabel.cs" />
     <Compile Include="GLTextBox.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="GLSplitLayout.cs" />
     <Compile Include="GLLinkLabel.cs" />
     <Compile Include="Advanced\GLDataControl.cs" />
-    <Compile Include="GLContextMenu.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
     <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
@@ -83,10 +81,8 @@
     <Compile Include="GLFont\GLFontTextNode.cs" />
     <Compile Include="GLFont\GLFontText.cs" />
     <Compile Include="GLFont\GLFontTexture.cs" />
-    <Compile Include="GLContextMenuEntry.cs" />
     <Compile Include="GLAnchorStyles.cs" />
     <Compile Include="GLFlowDirection.cs" />
-    <Compile Include="Clipboard.cs" />
     <Compile Include="GLScrolledControl.cs" />
     <Compile Include="GLPadding.cs" />
     <Compile Include="GLSliderOrientation.cs" />
