@@ -66,8 +66,6 @@
     <Compile Include="GLTextBox.cs" />
     <Compile Include="GLCheckBox.cs" />
     <Compile Include="GLFlowLayout.cs" />
-    <Compile Include="GLScrollableControl.cs" />
-    <Compile Include="GLSlider.cs" />
     <Compile Include="GLSplitLayout.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
@@ -81,7 +79,6 @@
     <Compile Include="GLFont\GLFontTexture.cs" />
     <Compile Include="GLAnchorStyles.cs" />
     <Compile Include="GLFlowDirection.cs" />
-    <Compile Include="GLScrolledControl.cs" />
     <Compile Include="GLPadding.cs" />
     <Compile Include="GLSliderOrientation.cs" />
     <Compile Include="GLSplitterOrientation.cs" />
