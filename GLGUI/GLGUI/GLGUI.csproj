@@ -44,9 +44,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GLOptions.cs" />
     <Compile Include="GLGroupLayout.cs" />
-    <Compile Include="GLViewport.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
     <Compile Include="GLFont\GLFontKerningCalculator.cs" />
