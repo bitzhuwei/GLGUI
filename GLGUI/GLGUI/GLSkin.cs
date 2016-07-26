@@ -36,9 +36,6 @@ namespace GLGUI
         public GLLabelSkin LabelEnabled = new GLLabelSkin();
         public GLLabelSkin LabelDisabled = new GLLabelSkin();
 
-        public GLLabelSkin LinkLabelEnabled = new GLLabelSkin();
-        public GLLabelSkin LinkLabelDisabled = new GLLabelSkin();
-
         public GLGroupLayoutSkin GroupLayout = new GLGroupLayoutSkin();
 
 
@@ -71,19 +68,6 @@ namespace GLGUI
             LabelDisabled.TextAlign = GLFontAlignment.Left;
             LabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
             LabelDisabled.BackgroundColor = Color.Transparent;
-
-
-            LinkLabelEnabled.Font = defaultFont;
-            LinkLabelEnabled.Color = Color.FromArgb(128, 128, 255);
-            LinkLabelEnabled.TextAlign = GLFontAlignment.Left;
-            LinkLabelEnabled.Padding = new GLPadding(1, 1, 1, 1);
-            LinkLabelEnabled.BackgroundColor = Color.Transparent;
-
-            LinkLabelDisabled.Font = defaultFont;
-            LinkLabelDisabled.Color = Color.FromArgb(96, 96, 192);
-            LinkLabelDisabled.TextAlign = GLFontAlignment.Left;
-            LinkLabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
-            LinkLabelDisabled.BackgroundColor = Color.Transparent;
 
 
             GroupLayout.Border = new GLPadding(1);
