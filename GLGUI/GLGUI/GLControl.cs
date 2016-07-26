@@ -124,10 +124,7 @@ namespace GLGUI
                     control.Parent.GetType().Name, control.Parent.Name);
                 throw new ArgumentException(message);
             }
-            if (control is GLForm)
-                controls.Insert(0, control);
-            else
-                controls.Add(control);
+            controls.Add(control);
             control.Gui = Gui;
             control.Parent = this;
             control.Invalidate();
@@ -313,12 +310,6 @@ namespace GLGUI
                         if (control.Outer.Contains(im))
                         {
                             bool handled = control.DoMouseDown(new MouseButtonEventArgs(im.X - control.Outer.X, im.Y - control.Outer.Y, e.Button, e.IsPressed));
-                            if (control is GLForm)
-                            {
-                                GLControl tmp = controls[i]; // move to front
-                                controls.RemoveAt(i);
-                                controls.Insert(0, tmp);
-                            }
                             if (handled)
                             {
                                 if (control != focusedChild)
