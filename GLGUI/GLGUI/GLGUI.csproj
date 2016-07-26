@@ -62,7 +62,6 @@
     <Compile Include="GLSkin.cs" />
     <Compile Include="GLLabel.cs" />
     <Compile Include="GLCheckBox.cs" />
-    <Compile Include="GLFlowLayout.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
     <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
