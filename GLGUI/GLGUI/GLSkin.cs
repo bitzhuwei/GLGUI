@@ -92,9 +92,6 @@ namespace GLGUI
         public GLFormSkin FormActive = new GLFormSkin();
         public GLFormSkin FormInactive = new GLFormSkin();
 
-        public GLLabelSkin LabelEnabled = new GLLabelSkin();
-        public GLLabelSkin LabelDisabled = new GLLabelSkin();
-
         public GLLabelSkin LinkLabelEnabled = new GLLabelSkin();
         public GLLabelSkin LinkLabelDisabled = new GLLabelSkin();
 
@@ -144,19 +141,6 @@ namespace GLGUI
             FormInactive.Border = new GLPadding(2);
             FormInactive.BorderColor = Color.FromArgb(192, 56, 56, 56);
             FormInactive.BackgroundColor = Color.FromArgb(41, 41, 41);
-
-            LabelEnabled.Font = defaultFont;
-            LabelEnabled.Color = Color.FromArgb(192, 192, 192);
-            LabelEnabled.TextAlign = GLFontAlignment.Left;
-            LabelEnabled.Padding = new GLPadding(1, 1, 1, 1);
-            LabelEnabled.BackgroundColor = Color.Transparent;
-
-            LabelDisabled.Font = defaultFont;
-            LabelDisabled.Color = Color.FromArgb(128, 128, 128);
-            LabelDisabled.TextAlign = GLFontAlignment.Left;
-            LabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
-            LabelDisabled.BackgroundColor = Color.Transparent;
-
 
             LinkLabelEnabled.Font = defaultFont;
             LinkLabelEnabled.Color = Color.FromArgb(128, 128, 255);

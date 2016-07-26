@@ -61,7 +61,6 @@
     <Compile Include="GLGui.cs" />
     <Compile Include="GLDraw.cs" />
     <Compile Include="GLSkin.cs" />
-    <Compile Include="GLLabel.cs" />
     <Compile Include="GLTextBox.cs" />
     <Compile Include="GLFlowLayout.cs" />
     <Compile Include="GLScrollableControl.cs" />
