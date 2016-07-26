@@ -92,11 +92,6 @@ namespace GLGUI
         public GLFormSkin FormActive = new GLFormSkin();
         public GLFormSkin FormInactive = new GLFormSkin();
 
-        public GLButtonSkin ButtonEnabled = new GLButtonSkin();
-        public GLButtonSkin ButtonDisabled = new GLButtonSkin();
-        public GLButtonSkin ButtonHover = new GLButtonSkin();
-        public GLButtonSkin ButtonPressed = new GLButtonSkin();
-
         public GLLabelSkin LabelEnabled = new GLLabelSkin();
         public GLLabelSkin LabelDisabled = new GLLabelSkin();
 
@@ -149,36 +144,6 @@ namespace GLGUI
             FormInactive.Border = new GLPadding(2);
             FormInactive.BorderColor = Color.FromArgb(192, 56, 56, 56);
             FormInactive.BackgroundColor = Color.FromArgb(41, 41, 41);
-
-
-            ButtonEnabled.Font = defaultFont;
-            ButtonEnabled.Color = Color.FromArgb(240, 240, 240);
-            ButtonEnabled.TextAlign = GLFontAlignment.Centre;
-            ButtonEnabled.Border = new GLPadding(2);
-            ButtonEnabled.BorderColor = Color.FromArgb(56, 56, 56);
-            ButtonEnabled.BackgroundColor = Color.Transparent;
-
-            ButtonDisabled.Font = defaultFont;
-            ButtonDisabled.Color = Color.FromArgb(128, 128, 128);
-            ButtonDisabled.TextAlign = GLFontAlignment.Centre;
-            ButtonDisabled.Border = new GLPadding(2);
-            ButtonDisabled.BorderColor = Color.FromArgb(56, 56, 56);
-            ButtonDisabled.BackgroundColor = Color.Transparent;
-
-            ButtonHover.Font = defaultFont;
-            ButtonHover.Color = Color.FromArgb(255, 255, 255);
-            ButtonHover.TextAlign = GLFontAlignment.Centre;
-            ButtonHover.Border = new GLPadding(2);
-            ButtonHover.BorderColor = Color.FromArgb(64, 64, 64);
-            ButtonHover.BackgroundColor = Color.Transparent;
-
-            ButtonPressed.Font = defaultFont;
-            ButtonPressed.Color = Color.FromArgb(96, 96, 96);
-            ButtonPressed.TextAlign = GLFontAlignment.Centre;
-            ButtonPressed.Border = new GLPadding(2);
-            ButtonPressed.BorderColor = Color.FromArgb(32, 32, 32);
-            ButtonPressed.BackgroundColor = Color.Transparent;
-
 
             LabelEnabled.Font = defaultFont;
             LabelEnabled.Color = Color.FromArgb(192, 192, 192);

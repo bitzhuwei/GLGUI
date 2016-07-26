@@ -58,9 +58,6 @@ namespace GLGUI
 
             outer = new Rectangle(0, 0, 100, 0);
 
-            ContextMenu = new GLContextMenu(gui);
-            ContextMenu.Add(new GLContextMenuEntry(gui) { Text = "Copy" }).Click += (s, e) => { if (selectionStart.Index != cursorPosition.Index) CopySelection(); };
-            ContextMenu.Add(new GLContextMenuEntry(gui) { Text = "Paste" }).Click += (s, e) => { if (Clipboard.ContainsText()) Insert(Clipboard.GetText()); };
         }
 
         protected override void UpdateLayout()

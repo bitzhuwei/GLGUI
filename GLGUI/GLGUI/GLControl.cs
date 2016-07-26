@@ -22,7 +22,6 @@ namespace GLGUI
         public bool IsDragged { get { return isDragged || controls.Any(c => c.IsDragged); } }
         public GLAnchorStyles Anchor { get { return anchor; } set { anchor = value; Invalidate(); } }
         public bool AutoSize { get { return autoSize; } set { autoSize = value; Invalidate(); } }
-        public virtual GLContextMenu ContextMenu { get { return contextMenu; } set { contextMenu = value; } }
         public bool HandleMouseEvents { get { return handleMouseEvents; } set { handleMouseEvents = value; } }
 
         // derived from above properties:

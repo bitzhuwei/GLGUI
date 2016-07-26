@@ -12,7 +12,6 @@ namespace GLGUI
         public Point ScrollPosition { get { return scrollPosition; } }
         public Size ScrollFreedom { get { return scrollFreedom; } }
         public GLSkin.GLScrollableControlSkin Skin { get { return skin; } set { skin = value; Invalidate(); } }
-        public override GLContextMenu ContextMenu { get { return base.ContextMenu; } set { base.ContextMenu = value; content.ContextMenu = value; } }
 
         private GLSkin.GLScrollableControlSkin skin;
         private Point scrollPosition;
