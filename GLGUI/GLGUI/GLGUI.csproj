@@ -69,8 +69,6 @@
     <Compile Include="GLScrollableControl.cs" />
     <Compile Include="GLSlider.cs" />
     <Compile Include="GLSplitLayout.cs" />
-    <Compile Include="GLLinkLabel.cs" />
-    <Compile Include="Advanced\GLDataControl.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
     <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
