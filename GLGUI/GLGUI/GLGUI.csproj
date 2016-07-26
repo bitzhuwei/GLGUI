@@ -61,7 +61,6 @@
     <Compile Include="GLDraw.cs" />
     <Compile Include="GLSkin.cs" />
     <Compile Include="GLLabel.cs" />
-    <Compile Include="GLCheckBox.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
     <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="GLAnchorStyles.cs" />
     <Compile Include="GLFlowDirection.cs" />
     <Compile Include="GLPadding.cs" />
-    <Compile Include="GLSliderOrientation.cs" />
     <Compile Include="GLFont\GLFontTextPosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
