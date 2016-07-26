@@ -46,7 +46,7 @@ namespace GLGUI.Example
             // change font and background color:
             var skin = fpsLabel.SkinEnabled;
             skin.Font = new GLFont(new Font("Arial", 12.0f));
-            skin.BackgroundColor = glgui.Skin.TextBoxActive.BackgroundColor;
+            skin.BackgroundColor = new Color4(Color.Green);
             fpsLabel.SkinEnabled = skin;
         }
 

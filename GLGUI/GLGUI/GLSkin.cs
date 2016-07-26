@@ -23,17 +23,7 @@ namespace GLGUI
             public Color4 BackgroundColor;
         }
 
-        public struct GLTextBoxSkin
-        {
-            public GLFont Font;
-            public Color4 Color;
-            public Color4 SelectionColor;
-            public GLFontAlignment TextAlign;
-            public GLPadding Border;
-            public GLPadding Padding;
-            public Color4 BorderColor;
-            public Color4 BackgroundColor;
-        }
+
 
         public struct GLCheckBoxSkin
         {
@@ -87,11 +77,6 @@ namespace GLGUI
 
         public GLLabelSkin LinkLabelEnabled = new GLLabelSkin();
         public GLLabelSkin LinkLabelDisabled = new GLLabelSkin();
-
-        public GLTextBoxSkin TextBoxEnabled = new GLTextBoxSkin();
-        public GLTextBoxSkin TextBoxActive = new GLTextBoxSkin();
-        public GLTextBoxSkin TextBoxHover = new GLTextBoxSkin();
-        public GLTextBoxSkin TextBoxDisabled = new GLTextBoxSkin();
 
         public GLCheckBoxSkin CheckBoxEnabled = new GLCheckBoxSkin();
         public GLCheckBoxSkin CheckBoxPressed = new GLCheckBoxSkin();
@@ -156,43 +141,6 @@ namespace GLGUI
             LinkLabelDisabled.TextAlign = GLFontAlignment.Left;
             LinkLabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
             LinkLabelDisabled.BackgroundColor = Color.Transparent;
-
-
-            TextBoxEnabled.Font = defaultFont;
-            TextBoxEnabled.Color = Color.FromArgb(192, 192, 192);
-            TextBoxEnabled.SelectionColor = Color.FromArgb(80, 80, 80);
-            TextBoxEnabled.TextAlign = GLFontAlignment.Left;
-            TextBoxEnabled.Border = new GLPadding(1);
-            TextBoxEnabled.Padding = new GLPadding(1, 0, 1, 2);
-            TextBoxEnabled.BorderColor = Color.FromArgb(96, 96, 96);
-            TextBoxEnabled.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            TextBoxActive.Font = defaultFont;
-            TextBoxActive.Color = Color.FromArgb(192, 192, 192);
-            TextBoxActive.SelectionColor = Color.FromArgb(96, 96, 96);
-            TextBoxActive.TextAlign = GLFontAlignment.Left;
-            TextBoxActive.Border = new GLPadding(1);
-            TextBoxActive.Padding = new GLPadding(1, 0, 1, 2);
-            TextBoxActive.BorderColor = Color.FromArgb(255, 192, 96);
-            TextBoxActive.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            TextBoxHover.Font = defaultFont;
-            TextBoxHover.Color = Color.FromArgb(192, 192, 192);
-            TextBoxHover.SelectionColor = Color.FromArgb(80, 80, 80);
-            TextBoxHover.TextAlign = GLFontAlignment.Left;
-            TextBoxHover.Border = new GLPadding(1);
-            TextBoxHover.Padding = new GLPadding(1, 0, 1, 2);
-            TextBoxHover.BorderColor = Color.FromArgb(128, 128, 128);
-            TextBoxHover.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            TextBoxDisabled.Font = defaultFont;
-            TextBoxDisabled.Color = Color.FromArgb(128, 128, 128);
-            TextBoxDisabled.SelectionColor = Color.FromArgb(80, 80, 80);
-            TextBoxDisabled.TextAlign = GLFontAlignment.Left;
-            TextBoxDisabled.Border = new GLPadding(1);
-            TextBoxDisabled.Padding = new GLPadding(1, 0, 1, 2);
-            TextBoxDisabled.BorderColor = Color.FromArgb(128, 128, 128);
-            TextBoxDisabled.BackgroundColor = Color.FromArgb(56, 56, 56);
 
 
             CheckBoxEnabled.Font = defaultFont;
