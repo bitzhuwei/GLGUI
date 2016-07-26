@@ -44,7 +44,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GLOptions.cs" />
     <Compile Include="GLGroupLayout.cs" />
     <Compile Include="GLViewport.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="GLSkin.cs" />
     <Compile Include="GLLabel.cs" />
     <Compile Include="GLTextBox.cs" />
-    <Compile Include="GLCheckBox.cs" />
     <Compile Include="GLFlowLayout.cs" />
     <Compile Include="GLScrollableControl.cs" />
     <Compile Include="GLSlider.cs" />
