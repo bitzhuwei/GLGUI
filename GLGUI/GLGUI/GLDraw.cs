@@ -5,8 +5,8 @@ using OpenTK.Graphics.OpenGL;
 
 namespace GLGUI
 {
-	public static class GLDraw
-	{
+    public static class GLDraw
+    {
         public static Rectangle CurrentScreenRect { get { return ControlRect; } }
 
         internal static GLGui CurrentGui;
@@ -33,10 +33,10 @@ namespace GLGUI
             FillRect(ref rect, ref color);
         }
 
-		public static void FillRect(ref Rectangle rect, ref Color4 color)
-		{
+        public static void FillRect(ref Rectangle rect, ref Color4 color)
+        {
             if (color.A == 0.0f)
-				return;
+                return;
 
             int w = Math.Min(rect.Width, ScissorRect.Width - rect.X);
             int h = Math.Min(rect.Height, ScissorRect.Height - rect.Y);
@@ -46,7 +46,7 @@ namespace GLGUI
                 GL.Scissor(ScissorRect.X + rect.X, CurrentGui.Outer.Height - (ScissorRect.Y + rect.Y + h), w, h);
                 GL.Clear(ClearBufferMask.ColorBufferBit);
             }
-		}
+        }
 
         public static void Text(GLFontText processedText, Rectangle rect, ref Color4 color)
         {
@@ -64,7 +64,7 @@ namespace GLGUI
             {
                 GL.Scissor(ScissorRect.X + rect.X, CurrentGui.Outer.Height - (ScissorRect.Y + rect.Y + h), w, h);
                 GL.PushMatrix();
-                switch(processedText.alignment)
+                switch (processedText.alignment)
                 {
                     case GLFontAlignment.Left:
                     case GLFontAlignment.Justify:
@@ -83,6 +83,6 @@ namespace GLGUI
                 GL.PopMatrix();
             }
         }
-	}
+    }
 }
 

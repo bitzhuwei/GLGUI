@@ -1,6 +1,6 @@
 ﻿namespace GLGUI
 {
-	public enum GLFontRenderHint : byte
+    public enum GLFontRenderHint : byte
     {
         /// <summary>
         /// Use AntiAliasGridFit when rendering the ttf character set to create the GLFont texture

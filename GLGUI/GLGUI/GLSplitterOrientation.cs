@@ -1,8 +1,8 @@
 namespace GLGUI
 {
-	public enum GLSplitterOrientation : byte
-	{
-		Horizontal,
-		Vertical
-	}
+    public enum GLSplitterOrientation : byte
+    {
+        Horizontal,
+        Vertical
+    }
 }

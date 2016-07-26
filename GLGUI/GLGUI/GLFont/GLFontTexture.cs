@@ -6,14 +6,14 @@ namespace GLGUI
 {
     class GLFontTexture : IDisposable
     {
-		public readonly int TextureID;
-		public readonly int Width;
-		public readonly int Height;
+        public readonly int TextureID;
+        public readonly int Width;
+        public readonly int Height;
 
         public GLFontTexture(BitmapData dataSource)
         {
-			Width = dataSource.Width;
-			Height = dataSource.Height;
+            Width = dataSource.Width;
+            Height = dataSource.Height;
 
             GL.Enable(EnableCap.Texture2D);
 
@@ -27,26 +27,26 @@ namespace GLGUI
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
-			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Width, Height, 0,
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Width, Height, 0,
                 OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, dataSource.Scan0);
 
             GL.Disable(EnableCap.Texture2D);
 
-			GLGui.usedTextures++;
+            GLGui.usedTextures++;
         }
 
         public void Dispose()
         {
             GL.DeleteTexture(TextureID);
-			GLGui.usedTextures--;
+            GLGui.usedTextures--;
         }
 
-		~GLFontTexture()
-		{
-			lock(GLGui.toDispose)
-			{
-				GLGui.toDispose.Add(this);
-			}
-		}
+        ~GLFontTexture()
+        {
+            lock (GLGui.toDispose)
+            {
+                GLGui.toDispose.Add(this);
+            }
+        }
     }
 }

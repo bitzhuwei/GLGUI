@@ -37,12 +37,12 @@ namespace GLGUI
             var fontFamily = pfc.Families[0];
 
             if (!fontFamily.IsStyleAvailable(style))
-                throw new ArgumentException("Font file: " + fileName + " does not support style: " +  style);
+                throw new ArgumentException("Font file: " + fileName + " does not support style: " + style);
 
             if (config == null)
                 config = new GLFontBuilderConfiguration();
 
-            using(var font = new Font(fontFamily, size * config.SuperSampleLevels, style))
+            using (var font = new Font(fontFamily, size * config.SuperSampleLevels, style))
             {
                 fontData = new GLFontBuilder(font, config).BuildFontData();
             }
@@ -65,7 +65,7 @@ namespace GLGUI
         }
         public SizeF ProcessText(GLFontText processedText, string text, SizeF maxSize, GLFontAlignment alignment = GLFontAlignment.Left)
         {
-            if(processedText == null)
+            if (processedText == null)
                 throw new ArgumentNullException("processedText");
 
             var nodeList = new GLFontTextNodeList(text);
@@ -89,35 +89,35 @@ namespace GLGUI
                 }
             }
 
-			if (processedText.VertexBuffers == null)
-			{
-				processedText.VertexBuffers = new GLFontVertexBuffer[fontData.Pages.Length];
-				for (int i = 0; i < processedText.VertexBuffers.Length; i++)
-					processedText.VertexBuffers[i] = new GLFontVertexBuffer(fontData.Pages[i].TextureID);
-			}
-			if (processedText.VertexBuffers[0].TextureID != fontData.Pages[0].TextureID)
+            if (processedText.VertexBuffers == null)
             {
-				for (int i = 0; i < processedText.VertexBuffers.Length; i++)
-					processedText.VertexBuffers[i].TextureID = fontData.Pages[i].TextureID;
+                processedText.VertexBuffers = new GLFontVertexBuffer[fontData.Pages.Length];
+                for (int i = 0; i < processedText.VertexBuffers.Length; i++)
+                    processedText.VertexBuffers[i] = new GLFontVertexBuffer(fontData.Pages[i].TextureID);
+            }
+            if (processedText.VertexBuffers[0].TextureID != fontData.Pages[0].TextureID)
+            {
+                for (int i = 0; i < processedText.VertexBuffers.Length; i++)
+                    processedText.VertexBuffers[i].TextureID = fontData.Pages[i].TextureID;
             }
             processedText.textNodeList = nodeList;
             processedText.maxSize = maxSize;
             processedText.alignment = alignment;
 
-			foreach (var buffer in processedText.VertexBuffers)
+            foreach (var buffer in processedText.VertexBuffers)
                 buffer.Reset();
-			SizeF size = PrintOrMeasure(processedText.VertexBuffers, processedText, false);
-			foreach (var buffer in processedText.VertexBuffers)
+            SizeF size = PrintOrMeasure(processedText.VertexBuffers, processedText, false);
+            foreach (var buffer in processedText.VertexBuffers)
                 buffer.Load();
             return size;
         }
 
-		public GLFontTextPosition GetTextPosition(GLFontText processedText, GLFontTextPosition position)
+        public GLFontTextPosition GetTextPosition(GLFontText processedText, GLFontTextPosition position)
         {
             float maxMeasuredWidth = 0f;
 
-			float xOffset = 0f;
-			float yOffset = 0f;
+            float xOffset = 0f;
+            float yOffset = 0f;
 
             int character = 0;
 
@@ -147,7 +147,7 @@ namespace GLGUI
                 {
                     newLine = true;
                     if (character == position.Index)
-						return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
+                        return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
                     character++;
                 }
                 else
@@ -156,7 +156,7 @@ namespace GLGUI
                     {
                         newLine = true;
                         if (character == position.Index)
-							return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
+                            return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
                         character++;
                     }
                     else if (length + node.ModifiedLength <= maxWidth || !atLeastOneNodeCosumedOnLine)
@@ -165,7 +165,7 @@ namespace GLGUI
 
                         Vector2 p;
                         if (GetWordPosition(xOffset + length, yOffset, node, position, ref character, out p))
-							return new GLFontTextPosition() { Index = character, Position = p };
+                            return new GLFontTextPosition() { Index = character, Position = p };
 
                         length += node.ModifiedLength;
 
@@ -187,10 +187,10 @@ namespace GLGUI
                         break;
 
                     if ((long)(yOffset / lineSpacingCache) == (long)(position.Position.Y / lineSpacingCache))
-						return new GLFontTextPosition() { Index = character - 1, Position = new Vector2(xOffset + length, yOffset) };
+                        return new GLFontTextPosition() { Index = character - 1, Position = new Vector2(xOffset + length, yOffset) };
 
                     yOffset += lineSpacingCache;
-					xOffset = 0f;
+                    xOffset = 0f;
                     length = 0f;
                     atLeastOneNodeCosumedOnLine = false;
 
@@ -206,10 +206,10 @@ namespace GLGUI
                 }
             }
 
-			return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
+            return new GLFontTextPosition() { Index = character, Position = new Vector2(xOffset + length, yOffset) };
         }
 
-		private bool GetWordPosition(float x, float y, GLFontTextNode node, GLFontTextPosition position, ref int character, out Vector2 p)
+        private bool GetWordPosition(float x, float y, GLFontTextNode node, GLFontTextPosition position, ref int character, out Vector2 p)
         {
             bool sameLine = (long)(y / lineSpacingCache) == (long)(position.Position.Y / lineSpacingCache);
 
@@ -279,8 +279,8 @@ namespace GLGUI
             // init values we'll return
             float maxMeasuredWidth = 0f;
 
-			float xOffset = 0f;
-			float yOffset = 0f;
+            float xOffset = 0f;
+            float yOffset = 0f;
 
             lineSpacingCache = LineSpacing;
             isMonospacingActiveCache = IsMonospacingActive;
@@ -340,7 +340,7 @@ namespace GLGUI
                         break;
 
                     yOffset += lineSpacingCache;
-					xOffset = 0f;
+                    xOffset = 0f;
                     length = 0f;
                     atLeastOneNodeCosumedOnLine = false;
 
@@ -378,11 +378,11 @@ namespace GLGUI
                 leftOverPixels = (int)node.LengthTweak - pixelsPerGap * charGaps;
             }
 
-            for(int i = 0; i < node.Text.Length; i++)
+            for (int i = 0; i < node.Text.Length; i++)
             {
                 char c = node.Text[i];
                 GLFontGlyph glyph;
-                if(fontData.CharSetMapping.TryGetValue(c, out glyph))
+                if (fontData.CharSetMapping.TryGetValue(c, out glyph))
                 {
                     vbos[glyph.Page].AddQuad(x, y + glyph.YOffset, x + glyph.Rect.Width, y + glyph.YOffset + glyph.Rect.Height,
                         glyph.TextureMin.X, glyph.TextureMin.Y, glyph.TextureMax.X, glyph.TextureMax.Y);
@@ -433,7 +433,7 @@ namespace GLGUI
 
         private bool CrumbledWord(GLFontTextNode node)
         {
-            return (node.Type == GLFontTextNodeType.Word && node.Next != null && node.Next.Type == GLFontTextNodeType.Word);  
+            return (node.Type == GLFontTextNodeType.Word && node.Next != null && node.Next.Type == GLFontTextNodeType.Word);
         }
 
         private void JustifyLine(GLFontTextNode node, float targetLength)
@@ -471,7 +471,7 @@ namespace GLGUI
                     if (node.Type == GLFontTextNodeType.Space)
                         spaceGaps++;
                     if (node.Type == GLFontTextNodeType.Tab)
-                        spaceGaps+=4;
+                        spaceGaps += 4;
 
                     if (node.Type == GLFontTextNodeType.Word)
                     {
@@ -507,12 +507,12 @@ namespace GLGUI
                 {
                     extraLength += node.Length;
                     extraSpaceGaps++;
-                } 
+                }
                 else if (node.Type == GLFontTextNodeType.Tab)
                 {
                     extraLength += node.Length;
-                    extraSpaceGaps+=4;
-                } 
+                    extraSpaceGaps += 4;
+                }
                 else if (node.Type == GLFontTextNodeType.Word)
                 {
                     contractEndNode = node;
@@ -527,13 +527,13 @@ namespace GLGUI
             {
                 //last part of this condition is to ensure that the full contraction is possible (it is all or nothing with contractions, since it looks really bad if we don't manage the full)
                 bool contract = contractPossible && (extraLength + length - targetLength) * Options.JustifyContractionPenalty < (targetLength - length) &&
-                    ((targetLength - (length + extraLength + 1)) / targetLength > -Options.JustifyCapContract); 
+                    ((targetLength - (length + extraLength + 1)) / targetLength > -Options.JustifyCapContract);
 
-                if((!contract && length < targetLength) || (contract && length + extraLength > targetLength))  //calculate padding pixels per word and char
+                if ((!contract && length < targetLength) || (contract && length + extraLength > targetLength))  //calculate padding pixels per word and char
                 {
                     if (contract)
                     {
-                        length += extraLength + 1; 
+                        length += extraLength + 1;
                         charGaps += extraCharGaps;
                         spaceGaps += extraSpaceGaps;
                     }
@@ -564,13 +564,13 @@ namespace GLGUI
                     }
                     else
                     {
-                        if(contract)
+                        if (contract)
                             charPixels = (int)(totalPixels * Options.JustifyCharacterWeightForContract * charGaps / spaceGaps);
-                        else 
+                        else
                             charPixels = (int)(totalPixels * Options.JustifyCharacterWeightForExpand * charGaps / spaceGaps);
 
                         if ((!contract && charPixels > totalPixels) ||
-                            (contract && charPixels < totalPixels) )
+                            (contract && charPixels < totalPixels))
                             charPixels = totalPixels;
 
                         spacePixels = totalPixels - charPixels;
@@ -642,8 +642,8 @@ namespace GLGUI
                             {
                                 node.LengthTweak -= cGaps;
                                 leftOverCharPixels += cGaps;
-                            } 
-                            else  
+                            }
+                            else
                             {
                                 node.LengthTweak += leftOverCharPixels;
                                 leftOverCharPixels = 0;

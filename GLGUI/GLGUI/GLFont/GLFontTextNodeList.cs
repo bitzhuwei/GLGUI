@@ -117,9 +117,9 @@ namespace GLGUI
         /// <param name="baseCaseSize"></param>
         public void Crumble(GLFontTextNode node, int baseCaseSize)
         {
-            if(node.Text.Length <= baseCaseSize)
+            if (node.Text.Length <= baseCaseSize)
                 return;
- 
+
             var left = SplitNode(node);
             var right = left.Next;
             Crumble(left, baseCaseSize);
@@ -169,11 +169,11 @@ namespace GLGUI
 
         public void Add(GLFontTextNode node)
         {
-            if(Head == null)
+            if (Head == null)
             {
                 Head = Tail = node;
-            } 
-            else 
+            }
+            else
             {
                 Tail.Next = node;
                 node.Previous = Tail;
@@ -185,7 +185,7 @@ namespace GLGUI
         {
             StringBuilder builder = new StringBuilder();
 
-            foreach(GLFontTextNode node in this)
+            foreach (GLFontTextNode node in this)
             {
                 if (node.Type == GLFontTextNodeType.Space)
                     builder.Append(" ");

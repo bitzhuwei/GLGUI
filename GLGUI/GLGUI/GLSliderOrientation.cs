@@ -1,6 +1,6 @@
 namespace GLGUI
 {
-	public enum GLSliderOrientation : byte
+    public enum GLSliderOrientation : byte
     {
         Horizontal,
         Vertical
