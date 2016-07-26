@@ -23,17 +23,6 @@ namespace GLGUI
             public Color4 BackgroundColor;
         }
 
-
-
-        public struct GLCheckBoxSkin
-        {
-            public GLFont Font;
-            public Color4 Color;
-            public GLPadding Border;
-            public Color4 BorderColor;
-            public Color4 BackgroundColor;
-        }
-
         public struct GLGroupLayoutSkin
         {
             public GLPadding Border;
@@ -65,11 +54,6 @@ namespace GLGUI
 
         public GLLabelSkin LinkLabelEnabled = new GLLabelSkin();
         public GLLabelSkin LinkLabelDisabled = new GLLabelSkin();
-
-        public GLCheckBoxSkin CheckBoxEnabled = new GLCheckBoxSkin();
-        public GLCheckBoxSkin CheckBoxPressed = new GLCheckBoxSkin();
-        public GLCheckBoxSkin CheckBoxHover = new GLCheckBoxSkin();
-        public GLCheckBoxSkin CheckBoxDisabled = new GLCheckBoxSkin();
 
         public GLGroupLayoutSkin GroupLayout = new GLGroupLayoutSkin();
 
@@ -122,31 +106,6 @@ namespace GLGUI
             LinkLabelDisabled.TextAlign = GLFontAlignment.Left;
             LinkLabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
             LinkLabelDisabled.BackgroundColor = Color.Transparent;
-
-
-            CheckBoxEnabled.Font = defaultFont;
-            CheckBoxEnabled.Color = Color.FromArgb(192, 192, 192);
-            CheckBoxEnabled.Border = new GLPadding(1);
-            CheckBoxEnabled.BorderColor = Color.FromArgb(96, 96, 96);
-            CheckBoxEnabled.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            CheckBoxPressed.Font = defaultFont;
-            CheckBoxPressed.Color = Color.FromArgb(192, 192, 192);
-            CheckBoxPressed.Border = new GLPadding(1);
-            CheckBoxPressed.BorderColor = Color.FromArgb(255, 192, 96);
-            CheckBoxPressed.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            CheckBoxHover.Font = defaultFont;
-            CheckBoxHover.Color = Color.FromArgb(192, 192, 192);
-            CheckBoxHover.Border = new GLPadding(1);
-            CheckBoxHover.BorderColor = Color.FromArgb(128, 128, 128);
-            CheckBoxHover.BackgroundColor = Color.FromArgb(56, 56, 56);
-
-            CheckBoxDisabled.Font = defaultFont;
-            CheckBoxDisabled.Color = Color.FromArgb(128, 128, 128);
-            CheckBoxDisabled.Border = new GLPadding(1);
-            CheckBoxDisabled.BorderColor = Color.FromArgb(128, 128, 128);
-            CheckBoxDisabled.BackgroundColor = Color.FromArgb(56, 56, 56);
 
 
             GroupLayout.Border = new GLPadding(1);
