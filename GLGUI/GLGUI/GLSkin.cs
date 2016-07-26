@@ -50,18 +50,6 @@ namespace GLGUI
             public int Space;
         }
 
-        public struct GLSplitLayoutSkin
-        {
-            public Color4 BackgroundColor;
-            public int SplitterSize;
-        }
-
-        public struct GLSliderSkin
-        {
-            public Color4 KnobColor;
-            public Color4 BackgroundColor;
-        }
-
         public struct GLScrollableControlSkin
         {
             public GLPadding Border;
@@ -86,13 +74,6 @@ namespace GLGUI
         public GLGroupLayoutSkin GroupLayout = new GLGroupLayoutSkin();
 
         public GLFlowLayoutSkin FlowLayout = new GLFlowLayoutSkin();
-
-        public GLSplitLayoutSkin SplitLayout = new GLSplitLayoutSkin();
-
-        public GLSliderSkin SliderEnabled = new GLSliderSkin();
-        public GLSliderSkin SliderDisabled = new GLSliderSkin();
-        public GLSliderSkin SliderHover = new GLSliderSkin();
-        public GLSliderSkin SliderPressed = new GLSliderSkin();
 
         public GLScrollableControlSkin ScrollableControl = new GLScrollableControlSkin();
 
@@ -178,23 +159,6 @@ namespace GLGUI
             FlowLayout.BorderColor = Color.Transparent;
             FlowLayout.BackgroundColor = Color.Transparent;
             FlowLayout.Space = 2;
-
-
-            SplitLayout.BackgroundColor = Color.FromArgb(0, 0, 0);
-            SplitLayout.SplitterSize = 1;
-
-
-            SliderEnabled.KnobColor = Color.FromArgb(80, 80, 80);
-            SliderEnabled.BackgroundColor = Color.FromArgb(28, 28, 28);//Color.FromArgb(56, 56, 56);
-
-            SliderDisabled.KnobColor = Color.Transparent; //Color.FromArgb(96, 96, 96);
-            SliderDisabled.BackgroundColor = Color.FromArgb(28, 28, 28);//Color.FromArgb(56, 56, 56);
-
-            SliderHover.KnobColor = Color.FromArgb(96, 96, 96);
-            SliderHover.BackgroundColor = Color.FromArgb(32, 32, 32);
-
-            SliderPressed.KnobColor = Color.FromArgb(80, 80, 80);
-            SliderPressed.BackgroundColor = Color.FromArgb(32, 32, 32);
 
 
             ScrollableControl.Border = new GLPadding(1);
