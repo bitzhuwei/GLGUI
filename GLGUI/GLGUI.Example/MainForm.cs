@@ -9,8 +9,6 @@ namespace GLGUI.Example
     public class MainForm : GameWindow
     {
         GLGui glgui;
-        GLLabel fpsLabel;
-        GLLabel console;
         LineWriter consoleWriter;
 
         int fpsCounter = 0;
@@ -56,25 +54,8 @@ namespace GLGUI.Example
 
         private void OnRender(object sender, FrameEventArgs e)
         {
-            time += e.Time;
-
-            if (time >= fpsSecond)
-            {
-                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, glgui.RenderDuration);
-                fpsCounter = 0;
-                fpsSecond++;
-            }
-
-            if (consoleWriter.Changed)
-            {
-                console.Text = string.Join("\n", consoleWriter.Lines);
-                consoleWriter.Changed = false;
-            }
-
             glgui.Render();
             SwapBuffers();
-
-            fpsCounter++;
         }
 
     }
