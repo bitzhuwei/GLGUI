@@ -83,19 +83,19 @@ namespace GLGUI
             glyphs = new GLFontGlyph[charSet.Length];
 
             int spacing = (int)Math.Ceiling(maxSize.Width) + 2 * initialMargin;
-			Bitmap bmp = new Bitmap(spacing * charSet.Length, (int)Math.Ceiling(maxSize.Height) + 2 * initialMargin + 1, PixelFormat.Format24bppRgb);
+            Bitmap bmp = new Bitmap(spacing * charSet.Length, (int)Math.Ceiling(maxSize.Height) + 2 * initialMargin + 1, PixelFormat.Format24bppRgb);
             Graphics graph = Graphics.FromImage(bmp);
 
-            switch(renderHint)
+            switch (renderHint)
             {
-                case GLFontRenderHint.SizeDependent: 
-					graph.TextRenderingHint = font.Size <= 12.0f  ? TextRenderingHint.ClearTypeGridFit : TextRenderingHint.AntiAlias; 
+                case GLFontRenderHint.SizeDependent:
+                    graph.TextRenderingHint = font.Size <= 12.0f ? TextRenderingHint.ClearTypeGridFit : TextRenderingHint.AntiAlias;
                     break;
-                case GLFontRenderHint.AntiAlias: 
-                    graph.TextRenderingHint = TextRenderingHint.AntiAlias; 
+                case GLFontRenderHint.AntiAlias:
+                    graph.TextRenderingHint = TextRenderingHint.AntiAlias;
                     break;
-                case GLFontRenderHint.AntiAliasGridFit: 
-                    graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit; 
+                case GLFontRenderHint.AntiAliasGridFit:
+                    graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                     break;
                 case GLFontRenderHint.ClearTypeGridFit:
                     graph.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
@@ -108,9 +108,9 @@ namespace GLGUI
             int xOffset = initialMargin;
             for (int i = 0; i < charSet.Length; i++)
             {
-				graph.DrawString("" + charSet[i], font, Brushes.White, xOffset, initialMargin);
+                graph.DrawString("" + charSet[i], font, Brushes.White, xOffset, initialMargin);
                 var charSize = graph.MeasureString("" + charSet[i], font);
-				glyphs[i] = new GLFontGlyph(0, new Rectangle(xOffset - initialMargin, 0, (int)charSize.Width + initialMargin * 2, (int)charSize.Height + initialMargin * 2), 0, charSet[i]);
+                glyphs[i] = new GLFontGlyph(0, new Rectangle(xOffset - initialMargin, 0, (int)charSize.Width + initialMargin * 2, (int)charSize.Height + initialMargin * 2), 0, charSet[i]);
                 xOffset += (int)charSize.Width + initialMargin * 2;
             }
 
@@ -141,23 +141,23 @@ namespace GLGUI
                     for (int j = rect.Y; j < rect.Y + rect.Height; j++)
                         if (!emptyPix(bitmapData, startX, j))
                             goto Done1;
-                Done1:
-				for (endX = rect.X + rect.Width - 1; endX >= 0; endX--)
+            Done1:
+                for (endX = rect.X + rect.Width - 1; endX >= 0; endX--)
                     for (int j = rect.Y; j < rect.Y + rect.Height; j++)
                         if (!emptyPix(bitmapData, endX, j))
                             goto Done2;
-                Done2:
+            Done2:
                 for (startY = rect.Y; startY < bitmapData.Height; startY++)
                     for (int i = startX; i < endX; i++)
                         if (!emptyPix(bitmapData, i, startY))
                             goto Done3;
-                            
-                Done3:
-				for (endY = rect.Y + rect.Height - 1; endY >= 0; endY--)
+
+            Done3:
+                for (endY = rect.Y + rect.Height - 1; endY >= 0; endY--)
                     for (int i = startX; i < endX; i++)
                         if (!emptyPix(bitmapData, i, endY))
                             goto Done4;
-                Done4:;
+            Done4: ;
             }
 
             if (endY < startY)
@@ -166,7 +166,7 @@ namespace GLGUI
             if (endX < startX)
                 startX = endX = rect.X;
 
-			glyph.Rect = new Rectangle(startX, startY, endX - startX + 1, endY - startY + 1);
+            glyph.Rect = new Rectangle(startX, startY, endX - startX + 1, endY - startY + 1);
 
             if (setYOffset)
                 glyph.YOffset = glyph.Rect.Y;
@@ -214,7 +214,7 @@ namespace GLGUI
                         if (!emptyPix(bitmapData, endX, j))
                         {
                             foundPix = true;
-                            break; 
+                            break;
                         }
                     }
 
@@ -290,7 +290,7 @@ namespace GLGUI
 
                 for (int i = 0; i < sourceGlyphs.Length; i++)
                 {
-                    if(!pre && currentPage == null)
+                    if (!pre && currentPage == null)
                     {
                         if (finalPageIndex == pages.Count)
                         {
@@ -307,7 +307,7 @@ namespace GLGUI
                         }
                         pages.Add(currentPage);
                     }
-                
+
                     totalTries++;
 
                     if (totalTries > 10 * sourceGlyphs.Length)
@@ -320,7 +320,7 @@ namespace GLGUI
                         if (!pre)
                         {
                             //add to page
-                            if(sourceBitmaps[sourceGlyphs[i].Page].PixelFormat == PixelFormat.Format32bppArgb)
+                            if (sourceBitmaps[sourceGlyphs[i].Page].PixelFormat == PixelFormat.Format32bppArgb)
                                 GLFontBitmap.Blit(sourceBitmaps[sourceGlyphs[i].Page], currentPage.bitmapData, rect.X, rect.Y, rect.Width, rect.Height, xPos + destMargin, yPos + destMargin);
                             else
                                 GLFontBitmap.BlitMask(sourceBitmaps[sourceGlyphs[i].Page], currentPage.bitmapData, rect.X, rect.Y, rect.Width, rect.Height, xPos + destMargin, yPos + destMargin);
@@ -372,7 +372,7 @@ namespace GLGUI
             if (config.ForcePowerOfTwo && config.SuperSampleLevels != PowerOfTwo(config.SuperSampleLevels))
                 throw new ArgumentOutOfRangeException("SuperSampleLevels must be a power of two when using ForcePowerOfTwo.");
             if (config.SuperSampleLevels <= 0 || config.SuperSampleLevels > 8)
-                throw new ArgumentOutOfRangeException("SuperSampleLevels = [" + config.SuperSampleLevels + "] is an unsupported value. Please use values in the range [1,8]"); 
+                throw new ArgumentOutOfRangeException("SuperSampleLevels = [" + config.SuperSampleLevels + "] is an unsupported value. Please use values in the range [1,8]");
 
             int margin = 2; // margin in initial bitmap (don't bother to make configurable - likely to cause confusion
             int pageWidth = config.PageWidth * config.SuperSampleLevels;
@@ -380,9 +380,9 @@ namespace GLGUI
             bool usePowerOfTwo = config.ForcePowerOfTwo;
             int glyphMargin = config.GlyphMargin * config.SuperSampleLevels;
 
+            List<SizeF> sizes = GetGlyphSizes(font);
+            SizeF maxSize = GetMaxGlyphSize(sizes);
             GLFontGlyph[] initialGlyphs;
-            var sizes = GetGlyphSizes(font);
-            var maxSize = GetMaxGlyphSize(sizes);
             var initialBmp = CreateInitialBitmap(font, maxSize, margin, out initialGlyphs, config.TextGenerationRenderHint);
             var initialBitmapData = initialBmp.LockBits(new Rectangle(0, 0, initialBmp.Width, initialBmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
@@ -396,8 +396,8 @@ namespace GLGUI
 
             foreach (var glyph in initialGlyphs)
                 glyph.YOffset -= minYOffset;
-           
-            GLFontGlyph[] glyphs; 
+
+            GLFontGlyph[] glyphs;
             var bitmapPages = GenerateBitmapSheetsAndRepack(initialGlyphs, new BitmapData[1] { initialBitmapData }, pageWidth, pageHeight, out glyphs, glyphMargin, usePowerOfTwo);
 
             initialBmp.UnlockBits(initialBitmapData);
@@ -419,7 +419,7 @@ namespace GLGUI
             fontData.Pages = pages.ToArray();
             fontData.CalculateMeanWidth();
             fontData.CalculateMaxHeight();
-            fontData.KerningPairs = GLFontKerningCalculator.CalculateKerning(charSet.ToCharArray(), glyphs, bitmapPages,config.KerningConfig);
+            fontData.KerningPairs = GLFontKerningCalculator.CalculateKerning(charSet.ToCharArray(), glyphs, bitmapPages, config.KerningConfig);
             fontData.naturallyMonospaced = IsMonospaced(sizes);
 
             foreach (var glyph in glyphs)
@@ -436,7 +436,7 @@ namespace GLGUI
             var intercept = FirstIntercept(fontData.CharSetMapping);
             if (intercept != null)
                 throw new Exception("Failed to create glyph set. Glyphs '" + intercept[0] + "' and '" + intercept[1] + "' were overlapping. This is could be due to an error in the font, or a bug in Graphics.MeasureString().");
-            
+
             return fontData;
         }
 
@@ -458,20 +458,20 @@ namespace GLGUI
                 RetargetGlyphRectangleOutwards(pages[glyph.Page].bitmapData, glyph, false, alphaTolerance);
         }
 
-        public static void CreateBitmapPerGlyph(GLFontGlyph[] sourceGlyphs, GLFontBitmap[] sourceBitmaps, out GLFontGlyph[]  destGlyphs, out GLFontBitmap[] destBitmaps)
+        public static void CreateBitmapPerGlyph(GLFontGlyph[] sourceGlyphs, GLFontBitmap[] sourceBitmaps, out GLFontGlyph[] destGlyphs, out GLFontBitmap[] destBitmaps)
         {
             destBitmaps = new GLFontBitmap[sourceGlyphs.Length];
             destGlyphs = new GLFontGlyph[sourceGlyphs.Length];
-            for(int i = 0; i < sourceGlyphs.Length; i++)
+            for (int i = 0; i < sourceGlyphs.Length; i++)
             {
                 var sg = sourceGlyphs[i];
-                destGlyphs[i] = new GLFontGlyph(i,new Rectangle(0,0,sg.Rect.Width,sg.Rect.Height),sg.YOffset,sg.Character);
-                destBitmaps[i] = new GLFontBitmap(new Bitmap(sg.Rect.Width,sg.Rect.Height,PixelFormat.Format32bppArgb));
-                GLFontBitmap.Blit(sourceBitmaps[sg.Page].bitmapData,destBitmaps[i].bitmapData,sg.Rect,0,0);
+                destGlyphs[i] = new GLFontGlyph(i, new Rectangle(0, 0, sg.Rect.Width, sg.Rect.Height), sg.YOffset, sg.Character);
+                destBitmaps[i] = new GLFontBitmap(new Bitmap(sg.Rect.Width, sg.Rect.Height, PixelFormat.Format32bppArgb));
+                GLFontBitmap.Blit(sourceBitmaps[sg.Page].bitmapData, destBitmaps[i].bitmapData, sg.Rect, 0, 0);
             }
         }
 
-        private static char[] FirstIntercept(Dictionary<char,GLFontGlyph> charSet)
+        private static char[] FirstIntercept(Dictionary<char, GLFontGlyph> charSet)
         {
             char[] keys = charSet.Keys.ToArray();
             for (int i = 0; i < keys.Length; i++)
