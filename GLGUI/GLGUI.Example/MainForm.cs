@@ -35,14 +35,7 @@ namespace GLGUI.Example
 
             glgui = new GLGui(this);
 
-            var mainAreaControl = glgui.Add(new GLGroupLayout(glgui) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
-            // change background color:
-            var mainSkin = mainAreaControl.Skin;
-            mainSkin.BackgroundColor = glgui.Skin.FormActive.BackgroundColor;
-            mainSkin.BorderColor = glgui.Skin.FormActive.BorderColor;
-            mainAreaControl.Skin = mainSkin;
-
-            fpsLabel = mainAreaControl.Add(new GLLabel(glgui) { Location = new Point(10, 10), AutoSize = true });
+            fpsLabel = glgui.Add(new GLLabel(glgui) { Location = new Point(10, 10), AutoSize = true });
             // change font and background color:
             var skin = fpsLabel.SkinEnabled;
             skin.Font = new GLFont(new Font("Arial", 12.0f));
