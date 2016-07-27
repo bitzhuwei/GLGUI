@@ -26,11 +26,11 @@ namespace GLGUI
             List<SizeF> sizes = GetGlyphSizes(font);
             SizeF maxSize = GetMaxGlyphSize(sizes);
             GLFontGlyph[] initialGlyphs;
-            var initialBmp = CreateInitialBitmap(font, maxSize, margin, out initialGlyphs, config.TextGenerationRenderHint);
-            var initialBitmapData = initialBmp.LockBits(new Rectangle(0, 0, initialBmp.Width, initialBmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            Bitmap initialBmp = CreateInitialBitmap(font, maxSize, margin, out initialGlyphs, config.TextGenerationRenderHint);
+            BitmapData initialBitmapData = initialBmp.LockBits(new Rectangle(0, 0, initialBmp.Width, initialBmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
-            int minYOffset = int.MaxValue;
-            foreach (var glyph in initialGlyphs)
+            var minYOffset = int.MaxValue;
+            foreach (GLFontGlyph glyph in initialGlyphs)
             {
                 RetargetGlyphRectangleInwards(initialBitmapData, glyph, true, config.KerningConfig.AlphaEmptyPixelTolerance);
                 minYOffset = Math.Min(minYOffset, glyph.YOffset);
@@ -41,15 +41,25 @@ namespace GLGUI
                 glyph.YOffset -= minYOffset;
 
             GLFontGlyph[] glyphs;
-            var bitmapPages = GenerateBitmapSheetsAndRepack(initialGlyphs, new BitmapData[1] { initialBitmapData }, pageWidth, pageHeight, out glyphs, glyphMargin, usePowerOfTwo);
-
+            List<GLFontBitmap> bitmapPages = GenerateBitmapSheetsAndRepack(initialGlyphs, new BitmapData[1] { initialBitmapData }, pageWidth, pageHeight, out glyphs, glyphMargin, usePowerOfTwo);
+            int index = 0;
+            foreach (GLFontBitmap item in bitmapPages)
+            {
+                item.bitmap.Save(string.Format("bitmapPages{0}.bmp", index++));
+            }
             initialBmp.UnlockBits(initialBitmapData);
+            initialBmp.Save("initialBmp.bmp");
             initialBmp.Dispose();
 
             if (config.SuperSampleLevels != 1)
             {
                 ScaleSheetsAndGlyphs(bitmapPages, glyphs, 1.0f / config.SuperSampleLevels);
                 RetargetAllGlyphs(bitmapPages, glyphs, config.KerningConfig.AlphaEmptyPixelTolerance);
+                index = 0;
+                foreach (GLFontBitmap item in bitmapPages)
+                {
+                    item.bitmap.Save(string.Format("bitmapPages.2.{0}.bmp", index++));
+                }
             }
 
             //create list of texture pages
