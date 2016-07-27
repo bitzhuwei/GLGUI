@@ -44,6 +44,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GLFont\GLFont.JustifyLine.cs" />
     <Compile Include="GLFont\GLFont.PrintOrMeasure.cs" />
     <Compile Include="GLFont\GLFont.GetWordPosition.cs" />
     <Compile Include="GLFont\GLFont.GetTextPosition.cs" />
