@@ -26,7 +26,8 @@ namespace GLGUI
             if (config == null)
                 config = new GLFontBuilderConfiguration();
 
-            fontData = new GLFontBuilder(font, config).BuildFontData();
+            var builder = new GLFontBuilder(font, config);
+            fontData = builder.BuildFontData();
         }
 
         public GLFont(string fileName, float size, FontStyle style = FontStyle.Regular) : this(fileName, size, null, style) { }

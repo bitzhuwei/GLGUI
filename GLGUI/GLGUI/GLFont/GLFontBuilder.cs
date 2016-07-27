@@ -481,13 +481,17 @@ namespace GLGUI
             return null;
         }
 
-        private static int PowerOfTwo(int x) // Returns the power of 2 that is closest to x, but not smaller than x.
+        /// <summary>
+        /// Returns the power of 2 that is closest to x, but not smaller than x.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private static int PowerOfTwo(int x)
         {
+            if (x < 0) { return 0; }
+
             int shifts = 0;
             uint val = (uint)x;
-
-            if (x < 0)
-                return 0;
 
             while (val > 0)
             {
