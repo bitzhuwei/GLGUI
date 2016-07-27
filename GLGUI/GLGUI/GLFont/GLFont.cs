@@ -45,7 +45,8 @@ namespace GLGUI
 
             using (var font = new Font(fontFamily, size * config.SuperSampleLevels, style))
             {
-                fontData = new GLFontBuilder(font, config).BuildFontData();
+                var builder = new GLFontBuilder(font, config);
+                fontData = builder.BuildFontData();
             }
             pfc.Dispose();
         }
