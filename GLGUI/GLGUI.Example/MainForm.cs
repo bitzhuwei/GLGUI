@@ -38,7 +38,7 @@ namespace GLGUI.Example
             fpsLabel = glgui.Add(new GLLabel(glgui) { Location = new Point(10, 10), AutoSize = true });
             // change font and background color:
             var skin = fpsLabel.SkinEnabled;
-            skin.Font = new GLFont(new Font("Arial", 12.0f));
+            skin.Font = new GLFont(new Font("Arial", 48.0f));
             skin.BackgroundColor.A = 0.1f;// = new Color4(Color.Green);
             fpsLabel.SkinEnabled = skin;
         }

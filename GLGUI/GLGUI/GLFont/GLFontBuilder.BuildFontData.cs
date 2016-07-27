@@ -27,6 +27,7 @@ namespace GLGUI
             SizeF maxSize = GetMaxGlyphSize(sizes);
             GLFontGlyph[] initialGlyphs;
             Bitmap initialBmp = CreateInitialBitmap(font, maxSize, margin, out initialGlyphs, config.TextGenerationRenderHint);
+            initialBmp.Save("initialBmp0.bmp");
             BitmapData initialBitmapData = initialBmp.LockBits(new Rectangle(0, 0, initialBmp.Width, initialBmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
             var minYOffset = int.MaxValue;
@@ -36,6 +37,7 @@ namespace GLGUI
                 minYOffset = Math.Min(minYOffset, glyph.YOffset);
             }
             minYOffset--; // give one pixel of breathing room?
+            initialBmp.Save("initialBmp1.bmp");
 
             foreach (var glyph in initialGlyphs)
                 glyph.YOffset -= minYOffset;
@@ -48,7 +50,7 @@ namespace GLGUI
                 item.bitmap.Save(string.Format("bitmapPages{0}.bmp", index++));
             }
             initialBmp.UnlockBits(initialBitmapData);
-            initialBmp.Save("initialBmp.bmp");
+            initialBmp.Save("initialBmp2.bmp");
             initialBmp.Dispose();
 
             if (config.SuperSampleLevels != 1)
