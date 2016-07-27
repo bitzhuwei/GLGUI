@@ -23,26 +23,16 @@ namespace GLGUI
             public Color4 BackgroundColor;
         }
 
-        public struct GLGroupLayoutSkin
-        {
-            public GLPadding Border;
-            public Color4 BorderColor;
-            public Color4 BackgroundColor;
-        }
-
         public GLFormSkin FormActive = new GLFormSkin();
         public GLFormSkin FormInactive = new GLFormSkin();
 
         public GLLabelSkin LabelEnabled = new GLLabelSkin();
         public GLLabelSkin LabelDisabled = new GLLabelSkin();
 
-        public GLGroupLayoutSkin GroupLayout = new GLGroupLayoutSkin();
-
-
         public GLSkin(GLFont defaultFont = null)
         {
             if (defaultFont == null)
-                defaultFont = new GLFont(new Font("Arial", 8.0f));
+                defaultFont = new GLFont(new Font("Arial", 48.0f));
 
             FormActive.Font = defaultFont;
             FormActive.Color = Color.FromArgb(240, 240, 240);
@@ -68,13 +58,6 @@ namespace GLGUI
             LabelDisabled.TextAlign = GLFontAlignment.Left;
             LabelDisabled.Padding = new GLPadding(1, 1, 1, 1);
             LabelDisabled.BackgroundColor = Color.Transparent;
-
-
-            GroupLayout.Border = new GLPadding(1);
-            GroupLayout.BorderColor = Color.Transparent;//Color.FromArgb(96, 96, 96);
-            GroupLayout.BackgroundColor = Color.Transparent;//Color.FromArgb(240, 240, 240);
-
-
 
         }
     }

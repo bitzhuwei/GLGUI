@@ -63,13 +63,13 @@ namespace GLGUI
             }
 
             //create list of texture pages
-            var pages = new List<GLFontTexture>();
+            var texturePages = new List<GLFontTexture>();
             foreach (var page in bitmapPages)
-                pages.Add(new GLFontTexture(page.bitmapData));
+                texturePages.Add(new GLFontTexture(page.bitmapData));
 
             var fontData = new GLFontData();
             fontData.CharSetMapping = glyphs.ToDictionary(g => g.Character);
-            fontData.Pages = pages.ToArray();
+            fontData.TexturePages = texturePages.ToArray();
             fontData.CalculateMeanWidth();
             fontData.CalculateMaxHeight();
             fontData.KerningPairs = GLFontKerningCalculator.CalculateKerning(charSet.ToCharArray(), glyphs, bitmapPages, config.KerningConfig);
@@ -77,7 +77,7 @@ namespace GLGUI
 
             foreach (var glyph in glyphs)
             {
-                var page = pages[glyph.Page];
+                var page = texturePages[glyph.Page];
                 glyph.TextureMin = new PointF((float)glyph.Rect.X / page.Width, (float)glyph.Rect.Y / page.Height);
                 glyph.TextureMax = new PointF((float)glyph.Rect.Right / page.Width, (float)glyph.Rect.Bottom / page.Height);
             }

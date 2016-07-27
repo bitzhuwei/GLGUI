@@ -41,14 +41,14 @@ namespace GLGUI
 
             if (processedText.VertexBuffers == null)
             {
-                processedText.VertexBuffers = new GLFontVertexBuffer[fontData.Pages.Length];
+                processedText.VertexBuffers = new GLFontVertexBuffer[fontData.TexturePages.Length];
                 for (int i = 0; i < processedText.VertexBuffers.Length; i++)
-                    processedText.VertexBuffers[i] = new GLFontVertexBuffer(fontData.Pages[i].TextureID);
+                    processedText.VertexBuffers[i] = new GLFontVertexBuffer(fontData.TexturePages[i].TextureID);
             }
-            if (processedText.VertexBuffers[0].TextureID != fontData.Pages[0].TextureID)
+            if (processedText.VertexBuffers[0].TextureID != fontData.TexturePages[0].TextureID)
             {
                 for (int i = 0; i < processedText.VertexBuffers.Length; i++)
-                    processedText.VertexBuffers[i].TextureID = fontData.Pages[i].TextureID;
+                    processedText.VertexBuffers[i].TextureID = fontData.TexturePages[i].TextureID;
             }
             processedText.textNodeList = nodeList;
             processedText.maxSize = maxSize;

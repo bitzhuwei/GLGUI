@@ -55,7 +55,6 @@
     <Compile Include="GLFont\GLFontBuilder.RetargetGlyphRectangleOutwards.cs" />
     <Compile Include="GLFont\GLFontBuilder.RetargetGlyphRectangleInwards.cs" />
     <Compile Include="GLFont\GLFontBuilder.CreateInitialBitmap.cs" />
-    <Compile Include="GLGroupLayout.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
     <Compile Include="GLFont\GLFontKerningCalculator.cs" />
