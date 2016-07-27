@@ -50,6 +50,7 @@
     <Compile Include="GLFont\GLFont.GetWordPosition.cs" />
     <Compile Include="GLFont\GLFont.GetTextPosition.cs" />
     <Compile Include="GLFont\GLFont.ProcessText.cs" />
+    <Compile Include="GLFont\GLFontBuilder.CreateInitialBitmap.cs" />
     <Compile Include="GLGroupLayout.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
