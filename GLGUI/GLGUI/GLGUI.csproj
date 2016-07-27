@@ -44,6 +44,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GLFont\GLFont.ProcessText.cs" />
     <Compile Include="GLGroupLayout.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
