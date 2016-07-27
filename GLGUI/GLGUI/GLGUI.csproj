@@ -50,6 +50,7 @@
     <Compile Include="GLFont\GLFont.GetWordPosition.cs" />
     <Compile Include="GLFont\GLFont.GetTextPosition.cs" />
     <Compile Include="GLFont\GLFont.ProcessText.cs" />
+    <Compile Include="GLFont\GLFontBuilder.GenerateBitmapSheetsAndRepack.cs" />
     <Compile Include="GLFont\GLFontBuilder.RetargetGlyphRectangleOutwards.cs" />
     <Compile Include="GLFont\GLFontBuilder.RetargetGlyphRectangleInwards.cs" />
     <Compile Include="GLFont\GLFontBuilder.CreateInitialBitmap.cs" />
