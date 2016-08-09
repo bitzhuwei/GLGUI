@@ -37,7 +37,6 @@ namespace GLGUI
                 minYOffset = Math.Min(minYOffset, glyph.YOffset);
             }
             minYOffset--; // give one pixel of breathing room?
-            initialBmp.Save("initialBmp1.bmp");
 
             foreach (var glyph in initialGlyphs)
                 glyph.YOffset -= minYOffset;
@@ -50,7 +49,14 @@ namespace GLGUI
                 item.bitmap.Save(string.Format("bitmapPages{0}.bmp", index++));
             }
             initialBmp.UnlockBits(initialBitmapData);
-            initialBmp.Save("initialBmp2.bmp");
+            using (var graphics = Graphics.FromImage(initialBmp))
+            {
+                foreach (var item in initialGlyphs)
+                {
+                    graphics.DrawRectangle(Pens.Green, item.Rect);
+                }
+            }
+            initialBmp.Save("initialBmp1.bmp");
             initialBmp.Dispose();
 
             if (config.SuperSampleLevels != 1)

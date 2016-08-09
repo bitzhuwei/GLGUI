@@ -51,7 +51,7 @@ namespace GLGUI
             for (int i = 0; i < charSet.Length; i++)
             {
                 graph.DrawString("" + charSet[i], font, Brushes.White, xOffset, initialMargin);
-                var charSize = graph.MeasureString("" + charSet[i], font);
+                SizeF charSize = graph.MeasureString("" + charSet[i], font);
                 glyphs[i] = new GLFontGlyph(0, new Rectangle(xOffset - initialMargin, 0, (int)charSize.Width + initialMargin * 2, (int)charSize.Height + initialMargin * 2), 0, charSet[i]);
                 xOffset += (int)charSize.Width + initialMargin * 2;
             }
