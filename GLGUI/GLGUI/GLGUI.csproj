@@ -86,7 +86,6 @@
     <Compile Include="GLContextMenuEntry.cs" />
     <Compile Include="GLAnchorStyles.cs" />
     <Compile Include="GLFlowDirection.cs" />
-    <Compile Include="Clipboard.cs" />
     <Compile Include="GLScrolledControl.cs" />
     <Compile Include="GLPadding.cs" />
     <Compile Include="GLSliderOrientation.cs" />
