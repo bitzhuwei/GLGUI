@@ -44,9 +44,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GLOptions.cs" />
-    <Compile Include="GLGroupLayout.cs" />
-    <Compile Include="GLViewport.cs" />
+    <Compile Include="GLControls\GLFlowLayouts\GLOptions.cs" />
+    <Compile Include="GLControls\GLGroupLayout.cs" />
+    <Compile Include="GLControls\GLViewport.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
     <Compile Include="GLFont\GLFontKerningCalculator.cs" />
@@ -57,22 +57,22 @@
     <Compile Include="GLFont\GLFontRenderOptions.cs" />
     <Compile Include="GLFont\GLFontVertexBuffer.cs" />
     <Compile Include="GLFont\GLFontTextNodeList.cs" />
-    <Compile Include="GLForm.cs" />
+    <Compile Include="GLControls\GLForm.cs" />
     <Compile Include="GLControl.cs" />
-    <Compile Include="GLGui.cs" />
+    <Compile Include="GLControls\GLGui.cs" />
     <Compile Include="GLDraw.cs" />
-    <Compile Include="GLButton.cs" />
-    <Compile Include="GLSkin.cs" />
-    <Compile Include="GLLabel.cs" />
-    <Compile Include="GLTextBox.cs" />
-    <Compile Include="GLCheckBox.cs" />
-    <Compile Include="GLFlowLayout.cs" />
-    <Compile Include="GLScrollableControl.cs" />
-    <Compile Include="GLSlider.cs" />
-    <Compile Include="GLSplitLayout.cs" />
-    <Compile Include="GLLinkLabel.cs" />
-    <Compile Include="Advanced\GLDataControl.cs" />
-    <Compile Include="GLContextMenu.cs" />
+    <Compile Include="GLControls\GLButton.cs" />
+    <Compile Include="DataStructures\GLSkin.cs" />
+    <Compile Include="GLControls\GLLabel.cs" />
+    <Compile Include="GLControls\GLTextBox.cs" />
+    <Compile Include="GLControls\GLCheckBox.cs" />
+    <Compile Include="GLControls\GLFlowLayout.cs" />
+    <Compile Include="GLControls\GLScrollableControl.cs" />
+    <Compile Include="GLControls\GLSlider.cs" />
+    <Compile Include="GLControls\GLSplitLayout.cs" />
+    <Compile Include="GLControls\GLLinkLabel.cs" />
+    <Compile Include="GLControls\GLScrollableControls\GLDataControl.cs" />
+    <Compile Include="GLControls\GLFlowLayouts\GLContextMenu.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
     <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
@@ -83,15 +83,18 @@
     <Compile Include="GLFont\GLFontTextNode.cs" />
     <Compile Include="GLFont\GLFontText.cs" />
     <Compile Include="GLFont\GLFontTexture.cs" />
-    <Compile Include="GLContextMenuEntry.cs" />
-    <Compile Include="GLAnchorStyles.cs" />
-    <Compile Include="GLFlowDirection.cs" />
-    <Compile Include="GLScrolledControl.cs" />
-    <Compile Include="GLPadding.cs" />
-    <Compile Include="GLSliderOrientation.cs" />
-    <Compile Include="GLSplitterOrientation.cs" />
+    <Compile Include="GLControls\GLButtons\GLContextMenuEntry.cs" />
+    <Compile Include="Enumerations\GLAnchorStyles.cs" />
+    <Compile Include="Enumerations\GLFlowDirection.cs" />
+    <Compile Include="GLControls\GLScrolledControl.cs" />
+    <Compile Include="DataStructures\GLPadding.cs" />
+    <Compile Include="Enumerations\GLSliderOrientation.cs" />
+    <Compile Include="Enumerations\GLSplitterOrientation.cs" />
     <Compile Include="GLFont\GLFontTextPosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Advanced\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
