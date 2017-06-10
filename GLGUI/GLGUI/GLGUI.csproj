@@ -44,6 +44,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GLControl.Events.cs" />
     <Compile Include="GLControls\GLFlowLayouts\GLOptions.cs" />
     <Compile Include="GLControls\GLGroupLayout.cs" />
     <Compile Include="GLControls\GLViewport.cs" />
