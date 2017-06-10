@@ -75,11 +75,11 @@
     <Compile Include="GLControls\GLFlowLayouts\GLContextMenu.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
-    <Compile Include="GLFont\GLFontCharacterKerningRule.cs" />
-    <Compile Include="GLFont\GLFontRenderHint.cs" />
-    <Compile Include="GLFont\GLFontAlignment.cs" />
-    <Compile Include="GLFont\GLFontMonospacing.cs" />
-    <Compile Include="GLFont\GLFontTextNodeType.cs" />
+    <Compile Include="GLFont\Enumerations\GLFontCharacterKerningRule.cs" />
+    <Compile Include="GLFont\Enumerations\GLFontRenderHint.cs" />
+    <Compile Include="GLFont\Enumerations\GLFontAlignment.cs" />
+    <Compile Include="GLFont\Enumerations\GLFontMonospacing.cs" />
+    <Compile Include="GLFont\Enumerations\GLFontTextNodeType.cs" />
     <Compile Include="GLFont\GLFontTextNode.cs" />
     <Compile Include="GLFont\GLFontText.cs" />
     <Compile Include="GLFont\GLFontTexture.cs" />
