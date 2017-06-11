@@ -188,11 +188,11 @@ namespace GLGUI
 
         internal void DoRender(Point absolutePosition, double timeDelta)
         {
-            absolutePosition.X += outer.X;
-            absolutePosition.Y += outer.Y;
-
             if (Render != null)
             {
+                absolutePosition.X += outer.X;
+                absolutePosition.Y += outer.Y;
+
                 GLDraw.ControlRect = new Rectangle(absolutePosition, outer.Size);
                 GLDraw.ScissorRect.Intersect(GLDraw.ControlRect);
                 if (GLDraw.ScissorRect.Width != 0 && GLDraw.ScissorRect.Height != 0)
@@ -201,13 +201,13 @@ namespace GLGUI
 
             if (controls.Count > 0)
             {
-                absolutePosition.X += inner.X;
-                absolutePosition.Y += inner.Y;
-                GLDraw.ControlRect = new Rectangle(absolutePosition, inner.Size);
-                GLDraw.ScissorRect.Intersect(GLDraw.ControlRect);
-
                 if (GLDraw.ScissorRect.Width != 0 && GLDraw.ScissorRect.Height != 0)
                 {
+                    absolutePosition.X += inner.X;
+                    absolutePosition.Y += inner.Y;
+                    GLDraw.ControlRect = new Rectangle(absolutePosition, inner.Size);
+                    GLDraw.ScissorRect.Intersect(GLDraw.ControlRect);
+
                     Rectangle scissorRect = GLDraw.ScissorRect;
                     for (int i = controls.Count - 1; i >= 0; i--)
                     {
