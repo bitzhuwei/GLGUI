@@ -10,7 +10,7 @@ namespace GLGUI.GLControlExample
 {
     public class GLCanvas : OpenTK.GLControl
     {
-        GLControlControlContainer glgui;
+        GLControlControlContainer rootControl;
         GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
@@ -35,43 +35,46 @@ namespace GLGUI.GLControlExample
 
         private void OnLoad(object sender, EventArgs e)
         {
-            this.VSync = false; // vsync is nice, but you can't really measure performance while it's on
-
-            this.glgui = new GLControlControlContainer(this);
-
-            var mainAreaControl = glgui.Add(new GLGroupLayout(glgui) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
-            // change background color:
-            var mainSkin = mainAreaControl.Skin;
-            mainSkin.BackgroundColor = glgui.Skin.FormActive.BackgroundColor;
-            mainSkin.BorderColor = glgui.Skin.FormActive.BorderColor;
-            mainAreaControl.Skin = mainSkin;
-
-            var consoleScrollControl = glgui.Add(new GLScrollableControl(glgui) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
-            console = consoleScrollControl.Add(new GLLabel(glgui) { AutoSize = true, Multiline = true });
-
-            fpsLabel = mainAreaControl.Add(new GLLabel(glgui) { Location = new Point(10, 10), AutoSize = true });
-            // change font and background color:
-            var skin = fpsLabel.SkinEnabled;
-            skin.Font = new GLFont(new Font("Arial", 12.0f));
-            skin.BackgroundColor = glgui.Skin.TextBoxActive.BackgroundColor;
-            fpsLabel.SkinEnabled = skin;
-
-            var loremIpsumForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
-            loremIpsumForm.Add(new GLTextBox(glgui)
+            this.rootControl = new GLControlControlContainer(this);
             {
-                Text = "This is a GLTextBos in a GLForm in a GLGroupLayout.",
-                Multiline = true,
-                WordWrap = true,
-                Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
-                Anchor = GLAnchorStyles.All
-            }).Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
+                var mainAreaControl = rootControl.Add(new GLGroupLayout(rootControl) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
+                // change background color:
+                var mainSkin = mainAreaControl.Skin;
+                mainSkin.BackgroundColor = rootControl.Skin.FormActive.BackgroundColor;
+                mainSkin.BorderColor = rootControl.Skin.FormActive.BorderColor;
+                mainAreaControl.Skin = mainSkin;
+                {
+                    fpsLabel = mainAreaControl.Add(new GLLabel(rootControl) { Location = new Point(10, 10), AutoSize = true });
+                    // change font and background color:
+                    var skin = fpsLabel.SkinEnabled;
+                    skin.Font = new GLFont(new Font("Arial", 12.0f));
+                    skin.BackgroundColor = rootControl.Skin.TextBoxActive.BackgroundColor;
+                    fpsLabel.SkinEnabled = skin;
+                }
+                {
+                    var loremIpsumForm = mainAreaControl.Add(new GLForm(rootControl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
+                    loremIpsumForm.Add(new GLTextBox(rootControl)
+                    {
+                        Text = "This is a GLTextBos in a GLForm in a GLGroupLayout.",
+                        Multiline = true,
+                        WordWrap = true,
+                        Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
+                        Anchor = GLAnchorStyles.All
+                    }).Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
+                }
 
-            this.stopwatch = new Stopwatch();
-            this.Resize += (s, ev) => GL.Viewport(ClientSize);
-            this.Paint += OnRender;
+                var consoleScrollControl = rootControl.Add(new GLScrollableControl(rootControl) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
+                {
+                    console = consoleScrollControl.Add(new GLLabel(rootControl) { AutoSize = true, Multiline = true });
+                }
 
-            this.stopwatch.Start();
-            Application.Idle += (s, ev) => Invalidate();
+                this.stopwatch = new Stopwatch();
+                this.Resize += (s, ev) => GL.Viewport(ClientSize);
+                this.Paint += OnRender;
+
+                this.stopwatch.Start();
+                Application.Idle += (s, ev) => Invalidate();
+            }
         }
 
         private void OnRender(object sender, PaintEventArgs e)
@@ -83,7 +86,7 @@ namespace GLGUI.GLControlExample
 
             if (this.time >= this.fpsSecond)
             {
-                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, glgui.RenderDuration);
+                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, rootControl.RenderDuration);
                 fpsCounter = 0;
                 fpsSecond++;
             }
@@ -94,7 +97,7 @@ namespace GLGUI.GLControlExample
                 this.consoleWriter.Changed = false;
             }
 
-            this.glgui.Render();
+            this.rootControl.Render();
             SwapBuffers();
 
             this.fpsCounter++;
