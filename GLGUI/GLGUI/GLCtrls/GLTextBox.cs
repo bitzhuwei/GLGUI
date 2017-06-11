@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace GLGUI
 {
-	public class GLTextBox : GLControl
+	public class GLTextBox : GLCtrl
 	{
         public string Text { get { return text; } set { if (value != text) { text = value; Invalidate(); } } }
         public bool Enabled { get { return enabled; } set { enabled = value; Invalidate(); } }

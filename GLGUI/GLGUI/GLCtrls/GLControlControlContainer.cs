@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace GLGUI
 {
-    public class GLControlControlContainer : GLControl
+    public class GLControlControlContainer : GLCtrl
     {
         public readonly GameWindow ParentWindow;
         public GLSkin Skin = new GLSkin();

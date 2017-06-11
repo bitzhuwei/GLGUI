@@ -4,17 +4,17 @@ using OpenTK.Input;
 
 namespace GLGUI
 {
-	public class GLSplitLayout : GLControl
+	public class GLSplitLayout : GLCtrl
 	{
 		public GLSplitterOrientation Orientation { get { return orientation; } set { orientation = value; Invalidate(); } }
 		public float SplitterPosition { get { return splitterPosition; } set { splitterPosition = value; Invalidate(); } }
 		public GLSkin.GLSplitLayoutSkin Skin { get { return skin; } set { skin = value; Invalidate(); } }
-		public GLControl First { get { return first; } }
-		public GLControl Second { get { return second; } }
+		public GLCtrl First { get { return first; } }
+		public GLCtrl Second { get { return second; } }
 
 		private GLSplitterOrientation orientation = GLSplitterOrientation.Vertical;
 		private GLSkin.GLSplitLayoutSkin skin;
-		private GLControl first, second;
+		private GLCtrl first, second;
 		private float splitterPosition = 0.5f;
 
 		public GLSplitLayout(GLControlControlContainer gui) : base(gui)
@@ -81,7 +81,7 @@ namespace GLGUI
 			return control;
 		}
 
-		public override void Remove(GLControl control)
+		public override void Remove(GLCtrl control)
 		{
 			if (first == control)
 				first = null;

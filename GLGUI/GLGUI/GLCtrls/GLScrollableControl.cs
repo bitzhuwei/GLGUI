@@ -5,7 +5,7 @@ using OpenTK.Input;
 
 namespace GLGUI
 {
-	public class GLScrollableControl : GLControl
+	public class GLScrollableControl : GLCtrl
 	{
         public GLSlider Horizontal { get { return horizontal; } }
         public GLSlider Vertical { get { return vertical; } }
@@ -105,7 +105,7 @@ namespace GLGUI
             content.Clear();
         }
 
-        public override void Remove(GLControl control)
+        public override void Remove(GLCtrl control)
         {
             content.Remove(control);
         }

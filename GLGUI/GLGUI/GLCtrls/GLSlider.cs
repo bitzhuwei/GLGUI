@@ -4,7 +4,7 @@ using OpenTK.Input;
 
 namespace GLGUI
 {
-	public class GLSlider : GLControl
+	public class GLSlider : GLCtrl
 	{
 		public GLSliderOrientation Direction { get { return direction; } set { direction = value; Invalidate(); } }
         public float Value { get { return value; } set { this.value = value; Invalidate(); if (ValueChanged != null) ValueChanged(this, EventArgs.Empty); } }

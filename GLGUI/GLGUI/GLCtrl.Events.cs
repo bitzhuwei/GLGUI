@@ -7,7 +7,7 @@ using OpenTK.Input;
 
 namespace GLGUI
 {
-    public abstract partial class GLControl
+    public abstract partial class GLCtrl
     {
         public delegate void RenderEventHandler(object sender, double timeDelta);
         public delegate bool KeyEventHandler(object sender, KeyboardKeyEventArgs e);
@@ -44,7 +44,7 @@ namespace GLGUI
 
                 if (inner.Contains(e.Position))
                 {
-                    foreach (GLControl control in controls)
+                    foreach (GLCtrl control in controls)
                     {
                         if (control.Outer.Contains(im))
                         {
@@ -101,14 +101,14 @@ namespace GLGUI
                 if (inner.Contains(e.Position))
                 {
                     int i = 0;
-                    foreach (GLControl control in controls)
+                    foreach (GLCtrl control in controls)
                     {
                         if (control.Outer.Contains(im))
                         {
                             bool handled = control.DoMouseDown(new MouseButtonEventArgs(im.X - control.Outer.X, im.Y - control.Outer.Y, e.Button, e.IsPressed));
                             if (control is GLForm)
                             {
-                                GLControl tmp = controls[i]; // move to front
+                                GLCtrl tmp = controls[i]; // move to front
                                 controls.RemoveAt(i);
                                 controls.Insert(0, tmp);
                             }
@@ -162,7 +162,7 @@ namespace GLGUI
 
                 if (inner.Contains(e.Position))
                 {
-                    foreach (GLControl control in controls)
+                    foreach (GLCtrl control in controls)
                     {
                         if (control.Outer.Contains(im))
                         {
@@ -193,7 +193,7 @@ namespace GLGUI
 
                 if (inner.Contains(e.Position))
                 {
-                    foreach (GLControl control in controls)
+                    foreach (GLCtrl control in controls)
                     {
                         if (control.Outer.Contains(im))
                         {
@@ -246,7 +246,7 @@ namespace GLGUI
 
             if (!isDragged)
             {
-                foreach (GLControl control in controls)
+                foreach (GLCtrl control in controls)
                 {
                     if (control.HasFocus)
                     {
@@ -269,7 +269,7 @@ namespace GLGUI
 
             if (!isDragged)
             {
-                foreach (GLControl control in controls)
+                foreach (GLCtrl control in controls)
                 {
                     if (control.HasFocus)
                     {
@@ -292,7 +292,7 @@ namespace GLGUI
 
             if (!isDragged)
             {
-                foreach (GLControl control in controls)
+                foreach (GLCtrl control in controls)
                 {
                     if (control.HasFocus)
                     {
@@ -319,7 +319,7 @@ namespace GLGUI
                 if (FocusLost != null)
                     FocusLost(this, EventArgs.Empty);
             }
-            foreach (GLControl control in controls)
+            foreach (GLCtrl control in controls)
                 if (control.HasFocus)
                     control.DoFocusLost();
         }
@@ -336,7 +336,7 @@ namespace GLGUI
             int dx = inner.Width - lastInner.Width;
             int dy = inner.Height - lastInner.Height;
 
-            foreach (GLControl control in controls)
+            foreach (GLCtrl control in controls)
             {
                 var a = control.Anchor;
                 var o = control.Outer;

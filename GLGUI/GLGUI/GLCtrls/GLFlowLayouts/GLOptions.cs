@@ -26,7 +26,7 @@ namespace GLGUI
 			return control;
 		}
 
-		public override void Remove(GLControl control)
+		public override void Remove(GLCtrl control)
 		{
 			base.Remove(control);
             (control as GLCheckBox).Changed -= Select;

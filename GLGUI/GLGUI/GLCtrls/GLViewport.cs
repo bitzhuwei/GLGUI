@@ -4,26 +4,27 @@ using OpenTK.Graphics.OpenGL;
 
 namespace GLGUI
 {
-	public class GLViewport : GLControl
-	{
+    public class GLViewport : GLCtrl
+    {
         public float AspectRatio { get { return (float)Inner.Width / (float)Inner.Height; } }
-		public event RenderEventHandler RenderViewport;
+        public event RenderEventHandler RenderViewport;
 
-		public GLViewport(GLControlControlContainer gui) : base(gui)
-		{
+        public GLViewport(GLControlControlContainer gui)
+            : base(gui)
+        {
             Render += OnRender;
 
-			outer = new Rectangle(0, 0, 256, 256);
-			sizeMin = new Size(1, 1);
-			sizeMax = new Size(int.MaxValue, int.MaxValue);
-		}
+            outer = new Rectangle(0, 0, 256, 256);
+            sizeMin = new Size(1, 1);
+            sizeMax = new Size(int.MaxValue, int.MaxValue);
+        }
 
         protected override void UpdateLayout()
-		{
-			outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
+        {
+            outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
             outer.Height = Math.Min(Math.Max(outer.Height, sizeMin.Height), sizeMax.Height);
-			Inner = new Rectangle(0, 0, outer.Width, outer.Height);
-		}
+            Inner = new Rectangle(0, 0, outer.Width, outer.Height);
+        }
 
         private void OnRender(object sender, double timeDelta)
         {
@@ -38,7 +39,7 @@ namespace GLGUI
             GL.PushMatrix();
             GL.MatrixMode(MatrixMode.Modelview);
             GL.PushMatrix();
-            
+
             // render
             var vp = ToViewport(Inner);
             GL.Scissor(GLDraw.ScissorRect.X, Container.Outer.Height - GLDraw.ScissorRect.Bottom, GLDraw.ScissorRect.Width, GLDraw.ScissorRect.Height);
@@ -53,6 +54,6 @@ namespace GLGUI
             GL.MatrixMode(MatrixMode.Modelview);
             GL.PopMatrix();
         }
-	}
+    }
 }
 

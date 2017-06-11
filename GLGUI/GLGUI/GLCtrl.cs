@@ -7,12 +7,12 @@ using OpenTK.Input;
 
 namespace GLGUI
 {
-    public abstract partial class GLControl
+    public abstract partial class GLCtrl
     {
         public virtual string Name { get; set; }
         public GLControlControlContainer Container { get; internal set; }
-        public GLControl Parent { get; internal set; }
-        public IEnumerable<GLControl> Controls { get { return controls; } }
+        public GLCtrl Parent { get; internal set; }
+        public IEnumerable<GLCtrl> Controls { get { return controls; } }
 
         public Rectangle Outer { get { return outer; } set { if (outer != value) { outer = value; Invalidate(); } } }
         public Rectangle Inner { get { return inner; } protected set { if (inner != value) { lastInner = inner; inner = value; DoResize(); /*Invalidate();*/ } } }
@@ -45,16 +45,16 @@ namespace GLGUI
         private Rectangle inner;
         private Rectangle lastInner;
         private bool autoSize = false;
-        private readonly List<GLControl> controls = new List<GLControl>();
+        private readonly List<GLCtrl> controls = new List<GLCtrl>();
         private static int idCounter = 0;
         private bool visited = false;
         private GLContextMenu contextMenu;
         private bool handleMouseEvents = true;
 
-        private GLControl hoverChild;
-        private GLControl focusedChild;
+        private GLCtrl hoverChild;
+        private GLCtrl focusedChild;
 
-        protected GLControl(GLControlControlContainer gui)
+        protected GLCtrl(GLControlControlContainer gui)
         {
             Container = gui;
             Name = GetType().Name + (idCounter++);
@@ -99,7 +99,7 @@ namespace GLGUI
             Inner = new Rectangle(0, 0, outer.Width, outer.Height);
         }
 
-        public virtual T Add<T>(T control) where T : GLControl
+        public virtual T Add<T>(T control) where T : GLCtrl
         {
             if (control.Parent != null)
             {
@@ -118,7 +118,7 @@ namespace GLGUI
             return control;
         }
 
-        public virtual void Remove(GLControl control)
+        public virtual void Remove(GLCtrl control)
         {
             if (control.Parent == null)
                 return;
@@ -139,7 +139,7 @@ namespace GLGUI
         public virtual void Clear()
         {
             Container.SuspendLayout();
-            foreach (GLControl control in controls.ToArray())
+            foreach (GLCtrl control in controls.ToArray())
                 Remove(control);
             Container.ResumeLayout();
         }
@@ -148,7 +148,7 @@ namespace GLGUI
         {
             p.X -= outer.X;
             p.Y -= outer.Y;
-            GLControl c = Parent;
+            GLCtrl c = Parent;
             while (c != c.Parent)
             {
                 p.X -= c.inner.X + c.outer.X;
@@ -162,7 +162,7 @@ namespace GLGUI
         {
             p.X += outer.X;
             p.Y += outer.Y;
-            GLControl c = Parent;
+            GLCtrl c = Parent;
             while (c != c.Parent)
             {
                 p.X += c.inner.X + c.outer.X;
@@ -176,7 +176,7 @@ namespace GLGUI
         {
             r.X += outer.X;
             r.Y += outer.Y;
-            GLControl c = Parent;
+            GLCtrl c = Parent;
             while (c != c.Parent)
             {
                 r.X += c.inner.X + c.outer.X;

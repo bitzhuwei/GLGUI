@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GLGUI
 {
-	internal class GLScrolledControl : GLControl
+	internal class GLScrolledControl : GLCtrl
     {
         public Size TotalSize;
 
