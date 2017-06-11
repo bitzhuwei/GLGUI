@@ -9,9 +9,9 @@ namespace GLGUI.GLControlExample
             Text = "GLGUI.GLControlExample";
             Size = new System.Drawing.Size(1024, 600);
 
-            var guiControl = new GuiControl();
-            guiControl.Dock = DockStyle.Fill;
-            Controls.Add(guiControl);
+            var canvas = new GLCanvas();
+            canvas.Dock = DockStyle.Fill;
+            Controls.Add(canvas);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace GLGUI.GLControlExample
 {
-    public class GuiControl : OpenTK.GLControl
+    public class GLCanvas : OpenTK.GLControl
     {
         GLGui glgui;
         GLLabel fpsLabel;
@@ -20,7 +20,7 @@ namespace GLGUI.GLControlExample
         int fpsSecond = 1;
         double time = 0.0;
 
-        public GuiControl()
+        public GLCanvas()
             : base(new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 0, 4))
         {
             consoleWriter = new LineWriter();
@@ -59,7 +59,7 @@ namespace GLGUI.GLControlExample
             var loremIpsumForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
             loremIpsumForm.Add(new GLTextBox(glgui)
             {
-                Text = "Lorem ipsum dolor sit amet,\nconsetetur sadipscing elitr,\nsed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,\nsed diam voluptua.\n\nAt vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                Text = "This is a GLTextBos in a GLForm in a GLGroupLayout.",
                 Multiline = true,
                 WordWrap = true,
                 Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
@@ -166,6 +166,19 @@ namespace GLGUI.GLControlExample
         protected override bool IsInputKey(Keys key)
         {
             return true;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // GuiControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.BackColor = System.Drawing.Color.Silver;
+            this.Name = "GuiControl";
+            this.ResumeLayout(false);
+
         }
     }
 }
