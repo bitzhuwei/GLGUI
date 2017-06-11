@@ -27,15 +27,15 @@ namespace GLGUI
 		private GLSkin.GLLabelSkin skin;
 		private bool enabled = true;
 
-		public GLLinkLabel(GLGui gui) : base(gui)
+		public GLLinkLabel(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseUp += OnMouseUp;
 			MouseEnter += OnMouseEnter;
 			MouseLeave += OnMouseLeave;
 
-			skinEnabled = Gui.Skin.LinkLabelEnabled;
-			skinDisabled = Gui.Skin.LinkLabelDisabled;
+			skinEnabled = Container.Skin.LinkLabelEnabled;
+			skinDisabled = Container.Skin.LinkLabelDisabled;
 
 			outer = new Rectangle(0, 0, 0, 0);
 			sizeMin = new Size(1, (int)skinEnabled.Font.LineSpacing + skinEnabled.Padding.Vertical);
@@ -75,7 +75,7 @@ namespace GLGUI
 		{
             if (enabled && e.Button == MouseButton.Left)
 			{
-				Gui.Cursor = GLCursor.Default;
+				Container.Cursor = GLCursor.Default;
 				if (Click != null)
 					Click(this, EventArgs.Empty);
 			}
@@ -83,12 +83,12 @@ namespace GLGUI
 
 		private void OnMouseEnter(object sender, EventArgs e)
 		{
-			Gui.Cursor = GLCursor.Hand;
+			Container.Cursor = GLCursor.Hand;
 		}
 
 		private void OnMouseLeave(object sender, EventArgs e)
 		{
-			Gui.Cursor = GLCursor.Default;
+			Container.Cursor = GLCursor.Default;
 		}
 	}
 }

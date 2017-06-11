@@ -22,7 +22,7 @@ namespace GLGUI.Advanced
         private GLFlowLayout horizontal, left, right;
         private GLSkin.GLLabelSkin labelSkin, linkLabelSkin;
 
-        public GLDataControl(GLGui gui) : base(gui)
+        public GLDataControl(GLControlControlContainer gui) : base(gui)
         {
             Render += (s, d) => UpdateData();
 
@@ -53,10 +53,10 @@ namespace GLGUI.Advanced
 
         private void AddRow(string name, EventHandler click, Func<object> value)
         {
-			var link = left.Add(new GLLinkLabel(Gui) { AutoSize = true, Text = name, SkinEnabled = linkLabelSkin });
+			var link = left.Add(new GLLinkLabel(Container) { AutoSize = true, Text = name, SkinEnabled = linkLabelSkin });
             if (value() != null)
 				link.Click += click;
-			var label = right.Add(new GLLabel(Gui) { AutoSize = true, Text = (value() ?? "null").ToString(), SkinEnabled = labelSkin });
+			var label = right.Add(new GLLabel(Container) { AutoSize = true, Text = (value() ?? "null").ToString(), SkinEnabled = labelSkin });
             updateData.Add(new Tuple<Func<object>, GLLabel>(value, label));
             row++;
         }
@@ -303,7 +303,7 @@ namespace GLGUI.Advanced
 
         public void UpdateData()
         {
-            Gui.SuspendLayout();
+            Container.SuspendLayout();
             bool changed = false;
             foreach(var u in updateData)
             {
@@ -328,11 +328,11 @@ namespace GLGUI.Advanced
                     {
                         setData(null, true);
                     }
-                    Gui.ResumeLayout();
+                    Container.ResumeLayout();
                     return;
                 }
             }
-            Gui.ResumeLayout();
+            Container.ResumeLayout();
             if(changed)
                 right.Invalidate();
         }

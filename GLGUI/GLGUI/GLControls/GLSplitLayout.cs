@@ -17,14 +17,14 @@ namespace GLGUI
 		private GLControl first, second;
 		private float splitterPosition = 0.5f;
 
-		public GLSplitLayout(GLGui gui) : base(gui)
+		public GLSplitLayout(GLControlControlContainer gui) : base(gui)
 		{
 			MouseDown += OnMouseDown;
 			MouseUp += OnMouseUp;
 			MouseMove += OnMouseMove;
 			Render += OnRender;
 
-			skin = Gui.Skin.SplitLayout;
+			skin = Container.Skin.SplitLayout;
 
 			outer = new Rectangle(0, 0, 100, 100);
 			sizeMin = new Size(0, 0);
@@ -105,7 +105,7 @@ namespace GLGUI
 				if (isDragged)
 				{
 					isDragged = false;
-					Gui.Cursor = GLCursor.Default;
+					Container.Cursor = GLCursor.Default;
 				}
 			}
 		}
@@ -120,7 +120,7 @@ namespace GLGUI
 					splitterPosition = (float)(e.Y - skin.SplitterSize / 2) / (float)Inner.Height;
 				Invalidate();
 			}
-			Gui.Cursor = orientation == GLSplitterOrientation.Horizontal ? GLCursor.SizeNS : GLCursor.SizeWE;
+			Container.Cursor = orientation == GLSplitterOrientation.Horizontal ? GLCursor.SizeNS : GLCursor.SizeWE;
 		}
 	}
 }

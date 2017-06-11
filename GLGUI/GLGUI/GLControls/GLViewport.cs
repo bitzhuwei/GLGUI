@@ -9,7 +9,7 @@ namespace GLGUI
         public float AspectRatio { get { return (float)Inner.Width / (float)Inner.Height; } }
 		public event RenderEventHandler RenderViewport;
 
-		public GLViewport(GLGui gui) : base(gui)
+		public GLViewport(GLControlControlContainer gui) : base(gui)
 		{
             Render += OnRender;
 
@@ -41,7 +41,7 @@ namespace GLGUI
             
             // render
             var vp = ToViewport(Inner);
-            GL.Scissor(GLDraw.ScissorRect.X, Gui.Outer.Height - GLDraw.ScissorRect.Bottom, GLDraw.ScissorRect.Width, GLDraw.ScissorRect.Height);
+            GL.Scissor(GLDraw.ScissorRect.X, Container.Outer.Height - GLDraw.ScissorRect.Bottom, GLDraw.ScissorRect.Width, GLDraw.ScissorRect.Height);
             GL.Viewport(vp.X, mainViewport[3] - vp.Y - vp.Height, vp.Width, vp.Height);
             RenderViewport(this, timeDelta);
 

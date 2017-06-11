@@ -6,12 +6,12 @@ namespace GLGUI
 {
 	public class GLContextMenu : GLFlowLayout
 	{
-		public GLContextMenu(GLGui gui) : base(gui)
+		public GLContextMenu(GLControlControlContainer gui) : base(gui)
 		{
 			FlowDirection = GLFlowDirection.TopDown;
 			AutoSize = true;
 
-			Skin = Gui.Skin.ContextMenu;
+			Skin = Container.Skin.ContextMenu;
 		}
 
         protected override void UpdateLayout()

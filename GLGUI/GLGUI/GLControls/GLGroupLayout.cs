@@ -10,11 +10,11 @@ namespace GLGUI
 
 		private GLSkin.GLGroupLayoutSkin skin;
 
-		public GLGroupLayout(GLGui gui) : base(gui)
+		public GLGroupLayout(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 
-			skin = Gui.Skin.GroupLayout;
+			skin = Container.Skin.GroupLayout;
 
 			outer = new Rectangle(0, 0, 100, 100);
 			sizeMin = new Size(0, 0);

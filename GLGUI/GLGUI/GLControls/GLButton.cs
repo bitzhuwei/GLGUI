@@ -24,7 +24,7 @@ namespace GLGUI
 		private bool down = false;
 		private bool over = false;
 
-		public GLButton(GLGui gui) : base(gui)
+		public GLButton(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseDown += OnMouseDown;
@@ -32,10 +32,10 @@ namespace GLGUI
 			MouseEnter += OnMouseEnter;
 			MouseLeave += OnMouseLeave;
 
-			skinEnabled = Gui.Skin.ButtonEnabled;
-			skinPressed = Gui.Skin.ButtonPressed;
-			skinHover = Gui.Skin.ButtonHover;
-			skinDisabled = Gui.Skin.ButtonDisabled;
+			skinEnabled = Container.Skin.ButtonEnabled;
+			skinPressed = Container.Skin.ButtonPressed;
+			skinHover = Container.Skin.ButtonHover;
+			skinDisabled = Container.Skin.ButtonDisabled;
 
 			outer = new Rectangle(0, 0, 75, 0);
 			sizeMin = new Size(8, 8);

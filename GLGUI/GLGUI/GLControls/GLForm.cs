@@ -31,7 +31,7 @@ namespace GLGUI
 			GLCursor.SizeNWSE, GLCursor.SizeNS, GLCursor.SizeNESW, GLCursor.SizeWE
 		};
 
-		public GLForm(GLGui gui) : base(gui)
+		public GLForm(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseDown += OnMouseDown;
@@ -42,8 +42,8 @@ namespace GLGUI
 			Focus += (s, e) => Invalidate();
             FocusLost += (s, e) => Invalidate();
 
-			skinActive = Gui.Skin.FormActive;
-			skinInactive = Gui.Skin.FormInactive;
+			skinActive = Container.Skin.FormActive;
+			skinInactive = Container.Skin.FormInactive;
 
 			outer = new Rectangle(0, 0, 100, 100);
 			sizeMin = new Size(64, 32);
@@ -104,7 +104,7 @@ namespace GLGUI
 			mouseOffset = p;
 			isDragged = true;
 			dragOp = op;
-			Gui.Cursor = dragOpCursors[(int)op];
+			Container.Cursor = dragOpCursors[(int)op];
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -147,7 +147,7 @@ namespace GLGUI
 				if (isDragged)
 				{
 					isDragged = false;
-					Gui.Cursor = GLCursor.Default;
+					Container.Cursor = GLCursor.Default;
 				}
 				var now = DateTime.Now;
 				if ((now - lastClick).TotalMilliseconds < 500.0)
@@ -226,31 +226,31 @@ namespace GLGUI
 				if (e.X < skin.Border.Left)
 				{
 					if (e.Y < skin.Border.Top)
-						Gui.Cursor = GLCursor.SizeNWSE;
+						Container.Cursor = GLCursor.SizeNWSE;
 					else if (e.Y >= outer.Height - skin.Border.Bottom)
-						Gui.Cursor = GLCursor.SizeNESW;
+						Container.Cursor = GLCursor.SizeNESW;
 					else
-						Gui.Cursor = GLCursor.SizeWE;
+						Container.Cursor = GLCursor.SizeWE;
 				}
 				else if (e.X >= Outer.Width - skin.Border.Right)
 				{
 					if (e.Y < skin.Border.Top)
-						Gui.Cursor = GLCursor.SizeNESW;
+						Container.Cursor = GLCursor.SizeNESW;
 					else if (e.Y >= outer.Height - skin.Border.Bottom)
-						Gui.Cursor = GLCursor.SizeNWSE;
+						Container.Cursor = GLCursor.SizeNWSE;
 					else
-						Gui.Cursor = GLCursor.SizeWE;
+						Container.Cursor = GLCursor.SizeWE;
 				}
 				else if (e.Y < skin.Border.Top || e.Y >= outer.Height - skin.Border.Bottom)
-					Gui.Cursor = GLCursor.SizeNS;
+					Container.Cursor = GLCursor.SizeNS;
 				else
-					Gui.Cursor = GLCursor.Default;
+					Container.Cursor = GLCursor.Default;
 			}
 		}
 
 		private void OnMouseLeave(object sender, EventArgs e)
 		{
-			Gui.Cursor = GLCursor.Default;
+			Container.Cursor = GLCursor.Default;
 		}
 
         private bool justDoubleClicked = false;
@@ -284,7 +284,7 @@ namespace GLGUI
 			if (!AutoSize && Parent != null && moveClickRegion.Contains(e.Position))
                 Maximize(!maximized);
 
-			Gui.Cursor = GLCursor.Default; // hack to avoid move operation cursor
+			Container.Cursor = GLCursor.Default; // hack to avoid move operation cursor
             justDoubleClicked = true;
         }
 	}

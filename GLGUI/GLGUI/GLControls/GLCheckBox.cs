@@ -28,7 +28,7 @@ namespace GLGUI
 		private Rectangle outerBox = new Rectangle(0, 0, 10, 10);
 		private Rectangle innerBox;
 
-		public GLCheckBox(GLGui gui) : base(gui)
+		public GLCheckBox(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseDown += OnMouseDown;
@@ -36,10 +36,10 @@ namespace GLGUI
 			MouseEnter += OnMouseEnter;
 			MouseLeave += OnMouseLeave;
 
-			skinEnabled = Gui.Skin.CheckBoxEnabled;
-			skinPressed = Gui.Skin.CheckBoxPressed;
-			skinHover = Gui.Skin.CheckBoxHover;
-			skinDisabled = Gui.Skin.CheckBoxDisabled;
+			skinEnabled = Container.Skin.CheckBoxEnabled;
+			skinPressed = Container.Skin.CheckBoxPressed;
+			skinHover = Container.Skin.CheckBoxHover;
+			skinDisabled = Container.Skin.CheckBoxDisabled;
 
 			outer = outerBox;
 			sizeMin = outerBox.Size;

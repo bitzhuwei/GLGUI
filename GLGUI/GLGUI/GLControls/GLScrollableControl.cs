@@ -20,12 +20,12 @@ namespace GLGUI
         private GLScrolledControl content;
         private GLSlider horizontal, vertical;
 
-		public GLScrollableControl(GLGui gui) : base(gui)
+		public GLScrollableControl(GLControlControlContainer gui) : base(gui)
 		{
             Render += OnRender;
             MouseWheel += OnMouseWheel;
 
-            skin = Gui.Skin.ScrollableControl;
+            skin = Container.Skin.ScrollableControl;
 
 			outer = new Rectangle(0, 0, 32, 32);
 			horizontal = base.Add(new GLSlider(gui) { Direction = GLSliderOrientation.Horizontal/*, Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom*/ });

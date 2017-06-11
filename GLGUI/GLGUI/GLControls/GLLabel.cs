@@ -24,12 +24,12 @@ namespace GLGUI
 		private GLSkin.GLLabelSkin skin;
 		private bool enabled = true;
 
-		public GLLabel(GLGui gui) : base(gui)
+		public GLLabel(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 
-			skinEnabled = Gui.Skin.LabelEnabled;
-			skinDisabled = Gui.Skin.LabelDisabled;
+			skinEnabled = Container.Skin.LabelEnabled;
+			skinDisabled = Container.Skin.LabelDisabled;
 
 			outer = new Rectangle(0, 0, 0, 0);
 			sizeMin = new Size(1, (int)skinEnabled.Font.LineSpacing + skinEnabled.Padding.Vertical);

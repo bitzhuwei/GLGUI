@@ -10,7 +10,7 @@ namespace GLGUI
     public abstract partial class GLControl
     {
         public virtual string Name { get; set; }
-        public GLGui Gui { get; internal set; }
+        public GLControlControlContainer Container { get; internal set; }
         public GLControl Parent { get; internal set; }
         public IEnumerable<GLControl> Controls { get { return controls; } }
 
@@ -54,9 +54,9 @@ namespace GLGUI
         private GLControl hoverChild;
         private GLControl focusedChild;
 
-        protected GLControl(GLGui gui)
+        protected GLControl(GLControlControlContainer gui)
         {
-            Gui = gui;
+            Container = gui;
             Name = GetType().Name + (idCounter++);
 
             outer = new Rectangle(0, 0, 0, 0);
@@ -67,7 +67,7 @@ namespace GLGUI
 
         public void Invalidate()
         {
-            if (visited || Gui == null || Gui.LayoutSuspended)
+            if (visited || Container == null || Container.LayoutSuspended)
                 return;
             visited = true;
 
@@ -112,7 +112,7 @@ namespace GLGUI
                 controls.Insert(0, control);
             else
                 controls.Add(control);
-            control.Gui = Gui;
+            control.Container = Container;
             control.Parent = this;
             control.Invalidate();
             return control;
@@ -132,16 +132,16 @@ namespace GLGUI
             }
 
             controls.Remove(control);
-            control.Gui = null;
+            control.Container = null;
             control.Parent = null;
         }
 
         public virtual void Clear()
         {
-            Gui.SuspendLayout();
+            Container.SuspendLayout();
             foreach (GLControl control in controls.ToArray())
                 Remove(control);
-            Gui.ResumeLayout();
+            Container.ResumeLayout();
         }
 
         protected Point ToControl(Point p)

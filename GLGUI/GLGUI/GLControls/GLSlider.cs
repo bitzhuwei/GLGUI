@@ -25,7 +25,7 @@ namespace GLGUI
 		private bool down = false;
 		private bool over = false;
 
-		public GLSlider(GLGui gui) : base(gui)
+		public GLSlider(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
             MouseMove += OnMouseMove;
@@ -35,10 +35,10 @@ namespace GLGUI
 			MouseLeave += OnMouseLeave;
             MouseWheel += OnMouseWheel;
 
-			skinEnabled = Gui.Skin.SliderEnabled;
-            skinPressed = Gui.Skin.SliderPressed;
-            skinHover = Gui.Skin.SliderHover;
-            skinDisabled = Gui.Skin.SliderDisabled;
+			skinEnabled = Container.Skin.SliderEnabled;
+            skinPressed = Container.Skin.SliderPressed;
+            skinHover = Container.Skin.SliderHover;
+            skinDisabled = Container.Skin.SliderDisabled;
 
 			outer = new Rectangle(0, 0, 8, 8);
 			sizeMin = new Size(8, 8);

@@ -8,7 +8,7 @@ namespace GLGUI.Example
 {
 	public class MainForm : GameWindow
 	{
-		GLGui glgui;
+		GLControlControlContainer glgui;
         GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
@@ -32,7 +32,7 @@ namespace GLGUI.Example
 		{
 			VSync = VSyncMode.Off; // vsync is nice, but you can't really measure performance while it's on
 
-			glgui = new GLGui(this);
+			glgui = new GLControlControlContainer(this);
             
             var mainAreaControl = glgui.Add(new GLGroupLayout(glgui) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
             // change background color:

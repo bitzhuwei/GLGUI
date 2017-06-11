@@ -10,7 +10,7 @@ namespace GLGUI.GLControlExample
 {
     public class GLCanvas : OpenTK.GLControl
     {
-        GLGui glgui;
+        GLControlControlContainer glgui;
         GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
@@ -37,7 +37,7 @@ namespace GLGUI.GLControlExample
         {
             this.VSync = false; // vsync is nice, but you can't really measure performance while it's on
 
-            this.glgui = new GLGui(this);
+            this.glgui = new GLControlControlContainer(this);
 
             var mainAreaControl = glgui.Add(new GLGroupLayout(glgui) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
             // change background color:

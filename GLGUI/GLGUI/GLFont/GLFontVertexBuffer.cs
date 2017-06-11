@@ -20,14 +20,14 @@ namespace GLGUI
 			this.textureID = textureID;
 			vaoID = GL.GenVertexArray();
 			vboID = GL.GenBuffer();
-			GLGui.usedVertexArrays++;
+			GLControlControlContainer.usedVertexArrays++;
         }
 
 		~GLFontVertexBuffer()
 		{
-			lock(GLGui.toDispose)
+			lock(GLControlControlContainer.toDispose)
 			{
-				GLGui.toDispose.Add(this);
+				GLControlControlContainer.toDispose.Add(this);
 			}
 		}
 
@@ -35,7 +35,7 @@ namespace GLGUI
         {
 			GL.DeleteVertexArray(vaoID);
 			GL.DeleteBuffer(vboID);
-			GLGui.usedVertexArrays--;
+			GLControlControlContainer.usedVertexArrays--;
         }
 
         public void Reset()

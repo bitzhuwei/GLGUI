@@ -12,7 +12,7 @@ namespace GLGUI
 
         private GLCheckBox selection;
 
-		public GLOptions(GLGui gui) : base(gui)
+		public GLOptions(GLControlControlContainer gui) : base(gui)
 		{
 			outer = new Rectangle(0, 0, 0, 0);
 		}

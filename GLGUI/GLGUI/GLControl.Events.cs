@@ -138,7 +138,7 @@ namespace GLGUI
 
             if (contextMenu != null && e.Button == MouseButton.Right)
             {
-                Gui.OpenContextMenu(contextMenu, ToViewport(e.Position));
+                Container.OpenContextMenu(contextMenu, ToViewport(e.Position));
                 handledHere = true;
             }
 
@@ -218,7 +218,7 @@ namespace GLGUI
             if (Parent == null)
                 return;
 
-            Gui.Cursor = GLCursor.Default;
+            Container.Cursor = GLCursor.Default;
 
             if (MouseEnter != null)
                 MouseEnter(this, EventArgs.Empty);

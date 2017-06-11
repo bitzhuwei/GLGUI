@@ -37,7 +37,7 @@ namespace GLGUI
         private Stack<string> history = new Stack<string>();
         private Stack<string> future = new Stack<string>();
 
-		public GLTextBox(GLGui gui) : base(gui)
+		public GLTextBox(GLControlControlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseDown += OnMouseDown;
@@ -50,10 +50,10 @@ namespace GLGUI
 			KeyDown += OnKeyDown;
 			KeyPress += OnKeyPress;
 
-			skinEnabled = Gui.Skin.TextBoxEnabled;
-			skinActive = Gui.Skin.TextBoxActive;
-			skinHover = Gui.Skin.TextBoxHover;
-			skinDisabled = Gui.Skin.TextBoxDisabled;
+			skinEnabled = Container.Skin.TextBoxEnabled;
+			skinActive = Container.Skin.TextBoxActive;
+			skinHover = Container.Skin.TextBoxHover;
+			skinDisabled = Container.Skin.TextBoxDisabled;
 
 			outer = new Rectangle(0, 0, 100, 0);
 
@@ -176,14 +176,14 @@ namespace GLGUI
 		private void OnMouseEnter(object sender, EventArgs e)
 		{
 			over = true;
-			Gui.Cursor = GLCursor.IBeam;
+			Container.Cursor = GLCursor.IBeam;
             Invalidate();
 		}
 
 		private void OnMouseLeave(object sender, EventArgs e)
 		{
 			over = false;
-			Gui.Cursor = GLCursor.Default;
+			Container.Cursor = GLCursor.Default;
             Invalidate();
 		}
 

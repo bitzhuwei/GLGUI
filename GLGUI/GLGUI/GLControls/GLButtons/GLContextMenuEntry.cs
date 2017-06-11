@@ -2,14 +2,14 @@ namespace GLGUI
 {
 	public class GLContextMenuEntry : GLButton
 	{
-		public GLContextMenuEntry(GLGui gui) : base(gui)
+		public GLContextMenuEntry(GLControlControlContainer gui) : base(gui)
 		{
-			SkinEnabled = Gui.Skin.ContextMenuEntryEnabled;
-			SkinPressed = Gui.Skin.ContextMenuEntryPressed;
-			SkinHover = Gui.Skin.ContextMenuEntryHover;
-			SkinDisabled = Gui.Skin.ContextMenuEntryDisabled;
+			SkinEnabled = Container.Skin.ContextMenuEntryEnabled;
+			SkinPressed = Container.Skin.ContextMenuEntryPressed;
+			SkinHover = Container.Skin.ContextMenuEntryHover;
+			SkinDisabled = Container.Skin.ContextMenuEntryDisabled;
 
-			Click += (s, e) => Gui.CloseContextMenu();
+			Click += (s, e) => Container.CloseContextMenu();
 		}
 	}
 }
