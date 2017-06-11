@@ -31,7 +31,7 @@ namespace GLGUI
 			GLCursor.SizeNWSE, GLCursor.SizeNS, GLCursor.SizeNESW, GLCursor.SizeWE
 		};
 
-        public GLForm(GLControlControlContainer gui)
+        public GLForm(GLCtrlContainer gui)
             : base(gui)
         {
             Render += OnRender;

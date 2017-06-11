@@ -37,7 +37,7 @@ namespace GLGUI
         private Stack<string> history = new Stack<string>();
         private Stack<string> future = new Stack<string>();
 
-		public GLTextBox(GLControlControlContainer gui) : base(gui)
+		public GLTextBox(GLCtrlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseDown += OnMouseDown;

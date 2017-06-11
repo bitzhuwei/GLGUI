@@ -13,7 +13,7 @@ namespace GLGUI
         private GLSkin.GLFlowLayoutSkin skin;
         private Rectangle background;
 
-        public GLFlowLayout(GLControlControlContainer gui)
+        public GLFlowLayout(GLCtrlContainer gui)
             : base(gui)
         {
             Render += OnRender;

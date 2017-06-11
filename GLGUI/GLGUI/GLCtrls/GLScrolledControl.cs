@@ -8,7 +8,7 @@ namespace GLGUI
     {
         public Size TotalSize;
 
-        public GLScrolledControl(GLControlControlContainer gui) : base(gui)
+        public GLScrolledControl(GLCtrlContainer gui) : base(gui)
 		{
             AutoSize = true;
             HandleMouseEvents = false;

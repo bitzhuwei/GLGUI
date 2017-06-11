@@ -9,7 +9,7 @@ namespace GLGUI
 	{
         public static Rectangle CurrentScreenRect { get { return ControlRect; } }
 
-        internal static GLControlControlContainer CurrentGui;
+        internal static GLCtrlContainer CurrentGui;
         internal static Rectangle ControlRect;
         internal static Rectangle ScissorRect;
 

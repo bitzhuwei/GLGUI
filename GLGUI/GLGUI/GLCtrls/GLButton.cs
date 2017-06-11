@@ -24,7 +24,7 @@ namespace GLGUI
         private bool down = false;
         private bool over = false;
 
-        public GLButton(GLControlControlContainer gui)
+        public GLButton(GLCtrlContainer gui)
             : base(gui)
         {
             Render += OnRender;

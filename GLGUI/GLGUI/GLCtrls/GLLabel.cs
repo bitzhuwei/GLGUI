@@ -24,7 +24,7 @@ namespace GLGUI
 		private GLSkin.GLLabelSkin skin;
 		private bool enabled = true;
 
-		public GLLabel(GLControlControlContainer gui) : base(gui)
+		public GLLabel(GLCtrlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 

@@ -6,7 +6,7 @@ namespace GLGUI
 {
 	public class GLContextMenu : GLFlowLayout
 	{
-		public GLContextMenu(GLControlControlContainer gui) : base(gui)
+		public GLContextMenu(GLCtrlContainer gui) : base(gui)
 		{
 			FlowDirection = GLFlowDirection.TopDown;
 			AutoSize = true;

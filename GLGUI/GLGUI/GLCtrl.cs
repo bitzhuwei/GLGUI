@@ -10,7 +10,7 @@ namespace GLGUI
     public abstract partial class GLCtrl
     {
         public virtual string Name { get; set; }
-        public GLControlControlContainer Container { get; internal set; }
+        public GLCtrlContainer Container { get; internal set; }
         public GLCtrl Parent { get; internal set; }
         public IEnumerable<GLCtrl> Controls { get { return controls; } }
 
@@ -54,7 +54,7 @@ namespace GLGUI
         private GLCtrl hoverChild;
         private GLCtrl focusedChild;
 
-        protected GLCtrl(GLControlControlContainer gui)
+        protected GLCtrl(GLCtrlContainer gui)
         {
             Container = gui;
             Name = GetType().Name + (idCounter++);

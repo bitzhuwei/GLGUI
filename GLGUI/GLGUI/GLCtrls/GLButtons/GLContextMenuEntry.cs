@@ -2,7 +2,7 @@ namespace GLGUI
 {
 	public class GLContextMenuEntry : GLButton
 	{
-		public GLContextMenuEntry(GLControlControlContainer gui) : base(gui)
+		public GLContextMenuEntry(GLCtrlContainer gui) : base(gui)
 		{
 			SkinEnabled = Container.Skin.ContextMenuEntryEnabled;
 			SkinPressed = Container.Skin.ContextMenuEntryPressed;

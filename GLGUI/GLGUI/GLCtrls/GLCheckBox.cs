@@ -28,7 +28,7 @@ namespace GLGUI
         private Rectangle outerBox = new Rectangle(0, 0, 10, 10);
         private Rectangle innerBox;
 
-        public GLCheckBox(GLControlControlContainer gui)
+        public GLCheckBox(GLCtrlContainer gui)
             : base(gui)
         {
             Render += OnRender;

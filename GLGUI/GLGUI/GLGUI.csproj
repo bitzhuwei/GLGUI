@@ -60,7 +60,7 @@
     <Compile Include="GLFont\GLFontTextNodeList.cs" />
     <Compile Include="GLCtrls\GLForm.cs" />
     <Compile Include="GLCtrl.cs" />
-    <Compile Include="GLCtrls\GLControlControlContainer.cs" />
+    <Compile Include="GLCtrls\GLCtrlContainer.cs" />
     <Compile Include="GLDraw.cs" />
     <Compile Include="GLCtrls\GLButton.cs" />
     <Compile Include="DataStructures\GLSkin.cs" />

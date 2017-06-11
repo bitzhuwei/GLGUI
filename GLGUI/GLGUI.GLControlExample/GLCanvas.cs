@@ -10,7 +10,7 @@ namespace GLGUI.GLControlExample
 {
     public class GLCanvas : OpenTK.GLControl
     {
-        GLControlControlContainer rootControl;
+        GLCtrlContainer rootCtrl;
         GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
@@ -35,25 +35,25 @@ namespace GLGUI.GLControlExample
 
         private void OnLoad(object sender, EventArgs e)
         {
-            this.rootControl = new GLControlControlContainer(this);
+            this.rootCtrl = new GLCtrlContainer(this);
             {
-                var mainAreaControl = rootControl.Add(new GLGroupLayout(rootControl) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
+                var mainAreaControl = rootCtrl.Add(new GLGroupLayout(rootCtrl) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
                 // change background color:
                 var mainSkin = mainAreaControl.Skin;
-                mainSkin.BackgroundColor = rootControl.Skin.FormActive.BackgroundColor;
-                mainSkin.BorderColor = rootControl.Skin.FormActive.BorderColor;
+                mainSkin.BackgroundColor = rootCtrl.Skin.FormActive.BackgroundColor;
+                mainSkin.BorderColor = rootCtrl.Skin.FormActive.BorderColor;
                 mainAreaControl.Skin = mainSkin;
                 {
-                    fpsLabel = mainAreaControl.Add(new GLLabel(rootControl) { Location = new Point(10, 10), AutoSize = true });
+                    fpsLabel = mainAreaControl.Add(new GLLabel(rootCtrl) { Location = new Point(10, 10), AutoSize = true });
                     // change font and background color:
                     var skin = fpsLabel.SkinEnabled;
                     skin.Font = new GLFont(new Font("Arial", 12.0f));
-                    skin.BackgroundColor = rootControl.Skin.TextBoxActive.BackgroundColor;
+                    skin.BackgroundColor = rootCtrl.Skin.TextBoxActive.BackgroundColor;
                     fpsLabel.SkinEnabled = skin;
                 }
                 {
-                    var loremIpsumForm = mainAreaControl.Add(new GLForm(rootControl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
-                    loremIpsumForm.Add(new GLTextBox(rootControl)
+                    var loremIpsumForm = mainAreaControl.Add(new GLForm(rootCtrl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
+                    loremIpsumForm.Add(new GLTextBox(rootCtrl)
                     {
                         Text = "This is a GLTextBos in a GLForm in a GLGroupLayout.",
                         Multiline = true,
@@ -63,9 +63,9 @@ namespace GLGUI.GLControlExample
                     }).Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
                 }
 
-                var consoleScrollControl = rootControl.Add(new GLScrollableControl(rootControl) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
+                var consoleScrollControl = rootCtrl.Add(new GLScrollableControl(rootCtrl) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
                 {
-                    console = consoleScrollControl.Add(new GLLabel(rootControl) { AutoSize = true, Multiline = true });
+                    console = consoleScrollControl.Add(new GLLabel(rootCtrl) { AutoSize = true, Multiline = true });
                 }
 
                 this.stopwatch = new Stopwatch();
@@ -86,7 +86,7 @@ namespace GLGUI.GLControlExample
 
             if (this.time >= this.fpsSecond)
             {
-                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, rootControl.RenderDuration);
+                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, rootCtrl.RenderDuration);
                 fpsCounter = 0;
                 fpsSecond++;
             }
@@ -97,7 +97,7 @@ namespace GLGUI.GLControlExample
                 this.consoleWriter.Changed = false;
             }
 
-            this.rootControl.Render();
+            this.rootCtrl.Render();
             SwapBuffers();
 
             this.fpsCounter++;

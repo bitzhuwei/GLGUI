@@ -6,9 +6,9 @@ using OpenTK.Graphics.OpenGL;
 
 namespace GLGUI.Example
 {
-	public class MainForm : GameWindow
-	{
-		GLControlControlContainer glgui;
+    public class MainForm : GameWindow
+    {
+        GLCtrlContainer glgui;
         GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
@@ -17,28 +17,29 @@ namespace GLGUI.Example
         int fpsSecond = 1;
         double time = 0.0;
 
-		public MainForm() : base(1024, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 0, 4), "GLGUI Example")
-		{
+        public MainForm()
+            : base(1024, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 0, 4), "GLGUI Example")
+        {
             consoleWriter = new LineWriter();
             Console.SetOut(consoleWriter);
             Console.SetError(consoleWriter);
 
-			this.Load += OnLoad;
-			this.Resize += (s, e) => GL.Viewport(ClientSize);
-			this.RenderFrame += OnRender;
-		}
+            this.Load += OnLoad;
+            this.Resize += (s, e) => GL.Viewport(ClientSize);
+            this.RenderFrame += OnRender;
+        }
 
         private void OnLoad(object sender, EventArgs e)
-		{
-			VSync = VSyncMode.Off; // vsync is nice, but you can't really measure performance while it's on
+        {
+            VSync = VSyncMode.Off; // vsync is nice, but you can't really measure performance while it's on
 
-			glgui = new GLControlControlContainer(this);
-            
+            glgui = new GLCtrlContainer(this);
+
             var mainAreaControl = glgui.Add(new GLGroupLayout(glgui) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
             // change background color:
             var mainSkin = mainAreaControl.Skin;
-			mainSkin.BackgroundColor = glgui.Skin.FormActive.BackgroundColor;
-			mainSkin.BorderColor = glgui.Skin.FormActive.BorderColor;
+            mainSkin.BackgroundColor = glgui.Skin.FormActive.BackgroundColor;
+            mainSkin.BorderColor = glgui.Skin.FormActive.BorderColor;
             mainAreaControl.Skin = mainSkin;
 
             var consoleScrollControl = glgui.Add(new GLScrollableControl(glgui) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
@@ -59,16 +60,17 @@ namespace GLGUI.Example
             for (int i = 0; i < 5; i++)
                 flow.Add(new GLButton(glgui) { Text = "Button" + i, Size = new Size(150, 0) })
                     .Click += (s, w) => Console.WriteLine(s + " pressed.");
-			flow.Add(new GLButton(glgui) { Text = "Hide Cursor", Size = new Size(150, 0) })
+            flow.Add(new GLButton(glgui) { Text = "Hide Cursor", Size = new Size(150, 0) })
                 .Click += (s, w) => glgui.Cursor = GLCursor.None;
 
             var loremIpsumForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
-            loremIpsumForm.Add(new GLTextBox(glgui) {
+            loremIpsumForm.Add(new GLTextBox(glgui)
+            {
                 Text = "Lorem ipsum dolor sit amet,\nconsetetur sadipscing elitr,\nsed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,\nsed diam voluptua.\n\nAt vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                Multiline = true, 
-                WordWrap = true, 
-                Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8), 
-                Anchor = GLAnchorStyles.All 
+                Multiline = true,
+                WordWrap = true,
+                Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
+                Anchor = GLAnchorStyles.All
             }).Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
 
             var fixedSizeForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Fixed size Form", Location = new Point(64, 300), Size = new Size(100, 200), AutoSize = true });
@@ -82,36 +84,36 @@ namespace GLGUI.Example
             fooBarFlow.Add(new GLCheckBox(glgui) { Text = "Go away!", AutoSize = true })
                 .Changed += (s, w) => Console.WriteLine(s + ": " + ((GLCheckBox)s).Checked);
 
-			for (int i = 0; i < 3; i++)
-			{
+            for (int i = 0; i < 3; i++)
+            {
                 var viewportForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Cube", Location = new Point(300 + i * 16, 64 + i * 16), Size = new Size(200, 200) });
                 viewportForm.Add(new GLViewport(glgui) { Size = viewportForm.InnerSize, Anchor = GLAnchorStyles.All })
                     .RenderViewport += OnRenderViewport;
-			}
-		}
+            }
+        }
 
         private void OnRender(object sender, FrameEventArgs e)
-		{
-			time += e.Time;
+        {
+            time += e.Time;
 
-			if (time >= fpsSecond)
-			{
-				fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, glgui.RenderDuration);
-				fpsCounter = 0;
-				fpsSecond++;
-			}
+            if (time >= fpsSecond)
+            {
+                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, glgui.RenderDuration);
+                fpsCounter = 0;
+                fpsSecond++;
+            }
 
-			if (consoleWriter.Changed)
-			{
-				console.Text = string.Join("\n", consoleWriter.Lines);
-				consoleWriter.Changed = false;
-			}
+            if (consoleWriter.Changed)
+            {
+                console.Text = string.Join("\n", consoleWriter.Lines);
+                consoleWriter.Changed = false;
+            }
 
-			glgui.Render();
-			SwapBuffers();
+            glgui.Render();
+            SwapBuffers();
 
-			fpsCounter++;
-		}
+            fpsCounter++;
+        }
 
         // draws a simple colored cube in a GLViewport control
         private void OnRenderViewport(object sender, double deltaTime)
@@ -175,6 +177,6 @@ namespace GLGUI.Example
 
             GL.Disable(EnableCap.DepthTest);
         }
-	}
+    }
 }
 

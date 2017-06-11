@@ -25,7 +25,7 @@ namespace GLGUI
 		private bool down = false;
 		private bool over = false;
 
-		public GLSlider(GLControlControlContainer gui) : base(gui)
+		public GLSlider(GLCtrlContainer gui) : base(gui)
 		{
 			Render += OnRender;
             MouseMove += OnMouseMove;

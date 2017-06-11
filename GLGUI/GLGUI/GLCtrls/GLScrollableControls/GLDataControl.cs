@@ -22,7 +22,7 @@ namespace GLGUI.Advanced
         private GLFlowLayout horizontal, left, right;
         private GLSkin.GLLabelSkin labelSkin, linkLabelSkin;
 
-        public GLDataControl(GLControlControlContainer gui) : base(gui)
+        public GLDataControl(GLCtrlContainer gui) : base(gui)
         {
             Render += (s, d) => UpdateData();
 

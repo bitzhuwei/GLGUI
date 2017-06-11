@@ -27,7 +27,7 @@ namespace GLGUI
 		private GLSkin.GLLabelSkin skin;
 		private bool enabled = true;
 
-		public GLLinkLabel(GLControlControlContainer gui) : base(gui)
+		public GLLinkLabel(GLCtrlContainer gui) : base(gui)
 		{
 			Render += OnRender;
 			MouseUp += OnMouseUp;

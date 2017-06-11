@@ -17,7 +17,7 @@ namespace GLGUI
 		private GLCtrl first, second;
 		private float splitterPosition = 0.5f;
 
-		public GLSplitLayout(GLControlControlContainer gui) : base(gui)
+		public GLSplitLayout(GLCtrlContainer gui) : base(gui)
 		{
 			MouseDown += OnMouseDown;
 			MouseUp += OnMouseUp;

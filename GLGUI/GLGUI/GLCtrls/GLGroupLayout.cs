@@ -10,7 +10,7 @@ namespace GLGUI
 
         private GLSkin.GLGroupLayoutSkin skin;
 
-        public GLGroupLayout(GLControlControlContainer gui)
+        public GLGroupLayout(GLCtrlContainer gui)
             : base(gui)
         {
             Render += OnRender;

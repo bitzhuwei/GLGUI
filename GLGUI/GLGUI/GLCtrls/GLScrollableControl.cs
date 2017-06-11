@@ -20,7 +20,7 @@ namespace GLGUI
         private GLScrolledControl content;
         private GLSlider horizontal, vertical;
 
-		public GLScrollableControl(GLControlControlContainer gui) : base(gui)
+		public GLScrollableControl(GLCtrlContainer gui) : base(gui)
 		{
             Render += OnRender;
             MouseWheel += OnMouseWheel;

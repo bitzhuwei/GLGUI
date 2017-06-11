@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace GLGUI
 {
-    public class GLControlControlContainer : GLCtrl
+    public class GLCtrlContainer : GLCtrl
     {
         public readonly GameWindow ParentWindow;
         public GLSkin Skin = new GLSkin();
@@ -37,7 +37,7 @@ namespace GLGUI
         private int suspendCounter = 0;
         private GLCursor cursor;
 
-        public GLControlControlContainer(GameWindow parent)
+        public GLCtrlContainer(GameWindow parent)
             : base(null)
         {
             GLCursor.LoadCursors(parent);
@@ -63,7 +63,7 @@ namespace GLGUI
 #if REFERENCE_OPENTK_GLCONTROL
         public readonly OpenTK.GLControl ParentControl;
 
-        public GLControlControlContainer(OpenTK.GLControl parent)
+        public GLCtrlContainer(OpenTK.GLControl parent)
             : base(null)
         {
             GLCursor.LoadCursors(null);
