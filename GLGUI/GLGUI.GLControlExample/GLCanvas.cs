@@ -11,13 +11,10 @@ namespace GLGUI.GLControlExample
     public class GLCanvas : OpenTK.GLControl
     {
         GLCtrlContainer rootCtrl;
-        GLLabel fpsLabel;
         GLLabel console;
         LineWriter consoleWriter;
 
         Stopwatch stopwatch;
-        int fpsCounter = 0;
-        int fpsSecond = 1;
         double time = 0.0;
 
         public GLCanvas()
@@ -44,18 +41,10 @@ namespace GLGUI.GLControlExample
                 mainSkin.BorderColor = rootCtrl.Skin.FormActive.BorderColor;
                 mainAreaControl.Skin = mainSkin;
                 {
-                    fpsLabel = mainAreaControl.Add(new GLLabel(rootCtrl) { Location = new Point(10, 10), AutoSize = true });
-                    // change font and background color:
-                    var skin = fpsLabel.SkinEnabled;
-                    skin.Font = new GLFont(new Font("Arial", 12.0f));
-                    skin.BackgroundColor = rootCtrl.Skin.TextBoxActive.BackgroundColor;
-                    fpsLabel.SkinEnabled = skin;
-                }
-                {
                     var loremIpsumForm = mainAreaControl.Add(new GLForm(rootCtrl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
                     loremIpsumForm.Add(new GLTextBox(rootCtrl)
                     {
-                        Text = "This is a GLTextBos in a GLForm in a GLGroupLayout.",
+                        Text = "This is a GLTextBox in a GLForm in a GLGroupLayout.",
                         Multiline = true,
                         WordWrap = true,
                         Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
@@ -84,13 +73,6 @@ namespace GLGUI.GLControlExample
             this.stopwatch.Restart();
             this.time += delta;
 
-            if (this.time >= this.fpsSecond)
-            {
-                fpsLabel.Text = string.Format("Application: {0:0}FPS. GLGUI: {1:0.0}ms", fpsCounter, rootCtrl.RenderDuration);
-                fpsCounter = 0;
-                fpsSecond++;
-            }
-
             if (this.consoleWriter.isChanged)
             {
                 this.console.Text = string.Join("\n", this.consoleWriter.Lines);
@@ -99,8 +81,6 @@ namespace GLGUI.GLControlExample
 
             this.rootCtrl.Render();
             SwapBuffers();
-
-            this.fpsCounter++;
         }
 
         // draws a simple colored cube in a GLViewport control
