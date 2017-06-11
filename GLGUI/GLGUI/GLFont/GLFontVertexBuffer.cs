@@ -3,39 +3,31 @@ using OpenTK.Graphics.OpenGL;
 
 namespace GLGUI
 {
-	public class GLFontVertexBuffer : IDisposable
+    public class GLFontVertexBuffer : IDisposable
     {
-		public int TextureID { get { return textureID; } internal set { textureID = value; } }
-		public int VaoID { get { return vaoID; } }
-		public int VertexCount { get { return vertexCount; } }
+        public int TextureID { get { return textureID; } internal set { textureID = value; } }
+        public int VaoID { get { return vaoID; } }
+        public int VertexCount { get { return vertexCount; } }
 
-		int textureID;
-		int vaoID, vboID;
+        int textureID;
+        int vaoID, vboID;
         float[] vertices = new float[1024];
         int floatCount = 0;
         int vertexCount = 0;
 
         public GLFontVertexBuffer(int textureID)
         {
-			this.textureID = textureID;
-			vaoID = GL.GenVertexArray();
-			vboID = GL.GenBuffer();
-			GLControlControlContainer.usedVertexArrays++;
+            this.textureID = textureID;
+            vaoID = GL.GenVertexArray();
+            vboID = GL.GenBuffer();
+            GLControlControlContainer.usedVertexArrays++;
         }
-
-		~GLFontVertexBuffer()
-		{
-			lock(GLControlControlContainer.toDispose)
-			{
-				GLControlControlContainer.toDispose.Add(this);
-			}
-		}
 
         public void Dispose()
         {
-			GL.DeleteVertexArray(vaoID);
-			GL.DeleteBuffer(vboID);
-			GLControlControlContainer.usedVertexArrays--;
+            GL.DeleteVertexArray(vaoID);
+            GL.DeleteBuffer(vboID);
+            GLControlControlContainer.usedVertexArrays--;
         }
 
         public void Reset()
@@ -77,15 +69,15 @@ namespace GLGUI
             if (floatCount == 0)
                 return;
 
-			GL.BindVertexArray(vaoID);
+            GL.BindVertexArray(vaoID);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vboID);
             GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(floatCount * 4), vertices, BufferUsageHint.StaticDraw);
 
-			GL.VertexPointer(2, VertexPointerType.Float, 16, 0);
-			GL.EnableClientState(ArrayCap.VertexArray);
-			GL.TexCoordPointer(2, TexCoordPointerType.Float, 16, 8);
-			GL.EnableClientState(ArrayCap.TextureCoordArray);
-			GL.BindVertexArray(0);
+            GL.VertexPointer(2, VertexPointerType.Float, 16, 0);
+            GL.EnableClientState(ArrayCap.VertexArray);
+            GL.TexCoordPointer(2, TexCoordPointerType.Float, 16, 8);
+            GL.EnableClientState(ArrayCap.TextureCoordArray);
+            GL.BindVertexArray(0);
         }
 
         public void Draw()
@@ -94,11 +86,11 @@ namespace GLGUI
                 return;
 
             GL.Enable(EnableCap.Texture2D);
-			GL.BindTexture(TextureTarget.Texture2D, textureID);
+            GL.BindTexture(TextureTarget.Texture2D, textureID);
 
-			GL.BindVertexArray(vaoID);
-			GL.DrawArrays(PrimitiveType.Quads, 0, vertexCount);
-			GL.BindVertexArray(0);
+            GL.BindVertexArray(vaoID);
+            GL.DrawArrays(PrimitiveType.Quads, 0, vertexCount);
+            GL.BindVertexArray(0);
 
             GL.Disable(EnableCap.Texture2D);
         }

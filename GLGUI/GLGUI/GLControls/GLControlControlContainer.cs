@@ -31,7 +31,6 @@ namespace GLGUI
             }
         }
 
-        internal static List<IDisposable> toDispose = new List<IDisposable>();
         internal static int usedTextures = 0;
         internal static int usedVertexArrays = 0;
         private static int lastUsedTextures = 0;
@@ -291,12 +290,6 @@ namespace GLGUI
             GL.MatrixMode(MatrixMode.Modelview);
             GL.PopMatrix();
 
-            lock (toDispose)
-            {
-                foreach (var d in toDispose)
-                    d.Dispose();
-                toDispose.Clear();
-            }
             if (usedVertexArrays != lastUsedVertexArrays)
             {
                 lastUsedVertexArrays = usedVertexArrays;
