@@ -11,8 +11,6 @@ namespace GLGUI.GLControlExample
     public class GLCanvas : OpenTK.GLControl
     {
         GLCtrlContainer rootCtrl;
-        GLLabel console;
-        LineWriter consoleWriter;
 
         Stopwatch stopwatch;
         double time = 0.0;
@@ -20,10 +18,6 @@ namespace GLGUI.GLControlExample
         public GLCanvas()
             : base(new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 0, 4))
         {
-            consoleWriter = new LineWriter();
-            Console.SetOut(consoleWriter);
-            Console.SetError(consoleWriter);
-
             if (!this.DesignMode)
             {
                 this.Load += OnLoad;
@@ -34,27 +28,23 @@ namespace GLGUI.GLControlExample
         {
             this.rootCtrl = new GLCtrlContainer(this);
             {
-                var mainAreaControl = rootCtrl.Add(new GLGroupLayout(rootCtrl) { Size = new Size(ClientSize.Width, ClientSize.Height - 200), Anchor = GLAnchorStyles.All });
+                var mainAreaControl = rootCtrl.Add(new GLGroupLayout(rootCtrl) { Size = new Size(ClientSize.Width, ClientSize.Height - 100), Anchor = GLAnchorStyles.All });
                 // change background color:
                 var mainSkin = mainAreaControl.Skin;
                 mainSkin.BackgroundColor = rootCtrl.Skin.FormActive.BackgroundColor;
                 mainSkin.BorderColor = rootCtrl.Skin.FormActive.BorderColor;
                 mainAreaControl.Skin = mainSkin;
                 {
-                    var loremIpsumForm = mainAreaControl.Add(new GLForm(rootCtrl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(300, 200) });
-                    loremIpsumForm.Add(new GLTextBox(rootCtrl)
-                    {
-                        Text = "This is a GLTextBox in a GLForm in a GLGroupLayout.",
-                        Multiline = true,
-                        WordWrap = true,
-                        Outer = new Rectangle(4, 4, loremIpsumForm.Inner.Width - 8, loremIpsumForm.Inner.Height - 8),
-                        Anchor = GLAnchorStyles.All
-                    }).Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
-                }
-
-                var consoleScrollControl = rootCtrl.Add(new GLScrollableControl(rootCtrl) { Outer = new Rectangle(0, ClientSize.Height - 200, ClientSize.Width, 200), Anchor = GLAnchorStyles.Left | GLAnchorStyles.Right | GLAnchorStyles.Bottom });
-                {
-                    console = consoleScrollControl.Add(new GLLabel(rootCtrl) { AutoSize = true, Multiline = true });
+                    var form = mainAreaControl.Add(new GLForm(rootCtrl) { Title = "Lorem Ipsum", Location = new Point(600, 100), Size = new Size(600, 400), Anchor = GLAnchorStyles.All });
+                    var textBox = form.Add(new GLTextBox(rootCtrl)
+                       {
+                           Text = "This is a GLTextBox in a GLForm in a GLGroupLayout.",
+                           Multiline = true,
+                           WordWrap = true,
+                           Outer = new Rectangle(4, 4, form.Inner.Width - 8, form.Inner.Height - 8),
+                           Anchor = GLAnchorStyles.All
+                       });
+                    textBox.Changed += (s, w) => Console.WriteLine(s + " text length: " + ((GLTextBox)s).Text.Length);
                 }
 
                 this.stopwatch = new Stopwatch();
@@ -72,12 +62,6 @@ namespace GLGUI.GLControlExample
             double delta = this.stopwatch.Elapsed.TotalMilliseconds * 0.001;
             this.stopwatch.Restart();
             this.time += delta;
-
-            if (this.consoleWriter.isChanged)
-            {
-                this.console.Text = string.Join("\n", this.consoleWriter.Lines);
-                this.consoleWriter.isChanged = false;
-            }
 
             this.rootCtrl.Render();
             SwapBuffers();
