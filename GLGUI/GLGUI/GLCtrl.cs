@@ -54,9 +54,9 @@ namespace GLGUI
         private GLCtrl hoverChild;
         private GLCtrl focusedChild;
 
-        protected GLCtrl(GLCtrlContainer gui)
+        protected GLCtrl(GLCtrlContainer container)
         {
-            Container = gui;
+            Container = container;
             Name = GetType().Name + (idCounter++);
 
             outer = new Rectangle(0, 0, 0, 0);

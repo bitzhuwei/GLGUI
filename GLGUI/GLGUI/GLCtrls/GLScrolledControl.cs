@@ -4,12 +4,13 @@ using System.Linq;
 
 namespace GLGUI
 {
-	internal class GLScrolledControl : GLCtrl
+    internal class GLScrolledControl : GLCtrl
     {
         public Size TotalSize;
 
-        public GLScrolledControl(GLCtrlContainer gui) : base(gui)
-		{
+        public GLScrolledControl(GLCtrlContainer container)
+            : base(container)
+        {
             AutoSize = true;
             HandleMouseEvents = false;
         }
@@ -21,13 +22,13 @@ namespace GLGUI
             Inner = new Rectangle(0, 0, outer.Width, outer.Height);
 
             TotalSize = new Size(0, 0);
-			if (Controls.Any())
+            if (Controls.Any())
             {
                 TotalSize.Width = Controls.Max(c => c.Outer.Right);
                 TotalSize.Height = Controls.Max(c => c.Outer.Bottom);
             }
 
-			if (Parent != null && !Parent.AutoSize) // avoid repeated calls if autosize is true
+            if (Parent != null && !Parent.AutoSize) // avoid repeated calls if autosize is true
                 Parent.Invalidate();
         }
     }

@@ -68,7 +68,7 @@ namespace GLGUI
         {
             GLCursor.LoadCursors(null);
 
-            Container = this;
+            base.Container = this;
             base.Parent = this;
             ParentControl = parent;
             Outer = parent.ClientRectangle;

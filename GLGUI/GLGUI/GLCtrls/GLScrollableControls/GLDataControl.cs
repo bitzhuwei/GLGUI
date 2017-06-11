@@ -8,7 +8,7 @@ namespace GLGUI.Advanced
 {
     public class GLDataControl : GLScrollableControl
     {
-        public GLSkin.GLLabelSkin LabelSkin { get { return labelSkin; } set { labelSkin = value; if(history.Count > 0) SetData(history.First()); } }
+        public GLSkin.GLLabelSkin LabelSkin { get { return labelSkin; } set { labelSkin = value; if (history.Count > 0) SetData(history.First()); } }
         public GLSkin.GLLabelSkin LinkLabelSkin { get { return linkLabelSkin; } set { linkLabelSkin = value; if (history.Count > 0) SetData(history.First()); } }
 
         public Dictionary<Type, string[]> Hidden = new Dictionary<Type, string[]>();
@@ -22,23 +22,24 @@ namespace GLGUI.Advanced
         private GLFlowLayout horizontal, left, right;
         private GLSkin.GLLabelSkin labelSkin, linkLabelSkin;
 
-        public GLDataControl(GLCtrlContainer gui) : base(gui)
+        public GLDataControl(GLCtrlContainer container)
+            : base(container)
         {
             Render += (s, d) => UpdateData();
 
-            horizontal = Add(new GLFlowLayout(gui) { FlowDirection = GLFlowDirection.LeftToRight, AutoSize = true });
-            left = horizontal.Add(new GLFlowLayout(gui) { FlowDirection = GLFlowDirection.TopDown, AutoSize = true });
+            horizontal = Add(new GLFlowLayout(container) { FlowDirection = GLFlowDirection.LeftToRight, AutoSize = true });
+            left = horizontal.Add(new GLFlowLayout(container) { FlowDirection = GLFlowDirection.TopDown, AutoSize = true });
             var skin = left.Skin;
             skin.Space = 0;
             left.Skin = skin;
-            right = horizontal.Add(new GLFlowLayout(gui) { FlowDirection = GLFlowDirection.TopDown, AutoSize = true });
+            right = horizontal.Add(new GLFlowLayout(container) { FlowDirection = GLFlowDirection.TopDown, AutoSize = true });
             right.Skin = skin;
 
-			labelSkin = gui.Skin.LabelEnabled;
-            linkLabelSkin = gui.Skin.LinkLabelEnabled;
+            labelSkin = container.Skin.LabelEnabled;
+            linkLabelSkin = container.Skin.LinkLabelEnabled;
 
-			// defaults
-			Hidden.Add(typeof(IEnumerable), new string[] {
+            // defaults
+            Hidden.Add(typeof(IEnumerable), new string[] {
 				"_items", "_size", "_version", "_syncRoot",
 				"m_buckets", "m_slots", "m_count", "m_lastIndex", "m_freeList", "m_comparer",
 				"m_version", "m_siInfo", "m_collection", "m_boundedCapacity", "m_freeNodes",
@@ -46,17 +47,17 @@ namespace GLGUI.Advanced
 				"m_ProducersCancellationTokenSource", "m_currentAdders",
 				"buckets", "entries", "count", "version", "freeList", "freeCount", "comparer", "keys", "values",
 				"IsFixedSize", "IsReadOnly", "IsSynchronized", "SyncRoot" });
-			Hidden.Add(typeof(Array), new string[] { "LongLength", "Rank", "Count" });
-			Hidden.Add(typeof(KeyValuePair<,>), new string[] { "key", "value" });
-			Hidden.Add(typeof(Dictionary<,>), new string[] { "Keys", "Values" });
+            Hidden.Add(typeof(Array), new string[] { "LongLength", "Rank", "Count" });
+            Hidden.Add(typeof(KeyValuePair<,>), new string[] { "key", "value" });
+            Hidden.Add(typeof(Dictionary<,>), new string[] { "Keys", "Values" });
         }
 
         private void AddRow(string name, EventHandler click, Func<object> value)
         {
-			var link = left.Add(new GLLinkLabel(Container) { AutoSize = true, Text = name, SkinEnabled = linkLabelSkin });
+            var link = left.Add(new GLLinkLabel(Container) { AutoSize = true, Text = name, SkinEnabled = linkLabelSkin });
             if (value() != null)
-				link.Click += click;
-			var label = right.Add(new GLLabel(Container) { AutoSize = true, Text = (value() ?? "null").ToString(), SkinEnabled = labelSkin });
+                link.Click += click;
+            var label = right.Add(new GLLabel(Container) { AutoSize = true, Text = (value() ?? "null").ToString(), SkinEnabled = labelSkin });
             updateData.Add(new Tuple<Func<object>, GLLabel>(value, label));
             row++;
         }
@@ -83,7 +84,7 @@ namespace GLGUI.Advanced
                 }
 
                 var interfaces = type.GetInterfaces();
-                foreach(var iface in interfaces)
+                foreach (var iface in interfaces)
                 {
                     if (dict.ContainsKey(iface))
                         list.AddRange(dict[iface]);
@@ -148,8 +149,8 @@ namespace GLGUI.Advanced
                     type = type.BaseType;
                 }
             }
-            
-            shortcutFound:
+
+        shortcutFound:
             AddRow(name, (s, e) => setData(value, false), value);
         }
 
@@ -276,7 +277,7 @@ namespace GLGUI.Advanced
                         foreach (object item in ((IEnumerable)obj()))
                         {
                             int j = i++;
-                            considerShortcutsAndAdd("[" + i + "]", () => { try { return ((IEnumerable)obj()).Cast<object>().ElementAt(j); } catch(Exception) { return null; } });
+                            considerShortcutsAndAdd("[" + i + "]", () => { try { return ((IEnumerable)obj()).Cast<object>().ElementAt(j); } catch (Exception) { return null; } });
                         }
                     }
                     catch (InvalidOperationException)
@@ -305,7 +306,7 @@ namespace GLGUI.Advanced
         {
             Container.SuspendLayout();
             bool changed = false;
-            foreach(var u in updateData)
+            foreach (var u in updateData)
             {
                 try
                 {
@@ -317,7 +318,7 @@ namespace GLGUI.Advanced
                         changed = true;
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     if (history.Count > 1)
                     {
@@ -333,7 +334,7 @@ namespace GLGUI.Advanced
                 }
             }
             Container.ResumeLayout();
-            if(changed)
+            if (changed)
                 right.Invalidate();
         }
     }

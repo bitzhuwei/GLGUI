@@ -4,15 +4,16 @@ using System.Linq;
 
 namespace GLGUI
 {
-	public class GLContextMenu : GLFlowLayout
-	{
-		public GLContextMenu(GLCtrlContainer gui) : base(gui)
-		{
-			FlowDirection = GLFlowDirection.TopDown;
-			AutoSize = true;
+    public class GLContextMenu : GLFlowLayout
+    {
+        public GLContextMenu(GLCtrlContainer container)
+            : base(container)
+        {
+            FlowDirection = GLFlowDirection.TopDown;
+            AutoSize = true;
 
-			Skin = Container.Skin.ContextMenu;
-		}
+            Skin = Container.Skin.ContextMenu;
+        }
 
         protected override void UpdateLayout()
         {
@@ -33,5 +34,5 @@ namespace GLGUI
 
             base.UpdateLayout();
         }
-	}
+    }
 }
