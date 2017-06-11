@@ -79,8 +79,6 @@
     <Compile Include="Enumerations\GLAnchorStyles.cs" />
     <Compile Include="Enumerations\GLFlowDirection.cs" />
     <Compile Include="DataStructures\GLPadding.cs" />
-    <Compile Include="Enumerations\GLSliderOrientation.cs" />
-    <Compile Include="Enumerations\GLSplitterOrientation.cs" />
     <Compile Include="GLFont\GLFontTextPosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
