@@ -62,11 +62,8 @@
     <Compile Include="GLDraw.cs" />
     <Compile Include="GLCtrls\GLButton.cs" />
     <Compile Include="DataStructures\GLSkin.cs" />
-    <Compile Include="GLCtrls\GLLabel.cs" />
     <Compile Include="GLCtrls\GLTextBox.cs" />
     <Compile Include="GLCtrls\GLFlowLayout.cs" />
-    <Compile Include="GLCtrls\GLSlider.cs" />
-    <Compile Include="GLCtrls\GLLinkLabel.cs" />
     <Compile Include="GLCtrls\GLFlowLayouts\GLContextMenu.cs" />
     <Compile Include="GLCursor.cs" />
     <Compile Include="GLFont\GLFontKerningConfiguration.cs" />
