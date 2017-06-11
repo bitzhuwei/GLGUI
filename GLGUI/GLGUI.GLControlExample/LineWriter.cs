@@ -7,7 +7,7 @@ namespace GLGUI.GLControlExample
     public class LineWriter : TextWriter
     {
         public List<string> Lines;
-        public bool Changed = false;
+        public bool isChanged = false;
         private StringBuilder currentLine;
 
         public LineWriter()
@@ -30,7 +30,7 @@ namespace GLGUI.GLControlExample
             if (Lines.Count > 1024)
                 Lines.RemoveAt(0);
             currentLine.Clear();
-            Changed = true;
+            isChanged = true;
         }
 
         public override Encoding Encoding
@@ -42,7 +42,7 @@ namespace GLGUI.GLControlExample
         {
             Lines.Clear();
             currentLine.Clear();
-            Changed = true;
+            isChanged = true;
         }
     }
 }

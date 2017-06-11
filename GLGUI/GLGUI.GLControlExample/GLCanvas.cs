@@ -91,10 +91,10 @@ namespace GLGUI.GLControlExample
                 fpsSecond++;
             }
 
-            if (this.consoleWriter.Changed)
+            if (this.consoleWriter.isChanged)
             {
                 this.console.Text = string.Join("\n", this.consoleWriter.Lines);
-                this.consoleWriter.Changed = false;
+                this.consoleWriter.isChanged = false;
             }
 
             this.rootCtrl.Render();
