@@ -32,13 +32,11 @@ namespace GLGUI
 
             GL.Disable(EnableCap.Texture2D);
 
-            GLControlControlContainer.usedTextures++;
         }
 
         public void Dispose()
         {
             GL.DeleteTexture(TextureID);
-            GLControlControlContainer.usedTextures--;
         }
 
     }

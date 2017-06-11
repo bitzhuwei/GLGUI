@@ -31,11 +31,6 @@ namespace GLGUI
             }
         }
 
-        internal static int usedTextures = 0;
-        internal static int usedVertexArrays = 0;
-        private static int lastUsedTextures = 0;
-        private static int lastUsedVertexArrays = 0;
-
         private GLContextMenu currentContextMenu;
         private Stopwatch stopwatch;
         private double renderDuration;
@@ -289,21 +284,6 @@ namespace GLGUI
             GL.PopMatrix();
             GL.MatrixMode(MatrixMode.Modelview);
             GL.PopMatrix();
-
-            if (usedVertexArrays != lastUsedVertexArrays)
-            {
-                lastUsedVertexArrays = usedVertexArrays;
-                if (usedVertexArrays > 2048)
-                    Console.WriteLine("Warning: Used vertex arrays by GLGUI: {0}", usedVertexArrays);
-                GC.Collect();
-            }
-            if (usedTextures != lastUsedTextures)
-            {
-                lastUsedTextures = usedTextures;
-                if (usedTextures > 32)
-                    Console.WriteLine("Warning: Used textures by GLGUI: {0}", usedTextures);
-                GC.Collect();
-            }
 
             renderDuration = stopwatch.Elapsed.TotalMilliseconds;
         }
