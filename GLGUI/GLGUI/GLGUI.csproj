@@ -47,7 +47,6 @@
     <Compile Include="GLCtrl.Events.cs" />
     <Compile Include="GLCtrls\GLFlowLayouts\GLOptions.cs" />
     <Compile Include="GLCtrls\GLGroupLayout.cs" />
-    <Compile Include="GLCtrls\GLViewport.cs" />
     <Compile Include="GLFont\GLFontBuilder.cs" />
     <Compile Include="GLFont\GLFontBuilderConfiguration.cs" />
     <Compile Include="GLFont\GLFontKerningCalculator.cs" />

@@ -83,13 +83,6 @@ namespace GLGUI.Example
                 .Changed += (s, w) => Console.WriteLine(s + ": " + ((GLCheckBox)s).Checked);
             fooBarFlow.Add(new GLCheckBox(glgui) { Text = "Go away!", AutoSize = true })
                 .Changed += (s, w) => Console.WriteLine(s + ": " + ((GLCheckBox)s).Checked);
-
-            for (int i = 0; i < 3; i++)
-            {
-                var viewportForm = mainAreaControl.Add(new GLForm(glgui) { Title = "Cube", Location = new Point(300 + i * 16, 64 + i * 16), Size = new Size(200, 200) });
-                viewportForm.Add(new GLViewport(glgui) { Size = viewportForm.InnerSize, Anchor = GLAnchorStyles.All })
-                    .RenderViewport += OnRenderViewport;
-            }
         }
 
         private void OnRender(object sender, FrameEventArgs e)
@@ -115,68 +108,6 @@ namespace GLGUI.Example
             fpsCounter++;
         }
 
-        // draws a simple colored cube in a GLViewport control
-        private void OnRenderViewport(object sender, double deltaTime)
-        {
-            var viewport = (GLViewport)sender;
-
-            GL.Enable(EnableCap.DepthTest);
-            GL.ClearColor(0, 0, 0, 1);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            GL.MatrixMode(MatrixMode.Projection);
-            var proj = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(90.0f), viewport.AspectRatio, 1.0f, 100.0f);
-            GL.LoadMatrix(ref proj);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-
-            GL.Translate(0, 0, -2.0f);
-            GL.Rotate(time * 100.0f, 1, 0, 0);
-            GL.Rotate(time * 42.0f, 0, 1, 0);
-
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex3(0.5, -0.5, -0.5);
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex3(0.5, 0.5, -0.5);
-            GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex3(-0.5, 0.5, -0.5);
-            GL.Color3(1.0, 0.0, 1.0);
-            GL.Vertex3(-0.5, -0.5, -0.5);
-
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Vertex3(0.5, -0.5, 0.5);
-            GL.Vertex3(0.5, 0.5, 0.5);
-            GL.Vertex3(-0.5, 0.5, 0.5);
-            GL.Vertex3(-0.5, -0.5, 0.5);
-
-            GL.Color3(1.0, 0.0, 1.0);
-            GL.Vertex3(0.5, -0.5, -0.5);
-            GL.Vertex3(0.5, 0.5, -0.5);
-            GL.Vertex3(0.5, 0.5, 0.5);
-            GL.Vertex3(0.5, -0.5, 0.5);
-
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex3(-0.5, -0.5, 0.5);
-            GL.Vertex3(-0.5, 0.5, 0.5);
-            GL.Vertex3(-0.5, 0.5, -0.5);
-            GL.Vertex3(-0.5, -0.5, -0.5);
-
-            GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex3(0.5, 0.5, 0.5);
-            GL.Vertex3(0.5, 0.5, -0.5);
-            GL.Vertex3(-0.5, 0.5, -0.5);
-            GL.Vertex3(-0.5, 0.5, 0.5);
-
-            GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex3(0.5, -0.5, -0.5);
-            GL.Vertex3(0.5, -0.5, 0.5);
-            GL.Vertex3(-0.5, -0.5, 0.5);
-            GL.Vertex3(-0.5, -0.5, -0.5);
-            GL.End();
-
-            GL.Disable(EnableCap.DepthTest);
-        }
     }
 }
 
