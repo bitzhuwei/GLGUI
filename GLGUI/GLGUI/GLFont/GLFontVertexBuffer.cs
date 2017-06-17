@@ -36,8 +36,10 @@ namespace GLGUI
 
         public void AddQuad(float minx, float miny, float maxx, float maxy, float mintx, float minty, float maxtx, float maxty)
         {
-            if (floatCount + 16 >= vertices.Length)
-                Array.Resize(ref vertices, vertices.Length * 2);
+            if (floatCount + 16 >= this.vertices.Length)
+                Array.Resize(ref this.vertices, this.vertices.Length * 2);
+
+            var vertices = this.vertices;
 
             vertices[floatCount + 0] = minx;
             vertices[floatCount + 1] = miny;

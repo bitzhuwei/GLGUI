@@ -9,7 +9,7 @@ namespace GLGUI.GLControlExample
             Text = "GLGUI.GLControlExample";
             Size = new System.Drawing.Size(1024, 600);
 
-            var canvas = new GLCanvas();
+            var canvas = new WinGLCanvas();
             canvas.Dock = DockStyle.Fill;
             Controls.Add(canvas);
         }
