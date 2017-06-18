@@ -16,13 +16,13 @@ namespace GLGUI
         public GLFlowLayout(GLCtrlContainer container)
             : base(container)
         {
-            Render += OnRender;
+            this.Render += this.OnRender;
 
-            skin = Container.Skin.FlowLayout;
+            this.skin = this.Container.Skin.FlowLayout;
 
-            outer = new Rectangle(0, 0, 100, 100);
-            sizeMin = new Size(0, 0);
-            sizeMax = new Size(int.MaxValue, int.MaxValue);
+            this.outer = new Rectangle(0, 0, 100, 100);
+            this.sizeMin = new Size(0, 0);
+            this.sizeMax = new Size(int.MaxValue, int.MaxValue);
         }
 
         private void Invalidate(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace GLGUI
             switch (FlowDirection)
             {
                 case GLFlowDirection.LeftToRight:
-                    foreach (GLCtrl control in Controls)
+                    foreach (GLCtrl control in this.Controls)
                     {
                         Rectangle o = control.Outer;
                         control.Outer = new Rectangle(current, 0, o.Width, o.Height);
@@ -45,7 +45,7 @@ namespace GLGUI
                     break;
                 case GLFlowDirection.RightToLeft:
                     current = Inner.Width;
-                    foreach (GLCtrl control in Controls)
+                    foreach (GLCtrl control in this.Controls)
                     {
                         Rectangle o = control.Outer;
                         current -= o.Width;
@@ -54,7 +54,7 @@ namespace GLGUI
                     }
                     break;
                 case GLFlowDirection.TopToBottom:
-                    foreach (GLCtrl control in Controls)
+                    foreach (GLCtrl control in this.Controls)
                     {
                         Rectangle o = control.Outer;
                         control.Outer = new Rectangle(0, current, o.Width, o.Height);
@@ -63,7 +63,7 @@ namespace GLGUI
                     break;
                 case GLFlowDirection.BottomToTop:
                     current = Inner.Height;
-                    foreach (GLCtrl control in Controls)
+                    foreach (GLCtrl control in this.Controls)
                     {
                         Rectangle o = control.Outer;
                         current -= o.Height;
@@ -76,33 +76,33 @@ namespace GLGUI
 
         protected override void UpdateLayout()
         {
-            UpdatePositions();
+            this.UpdatePositions();
 
-            if (AutoSize)
+            if (this.AutoSize)
             {
-                if (Controls.Count() > 0)
+                if (this.Controls.Count() > 0)
                 {
-                    outer.Width = Controls.Max(c => c.Outer.Right) - Controls.Min(c => c.Outer.Left) + skin.Padding.Horizontal + skin.Border.Horizontal;
-                    outer.Height = Controls.Max(c => c.Outer.Bottom) - Controls.Min(c => c.Outer.Top) + skin.Padding.Vertical + skin.Border.Vertical;
+                    this.outer.Width = this.Controls.Max(c => c.Outer.Right) - this.Controls.Min(c => c.Outer.Left) + skin.Padding.Horizontal + skin.Border.Horizontal;
+                    this.outer.Height = this.Controls.Max(c => c.Outer.Bottom) - this.Controls.Min(c => c.Outer.Top) + skin.Padding.Vertical + skin.Border.Vertical;
                 }
                 else
                 {
-                    outer.Width = skin.Padding.Horizontal + skin.Border.Horizontal;
-                    outer.Height = skin.Padding.Vertical + skin.Border.Vertical;
+                    this.outer.Width = this.skin.Padding.Horizontal + this.skin.Border.Horizontal;
+                    this.outer.Height = this.skin.Padding.Vertical + this.skin.Border.Vertical;
                 }
             }
 
-            outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
-            outer.Height = Math.Min(Math.Max(outer.Height, sizeMin.Height), sizeMax.Height);
-            background = new Rectangle(
-                skin.Border.Left, skin.Border.Top,
-                outer.Width - skin.Border.Horizontal, outer.Height - skin.Border.Vertical);
-            Inner = new Rectangle(
-                background.Left + skin.Padding.Left, background.Top + skin.Padding.Top,
-                background.Width - skin.Padding.Horizontal, background.Height - skin.Padding.Vertical);
+            this.outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
+            this.outer.Height = Math.Min(Math.Max(outer.Height, sizeMin.Height), sizeMax.Height);
+            this.background = new Rectangle(
+             this.skin.Border.Left, this.skin.Border.Top,
+               this.outer.Width - this.skin.Border.Horizontal, this.outer.Height - this.skin.Border.Vertical);
+            this.Inner = new Rectangle(
+               this.background.Left + this.skin.Padding.Left, this.background.Top + this.skin.Padding.Top,
+               this.background.Width - this.skin.Padding.Horizontal, this.background.Height - this.skin.Padding.Vertical);
 
-            if (flowDirection == GLFlowDirection.BottomToTop || flowDirection == GLFlowDirection.RightToLeft)
-                UpdatePositions();
+            if (this.flowDirection == GLFlowDirection.BottomToTop || this.flowDirection == GLFlowDirection.RightToLeft)
+                this.UpdatePositions();
         }
 
         private void OnRender(object sender, double timeDelta)
@@ -114,16 +114,16 @@ namespace GLGUI
         public override T Add<T>(T control)
         {
             base.Add(control);
-            control.Resize += Invalidate;
-            Invalidate();
+            control.Resize += this.Invalidate;
+            this.Invalidate();
             return control;
         }
 
         public override void Remove(GLCtrl control)
         {
             base.Remove(control);
-            control.Resize -= Invalidate;
-            Invalidate();
+            control.Resize -= this.Invalidate;
+            this.Invalidate();
         }
     }
 }

@@ -34,60 +34,62 @@ namespace GLGUI
         public GLForm(GLCtrlContainer container)
             : base(container)
         {
-            Render += OnRender;
-            MouseDown += OnMouseDown;
-            MouseUp += OnMouseUp;
-            MouseMove += OnMouseMove;
-            MouseLeave += OnMouseLeave;
+            this.Render += this.OnRender;
+            this.MouseDown += this.OnMouseDown;
+            this.MouseUp += this.OnMouseUp;
+            this.MouseMove += this.OnMouseMove;
+            this.MouseLeave += this.OnMouseLeave;
             //MouseDoubleClick += OnMouseDoubleClick;
-            Focus += (s, e) => Invalidate();
-            FocusLost += (s, e) => Invalidate();
+            this.Focus += (s, e) => this.Invalidate();
+            this.FocusLost += (s, e) => this.Invalidate();
 
-            skinActive = Container.Skin.FormActive;
-            skinInactive = Container.Skin.FormInactive;
+            this.skinActive = this.Container.Skin.FormActive;
+            this.skinInactive = this.Container.Skin.FormInactive;
 
-            outer = new Rectangle(0, 0, 100, 100);
-            sizeMin = new Size(64, 32);
-            sizeMax = new Size(int.MaxValue, int.MaxValue);
+            this.outer = new Rectangle(0, 0, 100, 100);
+            this.sizeMin = new Size(64, 32);
+            this.sizeMax = new Size(int.MaxValue, int.MaxValue);
         }
 
         protected override void UpdateLayout()
         {
-            skin = HasFocus ? skinActive : skinInactive;
+            this.skin = this.HasFocus ? this.skinActive : this.skinInactive;
 
-            if (AutoSize)
+            if (this.AutoSize)
             {
-                if (Controls.Count() > 0)
+                if (this.Controls.Count() > 0)
                 {
-                    outer.Width = Controls.Max(c => c.Outer.Right) + skin.Border.Horizontal;
-                    outer.Height = Controls.Max(c => c.Outer.Bottom) + skin.Border.Vertical + (int)titleSize.Height + skin.Border.Top;
+                    this.outer.Width = this.Controls.Max(c => c.Outer.Right) + this.skin.Border.Horizontal;
+                    this.outer.Height = this.Controls.Max(c => c.Outer.Bottom) + this.skin.Border.Vertical + (int)this.titleSize.Height + this.skin.Border.Top;
                 }
                 else
                 {
-                    outer.Width = 0;
-                    outer.Height = 0;
+                    this.outer.Width = 0;
+                    this.outer.Height = 0;
                 }
             }
 
-            outer.Width = Math.Min(Math.Max(outer.Width, sizeMin.Width), sizeMax.Width);
+            this.outer.Width = Math.Min(Math.Max(this.outer.Width, this.sizeMin.Width), this.sizeMax.Width);
 
-            int innerWidth = outer.Width - skin.Border.Horizontal;
-            titleSize = skin.Font.ProcessText(titleProcessed, title, GLFontAlignment.Left);
-            minHeight = Math.Max(sizeMin.Height, (int)titleSize.Height + skin.Border.Vertical + skin.Border.Top);
+            int innerWidth = this.outer.Width - this.skin.Border.Horizontal;
+            this.titleSize = this.skin.Font.ProcessText(this.titleProcessed, this.title, GLFontAlignment.Left);
+            this.minHeight = Math.Max(sizeMin.Height, (int)this.titleSize.Height + this.skin.Border.Vertical + this.skin.Border.Top);
 
-            outer.Height = Math.Min(Math.Max(outer.Height, minHeight), sizeMax.Height);
-            if (Parent != null)
+            this.outer.Height = Math.Min(Math.Max(this.outer.Height, this.minHeight), this.sizeMax.Height);
+            if (this.Parent != null)
             {
-                outer.X = Math.Max(Math.Min(outer.X, Parent.Inner.Width - outer.Width), 0);
-                outer.Y = Math.Max(Math.Min(outer.Y, Parent.Inner.Height - outer.Height), 0);
-                outer.Width = Math.Min(outer.Right, Parent.Inner.Width) - outer.X;
-                outer.Height = Math.Min(outer.Bottom, Parent.Inner.Height) - outer.Y;
+                this.outer.X = Math.Max(Math.Min(this.outer.X, this.Parent.Inner.Width - this.outer.Width), 0);
+                this.outer.Y = Math.Max(Math.Min(this.outer.Y, this.Parent.Inner.Height - this.outer.Height), 0);
+                this.outer.Width = Math.Min(this.outer.Right, this.Parent.Inner.Width) - this.outer.X;
+                this.outer.Height = Math.Min(this.outer.Bottom, this.Parent.Inner.Height) - this.outer.Y;
             }
 
-            Inner = new Rectangle(
-                skin.Border.Left, skin.Border.Top + (int)titleSize.Height + skin.Border.Top,
-                innerWidth, outer.Height - skin.Border.Vertical - (int)titleSize.Height - skin.Border.Top);
-            moveClickRegion = new Rectangle(skin.Border.Left, skin.Border.Top, Inner.Width, (int)titleSize.Height);
+            this.Inner = new Rectangle(
+                this.skin.Border.Left,
+                this.skin.Border.Top + (int)this.titleSize.Height + this.skin.Border.Top,
+                innerWidth,
+                this.outer.Height - this.skin.Border.Vertical - (int)this.titleSize.Height - this.skin.Border.Top);
+            this.moveClickRegion = new Rectangle(this.skin.Border.Left, this.skin.Border.Top, this.Inner.Width, (int)this.titleSize.Height);
         }
 
         private void OnRender(object sender, double timeDelta)
@@ -99,13 +101,13 @@ namespace GLGUI
 
         private void StartDragOperation(DragOperation op, Point p)
         {
-            if ((AutoSize || maximized) && op != DragOperation.Move)
+            if ((this.AutoSize || this.maximized) && op != DragOperation.Move)
                 return;
 
-            mouseOffset = p;
-            isDragged = true;
-            dragOp = op;
-            Container.Cursor = dragOpCursors[(int)op];
+            this.mouseOffset = p;
+            this.isDragged = true;
+            this.dragOp = op;
+            this.Container.Cursor = GLForm.dragOpCursors[(int)op];
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
