@@ -193,8 +193,8 @@ namespace GLGUI
                 absolutePosition.X += outer.X;
                 absolutePosition.Y += outer.Y;
 
-                GLDraw.ControlRect = new Rectangle(absolutePosition, outer.Size);
-                GLDraw.ScissorRect.Intersect(GLDraw.ControlRect);
+                GLDraw.CurrentScreenRect = new Rectangle(absolutePosition, outer.Size);
+                GLDraw.ScissorRect.Intersect(GLDraw.CurrentScreenRect);
                 if (GLDraw.ScissorRect.Width != 0 && GLDraw.ScissorRect.Height != 0)
                     Render(this, timeDelta);
             }
@@ -205,8 +205,8 @@ namespace GLGUI
                 {
                     absolutePosition.X += inner.X;
                     absolutePosition.Y += inner.Y;
-                    GLDraw.ControlRect = new Rectangle(absolutePosition, inner.Size);
-                    GLDraw.ScissorRect.Intersect(GLDraw.ControlRect);
+                    GLDraw.CurrentScreenRect = new Rectangle(absolutePosition, inner.Size);
+                    GLDraw.ScissorRect.Intersect(GLDraw.CurrentScreenRect);
 
                     Rectangle scissorRect = GLDraw.ScissorRect;
                     for (int i = controls.Count - 1; i >= 0; i--)

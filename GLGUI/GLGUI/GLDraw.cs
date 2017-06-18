@@ -5,18 +5,11 @@ using OpenTK.Graphics.OpenGL;
 
 namespace GLGUI
 {
-	public static class GLDraw
-	{
-        public static Rectangle CurrentScreenRect { get { return ControlRect; } }
-
+    public static class GLDraw
+    {
+        internal static Rectangle CurrentScreenRect;
         internal static GLCtrlContainer CurrentGui;
-        internal static Rectangle ControlRect;
         internal static Rectangle ScissorRect;
-
-        public static void PrepareCustomDrawing()
-        {
-            GL.Scissor(ScissorRect.X, CurrentGui.Outer.Height - ScissorRect.Bottom, ScissorRect.Width, ScissorRect.Height);
-        }
 
         public static void Fill(ref Color4 color)
         {
@@ -30,13 +23,8 @@ namespace GLGUI
 
         public static void FillRect(Rectangle rect, ref Color4 color)
         {
-            FillRect(ref rect, ref color);
-        }
-
-		public static void FillRect(ref Rectangle rect, ref Color4 color)
-		{
             if (color.A == 0.0f)
-				return;
+                return;
 
             int w = Math.Min(rect.Width, ScissorRect.Width - rect.X);
             int h = Math.Min(rect.Height, ScissorRect.Height - rect.Y);
@@ -46,7 +34,7 @@ namespace GLGUI
                 GL.Scissor(ScissorRect.X + rect.X, CurrentGui.Outer.Height - (ScissorRect.Y + rect.Y + h), w, h);
                 GL.Clear(ClearBufferMask.ColorBufferBit);
             }
-		}
+        }
 
         public static void Text(GLFontText processedText, Rectangle rect, ref Color4 color)
         {
@@ -64,17 +52,17 @@ namespace GLGUI
             {
                 GL.Scissor(ScissorRect.X + rect.X, CurrentGui.Outer.Height - (ScissorRect.Y + rect.Y + h), w, h);
                 GL.PushMatrix();
-                switch(processedText.alignment)
+                switch (processedText.alignment)
                 {
                     case GLFontAlignment.Left:
                     case GLFontAlignment.Justify:
-                        GL.Translate(ControlRect.X + rect.X, ControlRect.Y + rect.Y, 0.0f);
+                        GL.Translate(CurrentScreenRect.X + rect.X, CurrentScreenRect.Y + rect.Y, 0.0f);
                         break;
                     case GLFontAlignment.Centre:
-                        GL.Translate(ControlRect.X + rect.X + rect.Width / 2, ControlRect.Y + rect.Y, 0.0f);
+                        GL.Translate(CurrentScreenRect.X + rect.X + rect.Width / 2, CurrentScreenRect.Y + rect.Y, 0.0f);
                         break;
                     case GLFontAlignment.Right:
-                        GL.Translate(ControlRect.X + rect.X + rect.Width, ControlRect.Y + rect.Y, 0.0f);
+                        GL.Translate(CurrentScreenRect.X + rect.X + rect.Width, CurrentScreenRect.Y + rect.Y, 0.0f);
                         break;
                 }
                 GL.Color4(color);
@@ -83,6 +71,6 @@ namespace GLGUI
                 GL.PopMatrix();
             }
         }
-	}
+    }
 }
 

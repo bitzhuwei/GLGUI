@@ -109,8 +109,6 @@ namespace GLGUI
             caretBlinkTimer += timeDelta;
 
             GLDraw.Fill(ref skin.BorderColor);
-            GLDraw.FillRect(ref background, ref skin.BackgroundColor);
-
             if (selectionStart.Index != cursorPosition.Index)
             {
                 var start = selectionStart.Index < cursorPosition.Index ? selectionStart : cursorPosition;

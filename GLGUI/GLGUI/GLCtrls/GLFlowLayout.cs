@@ -108,7 +108,7 @@ namespace GLGUI
         private void OnRender(object sender, double timeDelta)
         {
             GLDraw.Fill(ref skin.BorderColor);
-            GLDraw.FillRect(ref background, ref skin.BackgroundColor);
+            GLDraw.FillRect(background, ref skin.BackgroundColor);
         }
 
         public override T Add<T>(T control)

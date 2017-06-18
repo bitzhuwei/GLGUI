@@ -276,7 +276,7 @@ namespace GLGUI
 
             var prevGui = GLDraw.CurrentGui;
             GLDraw.CurrentGui = this;
-            GLDraw.ControlRect = outer;
+            GLDraw.CurrentScreenRect = outer;
             GLDraw.ScissorRect = outer;
 
             DoRender(new Point(), delta);
