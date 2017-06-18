@@ -42,11 +42,11 @@ namespace GLGUI
         {
             GLCursor.LoadCursors(parent);
 
-            Container = this;
-            base.Parent = this;
-            ParentWindow = parent;
-            Outer = parent.ClientRectangle;
-            Anchor = GLAnchorStyles.All;
+            this.Container = this;
+            this.Parent = this;
+            this.ParentWindow = parent;
+            this.Outer = parent.ClientRectangle;
+            this.Anchor = GLAnchorStyles.All;
 
             parent.Mouse.Move += (s, e) => DoMouseMove(e);
             parent.Mouse.ButtonDown += OnMouseDown;
@@ -68,8 +68,8 @@ namespace GLGUI
         {
             GLCursor.LoadCursors(null);
 
-            base.Container = this;
-            base.Parent = this;
+            this.Container = this;
+            this.Parent = this;
             this.GLCanvas = glCanvas;
             this.Outer = glCanvas.ClientRectangle;
             this.Anchor = GLAnchorStyles.All;

@@ -9,23 +9,23 @@ namespace GLGUI
         public GLContextMenu(GLCtrlContainer container)
             : base(container)
         {
-            FlowDirection = GLFlowDirection.TopToBottom;
-            AutoSize = true;
+            this.FlowDirection = GLFlowDirection.TopToBottom;
+            this.AutoSize = true;
 
-            Skin = Container.Skin.ContextMenu;
+            this.Skin = Container.Skin.ContextMenu;
         }
 
         protected override void UpdateLayout()
         {
-            if (Controls.Count() > 0)
+            if (this.Controls.Count() > 0)
             {
                 int maxWidth = 0;
-                foreach (var entry in Controls)
+                foreach (var entry in this.Controls)
                 {
                     entry.AutoSize = true;
                     maxWidth = Math.Max(maxWidth, entry.Width);
                 }
-                foreach (var entry in Controls)
+                foreach (var entry in this.Controls)
                 {
                     entry.AutoSize = false;
                     entry.Size = new Size(maxWidth, entry.Height);
