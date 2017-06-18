@@ -54,7 +54,7 @@
     <Compile Include="GLFont\GLFontData.cs" />
     <Compile Include="GLFont\GLFontGlyph.cs" />
     <Compile Include="GLFont\GLFontRenderOptions.cs" />
-    <Compile Include="GLFont\GLFontVertexBuffer.cs" />
+    <Compile Include="GLFont\GLFontRenderer.cs" />
     <Compile Include="GLFont\GLFontTextNodeList.cs" />
     <Compile Include="GLCtrls\GLForm.cs" />
     <Compile Include="GLCtrl.cs" />

@@ -11,6 +11,6 @@ namespace GLGUI
         internal GLFontTextNodeList textNodeList;
         internal SizeF maxSize;
         internal GLFontAlignment alignment;
-		public GLFontVertexBuffer[] VertexBuffers;
+		public GLFontRenderer[] VertexBuffers;
     }
 }

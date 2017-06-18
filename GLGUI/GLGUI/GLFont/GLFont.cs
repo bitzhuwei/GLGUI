@@ -91,9 +91,9 @@ namespace GLGUI
 
 			if (processedText.VertexBuffers == null)
 			{
-				processedText.VertexBuffers = new GLFontVertexBuffer[fontData.Pages.Length];
+				processedText.VertexBuffers = new GLFontRenderer[fontData.Pages.Length];
 				for (int i = 0; i < processedText.VertexBuffers.Length; i++)
-					processedText.VertexBuffers[i] = new GLFontVertexBuffer(fontData.Pages[i].TextureID);
+					processedText.VertexBuffers[i] = new GLFontRenderer(fontData.Pages[i].TextureID);
 			}
 			if (processedText.VertexBuffers[0].TextureID != fontData.Pages[0].TextureID)
             {
@@ -274,7 +274,7 @@ namespace GLGUI
             return false;
         }
 
-        private SizeF PrintOrMeasure(GLFontVertexBuffer[] vbos, GLFontText processedText, bool measureOnly)
+        private SizeF PrintOrMeasure(GLFontRenderer[] vbos, GLFontText processedText, bool measureOnly)
         {
             // init values we'll return
             float maxMeasuredWidth = 0f;
@@ -359,7 +359,7 @@ namespace GLGUI
             return new SizeF(maxMeasuredWidth, yOffset + (nodeList.Head == null ? 0 : lineSpacingCache));
         }
 
-        private void RenderWord(GLFontVertexBuffer[] vbos, float x, float y, GLFontTextNode node)
+        private void RenderWord(GLFontRenderer[] vbos, float x, float y, GLFontTextNode node)
         {
             if (node.Type != GLFontTextNodeType.Word)
                 return;
