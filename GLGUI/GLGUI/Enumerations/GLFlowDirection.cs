@@ -1,10 +1,10 @@
 namespace GLGUI
 {
-	public enum GLFlowDirection : byte
-	{
-		LeftToRight,
-		TopDown,
-		RightToLeft,
-		BottomUp
-	}
+    public enum GLFlowDirection : byte
+    {
+        LeftToRight,
+        TopToBottom,
+        RightToLeft,
+        BottomToTop
+    }
 }

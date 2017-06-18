@@ -25,8 +25,8 @@ namespace GLGUI
                 if (ParentWindow != null)
                     ParentWindow.CursorHandle = cursor.Handle;
 #if REFERENCE_OPENTK_GLCONTROL
-                if (ParentControl != null)
-                    ParentControl.Cursor = cursor.Cursor;
+                if (GLCanvas != null)
+                    GLCanvas.Cursor = cursor.Cursor;
 #endif
             }
         }
@@ -61,30 +61,36 @@ namespace GLGUI
         }
 
 #if REFERENCE_OPENTK_GLCONTROL
-        public readonly OpenTK.GLControl ParentControl;
+        public readonly OpenTK.GLControl GLCanvas;
 
-        public GLCtrlContainer(OpenTK.GLControl parent)
+        public GLCtrlContainer(OpenTK.GLControl glCanvas)
             : base(null)
         {
             GLCursor.LoadCursors(null);
 
             base.Container = this;
             base.Parent = this;
-            ParentControl = parent;
-            Outer = parent.ClientRectangle;
-            Anchor = GLAnchorStyles.All;
+            this.GLCanvas = glCanvas;
+            this.Outer = glCanvas.ClientRectangle;
+            this.Anchor = GLAnchorStyles.All;
 
             int lastX = 0, lastY = 0, wheelValue = 0;
-            parent.MouseMove += (s, e) => { DoMouseMove(new MouseMoveEventArgs(e.X, e.Y, e.X - lastX, e.Y - lastY)); lastX = e.X; lastY = e.Y; };
-            parent.MouseDown += (s, e) => OnMouseDown(s, new MouseButtonEventArgs(e.X, e.Y, ToOpenTK(e.Button), true));
-            parent.MouseUp += (s, e) => OnMouseUp(s, new MouseButtonEventArgs(e.X, e.Y, ToOpenTK(e.Button), false));
-            parent.MouseWheel += (s, e) => { wheelValue += e.Delta; DoMouseWheel(new MouseWheelEventArgs(e.X, e.Y, wheelValue, e.Delta)); };
-            parent.MouseEnter += (s, e) => DoMouseEnter();
-            parent.MouseLeave += (s, e) => DoMouseLeave();
-            parent.KeyDown += (s, e) => DoKeyDown(ToOpenTK(e));
-            parent.KeyUp += (s, e) => DoKeyUp(ToOpenTK(e));
-            parent.KeyPress += (s, e) => DoKeyPress(new KeyPressEventArgs(e.KeyChar));
-            parent.Resize += (s, e) => Outer = parent.ClientRectangle;
+            glCanvas.MouseMove += (s, e) =>
+            {
+                DoMouseMove(new MouseMoveEventArgs(e.X, e.Y, e.X - lastX, e.Y - lastY)); lastX = e.X; lastY = e.Y;
+            };
+            glCanvas.MouseDown += (s, e) => OnMouseDown(s, new MouseButtonEventArgs(e.X, e.Y, ToOpenTK(e.Button), true));
+            glCanvas.MouseUp += (s, e) => OnMouseUp(s, new MouseButtonEventArgs(e.X, e.Y, ToOpenTK(e.Button), false));
+            glCanvas.MouseWheel += (s, e) =>
+            {
+                wheelValue += e.Delta; DoMouseWheel(new MouseWheelEventArgs(e.X, e.Y, wheelValue, e.Delta));
+            };
+            glCanvas.MouseEnter += (s, e) => DoMouseEnter();
+            glCanvas.MouseLeave += (s, e) => DoMouseLeave();
+            glCanvas.KeyDown += (s, e) => DoKeyDown(ToOpenTK(e));
+            glCanvas.KeyUp += (s, e) => DoKeyUp(ToOpenTK(e));
+            glCanvas.KeyPress += (s, e) => DoKeyPress(new KeyPressEventArgs(e.KeyChar));
+            glCanvas.Resize += (s, e) => Outer = glCanvas.ClientRectangle;
         }
 
         private MouseButton ToOpenTK(System.Windows.Forms.MouseButtons button)

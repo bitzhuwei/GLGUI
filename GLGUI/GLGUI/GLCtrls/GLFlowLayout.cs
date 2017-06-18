@@ -53,7 +53,7 @@ namespace GLGUI
                         current -= skin.Space;
                     }
                     break;
-                case GLFlowDirection.TopDown:
+                case GLFlowDirection.TopToBottom:
                     foreach (GLCtrl control in Controls)
                     {
                         Rectangle o = control.Outer;
@@ -61,7 +61,7 @@ namespace GLGUI
                         current += o.Height + skin.Space;
                     }
                     break;
-                case GLFlowDirection.BottomUp:
+                case GLFlowDirection.BottomToTop:
                     current = Inner.Height;
                     foreach (GLCtrl control in Controls)
                     {
@@ -101,7 +101,7 @@ namespace GLGUI
                 background.Left + skin.Padding.Left, background.Top + skin.Padding.Top,
                 background.Width - skin.Padding.Horizontal, background.Height - skin.Padding.Vertical);
 
-            if (flowDirection == GLFlowDirection.BottomUp || flowDirection == GLFlowDirection.RightToLeft)
+            if (flowDirection == GLFlowDirection.BottomToTop || flowDirection == GLFlowDirection.RightToLeft)
                 UpdatePositions();
         }
 

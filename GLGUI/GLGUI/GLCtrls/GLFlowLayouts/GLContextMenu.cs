@@ -9,7 +9,7 @@ namespace GLGUI
         public GLContextMenu(GLCtrlContainer container)
             : base(container)
         {
-            FlowDirection = GLFlowDirection.TopDown;
+            FlowDirection = GLFlowDirection.TopToBottom;
             AutoSize = true;
 
             Skin = Container.Skin.ContextMenu;
